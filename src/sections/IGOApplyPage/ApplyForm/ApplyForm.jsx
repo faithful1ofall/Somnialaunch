@@ -59,25 +59,20 @@ const ApplyForm = () => {
     const generateNFTs = async () => {
         if (layers.length === 0) return alert("No layers added");
 
-        let nftImages = [];
-        let metadataFiles = [];
-
+        let selectedImages = [];
         for (let i = 0; i < nftCount; i++) {
-            let selectedImages = layers.map(layer => getRandomImage(layer)); // Ensure one image per layer
-            nftImages.push(...selectedImages);
-
-            let metadata = {
-                name: `NFT #${i + 1}`,
-                attributes: layers.map((layer, index) => ({
-                    trait_type: layer.name,
-                    value: selectedImages[index] ? selectedImages[index].name : "None"
-                }))
-            };
-            metadataFiles.push(metadata);
+            let nftLayers = layers.map(layer => getRandomImage(layer));
+            selectedImages.push(...nftLayers);
         }
 
-        const imageCID = await uploadToIPFS(nftImages, "images");
+        const imageCID = await uploadToIPFS(selectedImages, "images");
         if (!imageCID) return alert("Failed to upload images");
+
+        const metadataFiles = selectedImages.map((image, index) => ({
+            name: `NFT #${index + 1}`,
+            attributes: layers.map(layer => ({ trait_type: layer.name, value: layer.rarity })),
+            image: `ipfs://${imageCID}/${image.name}`
+        }));
 
         const metadataBlob = new Blob([JSON.stringify(metadataFiles, null, 2)], { type: "application/json" });
         const metadataCID = await uploadToIPFS([metadataBlob], "metadata");
