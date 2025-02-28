@@ -2,7 +2,7 @@ const data = [
   {
     id: "1W6WV",
     title: "Home",
-    url: "/home-two",
+    url: "/",
  /*   subMenus: [
       {
         id: "TU4X2",
@@ -24,7 +24,7 @@ const data = [
   {
     id: "2ZYYU",
     title: "Projects",
-    url: "/projects-classic-1",
+    url: "/projects-grid",
  /*   subMenus: [
       {
         id: "0300T",
