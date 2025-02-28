@@ -149,13 +149,19 @@ const addLayer = () => {
         let selectedImage = null;
 
 
-
-        layers.forEach(layer => {
-
-            if (selectedLayers.has(layer.name)) return; // Prevent duplicate layers
+      layers.forEach(layer => {
+        if (selectedLayers.has(layer.name)) return; // Prevent duplicate layers
 
             selectedLayers.add(layer.name);
+    layer.images.forEach((img, index) => {
+        const file = img.file;
+        imageFiles.push(new File([file], `${index + 1}.png`, { type: file.type }));
+    });
+});
 
+     /*   layers.forEach(layer => {
+
+            
 
 
             const file = new File([layer.image], `${i + 1}.png`, { type: layer.image.type });
@@ -164,7 +170,7 @@ const addLayer = () => {
 
         });
 
-    }
+    }*/
 
 
 
