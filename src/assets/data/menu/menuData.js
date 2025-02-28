@@ -24,8 +24,8 @@ const data = [
   {
     id: "2ZYYU",
     title: "Projects",
-    url: "#",
-    subMenus: [
+    url: "/projects-classic-1",
+ /*   subMenus: [
       {
         id: "0300T",
         title: "Project Classic",
@@ -51,9 +51,9 @@ const data = [
         title: "Project Details",
         url: "/projects-details-1",
       },
-    ],
+    ],*/
   },
-  {
+/*  {
     id: "435U5",
     title: "Staking",
     url: "#",
@@ -84,34 +84,35 @@ const data = [
         url: "/staking-5",
       },
     ],
-  },
+  },*/
   {
-    id: "ZZUVV",
-    title: "Pages",
-    url: "#",
-    subMenus: [
-      {
         id: "5Z4XW",
-        title: "KYC Process",
+        title: "Create Collection",
         url: "#",
         subMenuChilds: [
           {
             id: "V6X1W",
-            title: "KYC Step 1",
+            title: "Step 1",
             url: "/kyc-1",
           },
           {
             id: "1WXX4",
-            title: "KYC Step 2",
+            title: "Step 2",
             url: "/kyc-2",
           },
           {
             id: "V6YVU",
-            title: "KYC Step 3",
+            title: "Step 3",
             url: "/kyc-3",
           },
         ],
-      },
+  },
+/*  {
+    id: "ZZUVV",
+    title: "Pages",
+    url: "#",
+    subMenus: [
+      
       {
         id: "3YY6V",
         title: "Auth Page",
@@ -165,7 +166,7 @@ const data = [
         url: "/contact",
       },
     ],
-  },
+  },*/
 ];
 
 export default data;
