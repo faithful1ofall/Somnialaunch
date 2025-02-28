@@ -89,7 +89,7 @@ const data = [
         id: "5Z4XW",
         title: "Create Collection",
         url: "#",
-        subMenuChilds: [
+        subMenus: [
           {
             id: "V6X1W",
             title: "Step 1",
