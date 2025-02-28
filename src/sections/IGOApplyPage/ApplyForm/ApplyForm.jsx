@@ -168,9 +168,9 @@ const addLayer = () => {
 
             imageFiles.push(file);
 
-        });
+        });*/
 
-    }*/
+    }
 
 
 
