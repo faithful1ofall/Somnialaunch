@@ -18,7 +18,7 @@ export default function IGOApplypage() {
         {walletModalvisibility && <WalletModal />}
         {metamaskModal && <MetamaskModal />}
         <Header />
-        <PageHeader pageTitle="APPLY FOR IGO" />
+        <PageHeader pageTitle="CREATE COLLECTION" />
         <IGOApply />
         <Footer />
       </Layout>
