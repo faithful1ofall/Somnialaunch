@@ -43,10 +43,10 @@ const ProjectItems = () => {
                   All Block Chain
                   <img src={nextArrowIcon.src} alt="icon" />
                   <ul className="sub-menu">
-                    <li><img src={coinIcon1.src} alt="icon" /> Binance (BSC)</li>
-                    <li><img src={coinIcon2.src} alt="icon" /> Ethereum (ETH)</li>
+                    <li><img src={coinIcon1.src} alt="icon" /> Sonic</li>
+                    {/* <li><img src={coinIcon2.src} alt="icon" /> Ethereum (ETH)</li>
                     <li><img src={coinIcon3.src} alt="icon" /> Polygon</li>
-                    <li><img src={coinIcon4.src} alt="icon" /> All Block Chain</li>
+                    <li><img src={coinIcon4.src} alt="icon" /> All Block Chain</li>*/}
                   </ul>
                 </button>
               </div>
