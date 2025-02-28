@@ -10,10 +10,25 @@ const pinata = new PinataSDK({
 });
 
 const ApplyForm = () => {
-  const [layers, setLayers] = useState([]);
+//  const [layers, setLayers] = useState([]);
+  const [layers, setLayers] = useState([
+  { name: "Background", images: []}
+]);
   const [nftCount, setNftCount] = useState(1);
   const [imageCID, setImageCID] = useState(null);
   const [metadataCID, setMetadataCID] = useState(null);
+  const [totalCombinations, setTotalCombinations] = useState(0);
+
+  // Compute total combinations dynamically
+  useEffect(() => {
+    let combinations = layers[0].images.length || 1; // Ensure at least one background
+    layers.forEach(layer => {
+      if (layer.images.length > 0) {
+        combinations *= layer.images.length;
+      }
+    });
+    setTotalCombinations(combinations);
+  }, [layers]);
 
   // Handle layer image upload
   const handleLayerUpload = (event, layerIndex) => {
@@ -193,6 +208,9 @@ const ApplyForm = () => {
               ))}
             </div>
           ))}
+
+            {/* Display Total Combinations */}
+        <h4>Total Possible Combinations: {totalCombinations}</h4>
 
           <Button variant="blue" onClick={addLayer}>
             <FaUpload /> Add Layer
