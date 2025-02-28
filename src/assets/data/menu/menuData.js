@@ -23,7 +23,7 @@ const data = [
   },
   {
     id: "2ZYYU",
-    title: "Projects",
+    title: "Collections",
     url: "/projects-grid",
  /*   subMenus: [
       {
