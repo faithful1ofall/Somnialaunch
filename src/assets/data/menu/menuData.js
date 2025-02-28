@@ -2,8 +2,8 @@ const data = [
   {
     id: "1W6WV",
     title: "Home",
-    url: "#",
-    subMenus: [
+    url: "/",
+ /*   subMenus: [
       {
         id: "TU4X2",
         title: "Home 1",
@@ -19,7 +19,7 @@ const data = [
         title: "Home 3",
         url: "/home-three",
       },
-    ],
+    ],*/
   },
   {
     id: "2ZYYU",
