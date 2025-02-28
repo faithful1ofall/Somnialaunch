@@ -14,7 +14,7 @@ const FooterBottom = () => {
             <img src={footerLogo.src} alt="footer logo" />
           </Link>
 
-          <ul className="footer-menu">
+          {/*   <ul className="footer-menu">
             <li>
               <Link href="#">
                 Features
@@ -50,13 +50,13 @@ const FooterBottom = () => {
                 Privacy Policy
               </Link>
             </li>
-          </ul>
+          </ul> */}
 
           <div className="copyright-text">
-            Copyright © 2022. All Rights Reserved by
-            <Link href="#">
-              GaFi
-            </Link>
+            Copyright © 2025. All Rights Reserved
+            {/*   <Link href="#">
+              faithful
+            </Link> */}
           </div>
           <div className="scrollup text-center">
             <Link href="#">
