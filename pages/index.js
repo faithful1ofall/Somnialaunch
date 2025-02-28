@@ -27,9 +27,9 @@ export default function Home() {
         <About />
         <NextProjects />
         <PreviousProjects />
-        <Statistics />
+          {/*   <Statistics />
         <Team />
-        <Partner />
+        <Partner />*/}
         <Footer />
       </Layout>
     </Fragment>
