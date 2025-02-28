@@ -8,15 +8,15 @@ const ApplyForm = () => {
             <form>
                 <div className="form_widgets">
                     <div className="form-group">
-                        <label htmlFor="projectName">Project Name</label>
+                        <label htmlFor="projectName">Collection Name</label>
                         <input type="text" id="projectName" placeholder="Project Name" className="form-control" />
                     </div>
-                    <div className="form-group">
+                      <div className="form-group">
                         <label htmlFor="email">Email</label>
                         <input type="email" id="email" placeholder="Email" className="form-control" />
                     </div>
                     <div className="input_field_wrapper form-group col-md-12">
-                        <label htmlFor="projectDetails">Project Brief</label>
+                        <label htmlFor="projectDetails">Collection Brief</label>
                         <textarea id="projectDetails" cols="30" rows="10" placeholder="Project Brief"></textarea>
                     </div>
                 </div>
@@ -111,7 +111,7 @@ const ApplyForm = () => {
                 </div>
 
                 <Button variant="blue" lg>
-                    Submit Collection Collection
+                    Submit Collection
                 </Button>
             </form>
         </ApplyFormStyleWrapper>
