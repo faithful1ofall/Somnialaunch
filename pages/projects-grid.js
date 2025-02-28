@@ -18,7 +18,7 @@ export default function ProjectGridPage() {
         {walletModalvisibility && <WalletModal />}
         {metamaskModal && <MetamaskModal />}
         <Header />
-        <PageHeader currentPage="PROJECTS" pageTitle="EXPLORE IGOS" />
+        <PageHeader currentPage="PROJECTS" pageTitle="EXPLORE COLLECTIONS" />
         <ProjectsGrid />
         <Footer />
       </Layout>
