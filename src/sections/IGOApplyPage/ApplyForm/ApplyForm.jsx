@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { FaTelegramPlane, FaTwitter, FaUpload, FaMagic } from "react-icons/fa";
 import Button from "@components/button";
 import ApplyFormStyleWrapper from "./ApplyFrom.style";
