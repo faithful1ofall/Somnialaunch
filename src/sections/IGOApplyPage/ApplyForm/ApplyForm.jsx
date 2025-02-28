@@ -100,10 +100,14 @@ const ApplyForm = () => {
                 nftMetadata.attributes.push({ trait_type: layer.name, value: layer.rarity });
             });
 
-            // Create metadata file
-            const metadataBlob = new Blob([JSON.stringify(nftMetadata, null, 2)], { type: "application/json" });
-            const metadataFile = new File([metadataBlob], `${i + 1}.json`);
-            metadataFiles.push(metadataFile);
+             // Create metadata file (specify type as JSON in File constructor)
+            const metadataFile = new File(
+                [JSON.stringify(nftMetadata, null, 2)], 
+                `${i + 1}.json`, 
+                { type: "application/json" }
+            );
+          
+          metadataFiles.push(metadataFile);
         }
 
         // Upload all metadata
