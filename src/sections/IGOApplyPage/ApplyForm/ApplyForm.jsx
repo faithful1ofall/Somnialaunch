@@ -23,18 +23,18 @@ const ApplyForm = () => {
 
                 <div className="form_widgets form_check">
                     <h5>BLOCKCHAIN/PLATFORM</h5>
-                    <label>Binance Smart Chain
+                    {/*   <label>Binance Smart Chain
                         <input type="radio" name="platfrom" value="binance" />
+                    </label>*/}
+                    <label>Sonic Blockchain
+                        <input type="radio" name="platfrom" value="sonic" />
                     </label>
-                    <label>Solana
-                        <input type="radio" name="platfrom" value="solana" />
-                    </label>
-                    <label>Ethereum
+                    {/*  <label>Ethereum
                         <input type="radio" name="platfrom" value="ethereum" />
                     </label>
                     <label>Polygon (Matic)
                         <input type="radio" name="platfrom" value="polygon" />
-                    </label>
+                    </label>*/}
                 </div>
 
                 <div className="form_widgets form_check">
@@ -111,7 +111,7 @@ const ApplyForm = () => {
                 </div>
 
                 <Button variant="blue" lg>
-                    Submit IGO Project
+                    Submit Collection Collection
                 </Button>
             </form>
         </ApplyFormStyleWrapper>
