@@ -84,7 +84,7 @@ const ApplyForm = () => {
                         <input type="text" id="fundterget" placeholder="How much are you planning on raising on the IGO?" className="form-control" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="projectLink">PROJECT WEBSITE / LINK TO WHITEPAPER</label>
+                        <label htmlFor="projectLink">COLLECTION WEBSITE / LINK TO WHITEPAPER</label>
                         <input type="text" id="projectLink" placeholder="Enter link" className="form-control" />
                     </div>
                 </div>
@@ -100,7 +100,7 @@ const ApplyForm = () => {
                         </div>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="telegram">Project Twitter</label>
+                        <label htmlFor="telegram">COLLECTION Twitter</label>
                         <div className="input_with_icon">
                             <div className="input_social_icon">
                                 <FaTwitter />
