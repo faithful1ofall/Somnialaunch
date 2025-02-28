@@ -8,8 +8,8 @@ const ApplyForm = () => {
             <form>
                 <div className="form_widgets">
                     <div className="form-group">
-                        <label htmlFor="projectName">Collection Name</label>
-                        <input type="text" id="projectName" placeholder="Project Name" className="form-control" />
+                        <label htmlFor="CollectionName">Collection Name</label>
+                        <input type="text" id="CollectionName" placeholder="Collection Name" className="form-control" />
                     </div>
                       <div className="form-group">
                         <label htmlFor="email">Email</label>
@@ -17,7 +17,7 @@ const ApplyForm = () => {
                     </div>
                     <div className="input_field_wrapper form-group col-md-12">
                         <label htmlFor="projectDetails">Collection Brief</label>
-                        <textarea id="projectDetails" cols="30" rows="10" placeholder="Project Brief"></textarea>
+                        <textarea id="projectDetails" cols="30" rows="10" placeholder="Collection Brief"></textarea>
                     </div>
                 </div>
 
