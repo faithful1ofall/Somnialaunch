@@ -8,14 +8,13 @@ const CTA = () => {
       <div className="container">
         <div className="cta-area text-center">
           <h2 className="title">
-            Apply for project <br />
-            incubation
+            Create Collection <br />
           </h2>
           <div className="dsc">
-            If you want to lanuch an IGO/IDO, It will be your perfect choice
+            If you want to lanuch a Collection, It will be your perfect choice
           </div>
           <Button variant="mint" md href="/igo-apply">
-            Apply For IGO
+            Create Collection
           </Button>
           <CardHover />
         </div>
