@@ -181,6 +181,7 @@ const ApplyForm = () => {
               {layer.images.map((image, imageIndex) => (
                 <div key={imageIndex} className="image-group">
                   <p>{image.file.name}</p>
+                  <img src={URL.createObjectURL(image.file)} alt="Layer Preview" className="preview-img" />
                   <input
                     type="number"
                     placeholder="Rarity %"
