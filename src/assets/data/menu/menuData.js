@@ -88,8 +88,8 @@ const data = [
   {
         id: "5Z4XW",
         title: "Create Collection",
-        url: "#",
-        subMenus: [
+        url: "/igo-apply",
+       /* subMenus: [
           {
             id: "V6X1W",
             title: "Step 1",
@@ -105,7 +105,7 @@ const data = [
             title: "Step 3",
             url: "/kyc-3",
           },
-        ],
+        ],*/
   },
 /*  {
     id: "ZZUVV",
