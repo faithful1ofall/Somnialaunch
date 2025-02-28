@@ -6,10 +6,9 @@ import axios from "axios";
 import { PinataSDK } from "pinata-web3";
 
 const pinata = new PinataSDK({
-  pinataJwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiJlMGU0YTYzZC1kYzk1LTQyYTEtOTAyMC1iYzAwZWU2MmVhYTciLCJlbWFpbCI6ImZhaXRoZnVsMW9mYWxsQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6IkZSQTEifSx7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6Ik5ZQzEifV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiIxYmM2YWI5OTQwZTYxMmQ5MDEyYSIsInNjb3BlZEtleVNlY3JldCI6ImI0NzFhM2YyYmUxM2YzYTEzNmM1ODIwNTg5OWM2YjMyMmRkMjQyYmFlOGRlNzE5N2VlMTVmMTdlMzI5ZWEzYTciLCJleHAiOjE3NzIzMDU0OTV9.3pwBiPx80mfxjup7rffIvC0j-SSF-lcrt68njQrU810',
+  pinataJwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiJlMGU0YTYzZC1kYzk1LTQyYTEtOTAyMC1iYzAwZWU2MmVhYTciLCJlbWFpbCI6ImZhaXRoZnVsMW9mYWxsQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6IkZSQTEifSx7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6Ik5ZQzEifV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiIxYmM2YWI5OTQwZTYxMmQ5MDEyYSIsInNjb3BlZEtleVNlY3JldCI6ImI0NzFhM2YyYmUxM2YzYTEzNmM1ODIwNTg5OWM2YjMyMmRkMjQyYmFlOGRlNzE5N2VlMTVmMTdlMzI5ZWEzYTciLCJleHAiOjE3NzIzMDU0OTV9.3pwBiPx80mfxjup7rffIvC0j-SSF-lcrt68njQrU810",
   pinataGateway: "example-gateway.mypinata.cloud",
 });
-
 
 const ApplyForm = () => {
     const [layers, setLayers] = useState([]);
@@ -17,116 +16,115 @@ const ApplyForm = () => {
     const [imageCID, setImageCID] = useState(null);
     const [metadataCID, setMetadataCID] = useState(null);
 
-    const handleLayerUpload = (event, index) => {
+    const handleLayerUpload = (event, layerIndex) => {
         const files = event.target.files;
-        if (files.length > 0) {
-            const newLayers = [...layers];
-            newLayers[index].image = files[0];
-            setLayers(newLayers);
-        }
+        if (files.length === 0) return;
+
+        setLayers(prevLayers => {
+            const updatedLayers = [...prevLayers];
+            const newTraits = [...updatedLayers[layerIndex].traits];
+
+            for (let file of files) {
+                newTraits.push({ image: file, rarity: "" });
+            }
+
+            updatedLayers[layerIndex].traits = newTraits;
+            return updatedLayers;
+        });
     };
 
-    const handleTraitChange = (index, field, value) => {
-        const newLayers = [...layers];
-        newLayers[index][field] = value;
-        setLayers(newLayers);
+    const handleTraitChange = (layerIndex, traitIndex, field, value) => {
+        setLayers(prevLayers => {
+            const updatedLayers = [...prevLayers];
+            updatedLayers[layerIndex].traits[traitIndex][field] = value;
+            return updatedLayers;
+        });
     };
 
     const addLayer = () => {
-        setLayers([...layers, { name: "", rarity: "", image: null }]);
+        setLayers([...layers, { name: "", traits: [] }]);
     };
 
-    const uploadToIPFS = async (files, type) => {
-        const formData = new FormData();
-        for (let file of files) {
-            formData.append("file", file);
+    const validateRarity = () => {
+        for (const layer of layers) {
+            const totalRarity = layer.traits.reduce((sum, trait) => sum + Number(trait.rarity || 0), 0);
+            if (totalRarity !== 100) {
+                alert(`Rarity percentages for layer "${layer.name}" must sum up to 100%.`);
+                return false;
+            }
         }
-
-        const pinataOptions = JSON.stringify({ cidVersion: 0 });
-        formData.append("pinataOptions", pinataOptions);
-
-        try {
-            const response = await axios.post("https://api.pinata.cloud/pinning/pinFileToIPFS", formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                    "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiJlMGU0YTYzZC1kYzk1LTQyYTEtOTAyMC1iYzAwZWU2MmVhYTciLCJlbWFpbCI6ImZhaXRoZnVsMW9mYWxsQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6IkZSQTEifSx7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6Ik5ZQzEifV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiIxYmM2YWI5OTQwZTYxMmQ5MDEyYSIsInNjb3BlZEtleVNlY3JldCI6ImI0NzFhM2YyYmUxM2YzYTEzNmM1ODIwNTg5OWM2YjMyMmRkMjQyYmFlOGRlNzE5N2VlMTVmMTdlMzI5ZWEzYTciLCJleHAiOjE3NzIzMDU0OTV9.3pwBiPx80mfxjup7rffIvC0j-SSF-lcrt68njQrU810`
-                }
-            });
-            return response.data.IpfsHash;
-        } catch (error) {
-            console.error(`Error uploading ${type} to IPFS:`, error);
-            return null;
-        }
+        return true;
     };
 
     const generateNFTs = async () => {
-    if (layers.length === 0) return alert("No layers added!");
+        if (!validateRarity()) return;
 
-    let imageFiles = [];
-    let metadataFiles = [];
-    let imageCIDs = [];
+        let imageFiles = [];
+        let metadataFiles = [];
+        let imageCIDs = [];
 
-    // Collect all images
-    for (let i = 0; i < nftCount; i++) {
-        let selectedLayers = new Set();
-        let selectedImage = null;
-
-        layers.forEach(layer => {
-            if (selectedLayers.has(layer.name)) return; // Prevent duplicate layers
-            selectedLayers.add(layer.name);
-
-            const file = new File([layer.image], `${i + 1}.png`, { type: layer.image.type });
-            imageFiles.push(file);
-        });
-    }
-
-    try {
-        // Upload images first
-        const imageUpload = await pinata.upload.fileArray(imageFiles);
-        if (!imageUpload.IpfsHash) return alert("Failed to upload images to IPFS");
-
-        imageCIDs = imageUpload.IpfsHash; // Store uploaded image CID
-        setImageCID(imageCIDs);
-
-        // Generate metadata using the correct image IPFS URLs
         for (let i = 0; i < nftCount; i++) {
             let nftMetadata = {
                 name: `NFT #${i + 1}`,
                 attributes: [],
-                image: `ipfs://${imageCIDs}/${i + 1}.png`
+                image: "",
             };
 
-            layers.forEach(layer => {
-                nftMetadata.attributes.push({ trait_type: layer.name, value: layer.rarity });
-            });
+            for (const layer of layers) {
+                // Randomly select an image based on weighted rarity
+                let randomValue = Math.random() * 100;
+                let accumulatedRarity = 0;
+                let selectedTrait = null;
 
-             // Create metadata file (specify type as JSON in File constructor)
-            const metadataFile = new File(
-                [JSON.stringify(nftMetadata, null, 2)], 
-                `${i + 1}.json`, 
-                { type: "application/json" }
-            );
-          
-          metadataFiles.push(metadataFile);
+                for (const trait of layer.traits) {
+                    accumulatedRarity += Number(trait.rarity);
+                    if (randomValue <= accumulatedRarity) {
+                        selectedTrait = trait;
+                        break;
+                    }
+                }
+
+                if (selectedTrait) {
+                    const file = new File([selectedTrait.image], `${i + 1}_${layer.name}.png`, { type: selectedTrait.image.type });
+                    imageFiles.push(file);
+
+                    nftMetadata.attributes.push({ trait_type: layer.name, value: selectedTrait.rarity });
+                }
+            }
+
+            metadataFiles.push(new File([JSON.stringify(nftMetadata)], `${i + 1}.json`, { type: "application/json" }));
         }
 
-        // Upload all metadata
-        const metadataUpload = await pinata.upload.fileArray(metadataFiles);
-        if (!metadataUpload.IpfsHash) return alert("Failed to upload metadata");
+        try {
+            // Upload images
+            const imageUpload = await pinata.upload.fileArray(imageFiles);
+            if (!imageUpload.IpfsHash) return alert("Failed to upload images to IPFS");
 
-        setMetadataCID(metadataUpload.IpfsHash);
-        alert(`NFTs generated!\nImages: ipfs://${imageCIDs}\nMetadata: ipfs://${metadataUpload.IpfsHash}`);
-    } catch (error) {
-        console.error("Error uploading to IPFS:", error);
-        alert("Upload failed!");
-    }
-};
+            imageCIDs = imageUpload.IpfsHash;
+            setImageCID(imageCIDs);
 
+            // Assign correct image CID to metadata
+            metadataFiles.forEach((file, index) => {
+                let jsonData = JSON.parse(file.text());
+                jsonData.image = `ipfs://${imageCIDs}/${index + 1}.png`;
+                metadataFiles[index] = new File([JSON.stringify(jsonData)], file.name, { type: "application/json" });
+            });
+
+            // Upload metadata
+            const metadataUpload = await pinata.upload.fileArray(metadataFiles);
+            if (!metadataUpload.IpfsHash) return alert("Failed to upload metadata");
+
+            setMetadataCID(metadataUpload.IpfsHash);
+            alert(`NFTs generated!\nImages: ipfs://${imageCIDs}\nMetadata: ipfs://${metadataUpload.IpfsHash}`);
+        } catch (error) {
+            console.error("Error uploading to IPFS:", error);
+            alert("Upload failed!");
+        }
+    };
 
     return (
         <ApplyFormStyleWrapper>
             <form>
-                {/* Existing Collection Form Fields */}
                 <div className="form_widgets">
                     <div className="form-group">
                         <label htmlFor="CollectionName">Collection Name</label>
@@ -138,31 +136,41 @@ const ApplyForm = () => {
                     </div>
                 </div>
 
-                {/* NFT Layer Management */}
                 <div className="form_widgets">
                     <h5>NFT Layer Management</h5>
-                    {layers.map((layer, index) => (
-                        <div key={index} className="layer-group">
+                    {layers.map((layer, layerIndex) => (
+                        <div key={layerIndex} className="layer-group">
                             <input
                                 type="text"
                                 placeholder="Layer Name"
                                 value={layer.name}
-                                onChange={(e) => handleTraitChange(index, "name", e.target.value)}
-                                className="form-control"
-                            />
-                            <input
-                                type="number"
-                                placeholder="Rarity Percentage"
-                                value={layer.rarity}
-                                onChange={(e) => handleTraitChange(index, "rarity", e.target.value)}
+                                onChange={(e) => {
+                                    let newLayers = [...layers];
+                                    newLayers[layerIndex].name = e.target.value;
+                                    setLayers(newLayers);
+                                }}
                                 className="form-control"
                             />
                             <input
                                 type="file"
+                                multiple
                                 accept="image/*"
-                                onChange={(e) => handleLayerUpload(e, index)}
+                                onChange={(e) => handleLayerUpload(e, layerIndex)}
                                 className="form-control"
                             />
+
+                            {layer.traits.map((trait, traitIndex) => (
+                                <div key={traitIndex} className="trait-group">
+                                    <span>{trait.image?.name || "No file selected"}</span>
+                                    <input
+                                        type="number"
+                                        placeholder="Rarity %"
+                                        value={trait.rarity}
+                                        onChange={(e) => handleTraitChange(layerIndex, traitIndex, "rarity", e.target.value)}
+                                        className="form-control"
+                                    />
+                                </div>
+                            ))}
                         </div>
                     ))}
                     <Button variant="blue" onClick={addLayer}>
@@ -170,13 +178,12 @@ const ApplyForm = () => {
                     </Button>
                 </div>
 
-                {/* NFT Generation Options */}
                 <div className="form_widgets">
                     <h5>Generate NFTs</h5>
                     <input
                         type="number"
                         value={nftCount}
-                        onChange={(e) => setNftCount(e.target.value)}
+                        onChange={(e) => setNftCount(Number(e.target.value))}
                         className="form-control"
                         placeholder="Number of NFTs to Generate"
                     />
@@ -184,7 +191,6 @@ const ApplyForm = () => {
                         <FaMagic /> Generate & Upload
                     </Button>
 
-                    {/* Display CIDs after generation */}
                     {imageCID && metadataCID && (
                         <div className="cid_display">
                             <h5>Uploaded CIDs</h5>
@@ -193,28 +199,6 @@ const ApplyForm = () => {
                         </div>
                     )}
                 </div>
-
-                {/* Social Links */}
-                <div className="form_widgets">
-                    <div className="form-group">
-                        <label htmlFor="telegram">TELEGRAM GROUP</label>
-                        <div className="input_with_icon">
-                            <div className="input_social_icon"><FaTelegramPlane /></div>
-                            <input type="text" id="telegram" placeholder="Enter telegram group link" className="form-control" />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="twitter">COLLECTION Twitter</label>
-                        <div className="input_with_icon">
-                            <div className="input_social_icon"><FaTwitter /></div>
-                            <input type="text" id="twitter" placeholder="Enter twitter link" className="form-control" />
-                        </div>
-                    </div>
-                </div>
-
-                <Button variant="blue" lg>
-                    Submit Collection
-                </Button>
             </form>
         </ApplyFormStyleWrapper>
     );
