@@ -7,14 +7,14 @@ import axios from "axios";
 const ApplyForm = () => {
     const [layers, setLayers] = useState([]);
     const [nftCount, setNftCount] = useState(1);
-    const [imageCID, setImageCID] = useState(null);
-    const [metadataCID, setMetadataCID] = useState(null);
+    const [cids, setCIDs] = useState({ images: "", metadata: "" });
 
     const handleLayerUpload = (event, index) => {
-        const files = event.target.files;
+        const files = Array.from(event.target.files);
         if (files.length > 0) {
             const newLayers = [...layers];
-            newLayers[index].image = files[0];
+            if (!newLayers[index].images) newLayers[index].images = [];
+            newLayers[index].images.push(...files);
             setLayers(newLayers);
         }
     };
@@ -26,14 +26,12 @@ const ApplyForm = () => {
     };
 
     const addLayer = () => {
-        setLayers([...layers, { name: "", rarity: "", image: null }]);
+        setLayers([...layers, { name: "", rarity: "", images: [] }]);
     };
 
     const uploadToIPFS = async (files, type) => {
         const formData = new FormData();
-        for (let file of files) {
-            formData.append("file", file);
-        }
+        files.forEach(file => formData.append("file", file));
 
         const pinataOptions = JSON.stringify({ cidVersion: 0 });
         formData.append("pinataOptions", pinataOptions);
@@ -52,46 +50,46 @@ const ApplyForm = () => {
         }
     };
 
+    const getRandomImage = (layer) => {
+        if (layer.images.length === 0) return null;
+        const randomIndex = Math.floor(Math.random() * layer.images.length);
+        return layer.images[randomIndex];
+    };
+
     const generateNFTs = async () => {
-        const imageFiles = layers.map(layer => layer.image);
-        const uploadedImageCID = await uploadToIPFS(imageFiles, "images");
+        if (layers.length === 0) return alert("No layers added");
 
-        if (!uploadedImageCID) return alert("Failed to upload images");
+        let nftImages = [];
+        let metadataFiles = [];
 
-        setImageCID(uploadedImageCID);  // Store the image CID
+        for (let i = 0; i < nftCount; i++) {
+            let selectedImages = layers.map(layer => getRandomImage(layer)); // Ensure one image per layer
+            nftImages.push(...selectedImages);
 
-        const metadataFiles = layers.map((layer, index) => ({
-            name: `NFT #${index + 1}`,
-            attributes: [{ trait_type: layer.name, value: layer.rarity }],
-            image: `ipfs://${uploadedImageCID}/${index + 1}.png`
-        }));
+            let metadata = {
+                name: `NFT #${i + 1}`,
+                attributes: layers.map((layer, index) => ({
+                    trait_type: layer.name,
+                    value: selectedImages[index] ? selectedImages[index].name : "None"
+                }))
+            };
+            metadataFiles.push(metadata);
+        }
+
+        const imageCID = await uploadToIPFS(nftImages, "images");
+        if (!imageCID) return alert("Failed to upload images");
 
         const metadataBlob = new Blob([JSON.stringify(metadataFiles, null, 2)], { type: "application/json" });
-        const uploadedMetadataCID = await uploadToIPFS([metadataBlob], "metadata");
+        const metadataCID = await uploadToIPFS([metadataBlob], "metadata");
+        if (!metadataCID) return alert("Failed to upload metadata");
 
-        if (!uploadedMetadataCID) return alert("Failed to upload metadata");
-
-        setMetadataCID(uploadedMetadataCID);  // Store the metadata CID
-
-        alert(`NFTs generated! Images: ipfs://${uploadedImageCID}, Metadata: ipfs://${uploadedMetadataCID}`);
+        setCIDs({ images: `ipfs://${imageCID}`, metadata: `ipfs://${metadataCID}` });
+        alert(`NFTs generated! Images: ipfs://${imageCID}, Metadata: ipfs://${metadataCID}`);
     };
 
     return (
         <ApplyFormStyleWrapper>
             <form>
-                {/* Existing Collection Form Fields */}
-                <div className="form_widgets">
-                    <div className="form-group">
-                        <label htmlFor="CollectionName">Collection Name</label>
-                        <input type="text" id="CollectionName" placeholder="Collection Name" className="form-control" />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input type="email" id="email" placeholder="Email" className="form-control" />
-                    </div>
-                </div>
-
-                {/* NFT Layer Management */}
                 <div className="form_widgets">
                     <h5>NFT Layer Management</h5>
                     {layers.map((layer, index) => (
@@ -113,6 +111,7 @@ const ApplyForm = () => {
                             <input
                                 type="file"
                                 accept="image/*"
+                                multiple
                                 onChange={(e) => handleLayerUpload(e, index)}
                                 className="form-control"
                             />
@@ -123,7 +122,6 @@ const ApplyForm = () => {
                     </Button>
                 </div>
 
-                {/* NFT Generation Options */}
                 <div className="form_widgets">
                     <h5>Generate NFTs</h5>
                     <input
@@ -136,34 +134,15 @@ const ApplyForm = () => {
                     <Button variant="blue" onClick={generateNFTs}>
                         <FaMagic /> Generate & Upload
                     </Button>
-
-                    {/* Display CIDs after generation */}
-                    {imageCID && metadataCID && (
-                        <div className="cid_display">
-                            <h5>Uploaded CIDs</h5>
-                            <p><strong>Images CID:</strong> <a href={`https://gateway.pinata.cloud/ipfs/${imageCID}`} target="_blank" rel="noopener noreferrer">ipfs://{imageCID}</a></p>
-                            <p><strong>Metadata CID:</strong> <a href={`https://gateway.pinata.cloud/ipfs/${metadataCID}`} target="_blank" rel="noopener noreferrer">ipfs://{metadataCID}</a></p>
-                        </div>
-                    )}
                 </div>
 
-                {/* Social Links */}
-                <div className="form_widgets">
-                    <div className="form-group">
-                        <label htmlFor="telegram">TELEGRAM GROUP</label>
-                        <div className="input_with_icon">
-                            <div className="input_social_icon"><FaTelegramPlane /></div>
-                            <input type="text" id="telegram" placeholder="Enter telegram group link" className="form-control" />
-                        </div>
+                {cids.images && cids.metadata && (
+                    <div className="cid-display">
+                        <h5>Uploaded IPFS CIDs</h5>
+                        <p><strong>Images CID:</strong> {cids.images}</p>
+                        <p><strong>Metadata CID:</strong> {cids.metadata}</p>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="twitter">COLLECTION Twitter</label>
-                        <div className="input_with_icon">
-                            <div className="input_social_icon"><FaTwitter /></div>
-                            <input type="text" id="twitter" placeholder="Enter twitter link" className="form-control" />
-                        </div>
-                    </div>
-                </div>
+                )}
 
                 <Button variant="blue" lg>
                     Submit Collection
