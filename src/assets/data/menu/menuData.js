@@ -2,7 +2,7 @@ const data = [
   {
     id: "1W6WV",
     title: "Home",
-    url: "/",
+    url: "/home-two",
  /*   subMenus: [
       {
         id: "TU4X2",
