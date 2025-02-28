@@ -7,6 +7,8 @@ import axios from "axios";
 const ApplyForm = () => {
     const [layers, setLayers] = useState([]);
     const [nftCount, setNftCount] = useState(1);
+    const [imageCID, setImageCID] = useState(null);
+    const [metadataCID, setMetadataCID] = useState(null);
 
     const handleLayerUpload = (event, index) => {
         const files = event.target.files;
@@ -40,7 +42,7 @@ const ApplyForm = () => {
             const response = await axios.post("https://api.pinata.cloud/pinning/pinFileToIPFS", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiJlMGU0YTYzZC1kYzk1LTQyYTEtOTAyMC1iYzAwZWU2MmVhYTciLCJlbWFpbCI6ImZhaXRoZnVsMW9mYWxsQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6IkZSQTEifSx7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6Ik5ZQzEifV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiIxYmM2YWI5OTQwZTYxMmQ5MDEyYSIsInNjb3BlZEtleVNlY3JldCI6ImI0NzFhM2YyYmUxM2YzYTEzNmM1ODIwNTg5OWM2YjMyMmRkMjQyYmFlOGRlNzE5N2VlMTVmMTdlMzI5ZWEzYTciLCJleHAiOjE3NzIzMDU0OTV9.3pwBiPx80mfxjup7rffIvC0j-SSF-lcrt68njQrU810`
+                    "Authorization": `Bearer YOUR_PINATA_JWT`
                 }
             });
             return response.data.IpfsHash;
@@ -52,22 +54,26 @@ const ApplyForm = () => {
 
     const generateNFTs = async () => {
         const imageFiles = layers.map(layer => layer.image);
-        const imageCID = await uploadToIPFS(imageFiles, "images");
+        const uploadedImageCID = await uploadToIPFS(imageFiles, "images");
 
-        if (!imageCID) return alert("Failed to upload images");
+        if (!uploadedImageCID) return alert("Failed to upload images");
+
+        setImageCID(uploadedImageCID);  // Store the image CID
 
         const metadataFiles = layers.map((layer, index) => ({
             name: `NFT #${index + 1}`,
             attributes: [{ trait_type: layer.name, value: layer.rarity }],
-            image: `ipfs://${imageCID}/${index + 1}.png`
+            image: `ipfs://${uploadedImageCID}/${index + 1}.png`
         }));
 
         const metadataBlob = new Blob([JSON.stringify(metadataFiles, null, 2)], { type: "application/json" });
-        const metadataCID = await uploadToIPFS([metadataBlob], "metadata");
+        const uploadedMetadataCID = await uploadToIPFS([metadataBlob], "metadata");
 
-        if (!metadataCID) return alert("Failed to upload metadata");
+        if (!uploadedMetadataCID) return alert("Failed to upload metadata");
 
-        alert(`NFTs generated! Images: ipfs://${imageCID}, Metadata: ipfs://${metadataCID}`);
+        setMetadataCID(uploadedMetadataCID);  // Store the metadata CID
+
+        alert(`NFTs generated! Images: ipfs://${uploadedImageCID}, Metadata: ipfs://${uploadedMetadataCID}`);
     };
 
     return (
@@ -130,6 +136,15 @@ const ApplyForm = () => {
                     <Button variant="blue" onClick={generateNFTs}>
                         <FaMagic /> Generate & Upload
                     </Button>
+
+                    {/* Display CIDs after generation */}
+                    {imageCID && metadataCID && (
+                        <div className="cid_display">
+                            <h5>Uploaded CIDs</h5>
+                            <p><strong>Images CID:</strong> <a href={`https://gateway.pinata.cloud/ipfs/${imageCID}`} target="_blank" rel="noopener noreferrer">ipfs://{imageCID}</a></p>
+                            <p><strong>Metadata CID:</strong> <a href={`https://gateway.pinata.cloud/ipfs/${metadataCID}`} target="_blank" rel="noopener noreferrer">ipfs://{metadataCID}</a></p>
+                        </div>
+                    )}
                 </div>
 
                 {/* Social Links */}
