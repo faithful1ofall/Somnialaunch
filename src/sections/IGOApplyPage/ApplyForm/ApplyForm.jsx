@@ -11,9 +11,6 @@ const pinata = new PinataSDK({
 
 const ApplyForm = () => {
  const [layers, setLayers] = useState([]);
-/*  const [layers, setLayers] = useState([
-  { name: "Background", images: []}
-]);*/
   const [nftCount, setNftCount] = useState(1);
   const [imageCID, setImageCID] = useState(null);
   const [metadataCID, setMetadataCID] = useState(null);
@@ -158,6 +155,9 @@ const ApplyForm = () => {
 const generateNFTs = async () => {
   setLoading(true);
   try {
+  if(imageCID && metadataCID){
+    await pinata.unpin([ imageCID, metadataCID])
+  }
   if (!validateRarity()) return alert("Rarity percentages must sum to 100% per layer.");
   if (layers.length === 0) return alert("No layers added!");
 
@@ -234,11 +234,11 @@ const generateNFTs = async () => {
     if (!metadataUpload.IpfsHash) return alert("Failed to upload metadata");
 
     setMetadataCID(metadataUpload.IpfsHash);
-  //  setLoading(false);
+  
     
     alert(`NFTs generated!\nImages: ipfs://${imageCID}\nMetadata: ipfs://${metadataUpload.IpfsHash}`);
   } catch (error) {
-  //  setLoading(false);
+  
     console.error("Error uploading to IPFS:", error);
     alert("Upload failed!");
   } finally {
