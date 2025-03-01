@@ -75,6 +75,21 @@ const ApplyForm = () => {
       });
     }
   };*/
+
+  const removeImage = (layerIndex, imageIndex) => {
+  setLayers((prevLayers) => {
+    const newLayers = [...prevLayers];
+    newLayers[layerIndex].images.splice(imageIndex, 1);
+    return newLayers;
+  });
+
+  setImagePreviews((prevPreviews) => {
+    const newPreviews = { ...prevPreviews };
+    URL.revokeObjectURL(newPreviews[layerIndex][imageIndex]); // Clean up URL
+    newPreviews[layerIndex].splice(imageIndex, 1);
+    return newPreviews;
+  });
+};
   const handleLayerUpload = (event, layerIndex) => {
   const files = Array.from(event.target.files);
   if (files.length > 0) {
@@ -243,6 +258,7 @@ const ApplyForm = () => {
                 <div key={imageIndex} className="image-group">
                   <p>{image.file.name}</p>
                   <img src={imagePreviews[layerIndex]?.[imageIndex]} alt="Layer Preview" className="preview-img" />
+                  <button onClick={() => removeImage(layerIndex, imageIndex)}>Remove</button>
                   <input
                     type="number"
                     placeholder="Rarity %"
