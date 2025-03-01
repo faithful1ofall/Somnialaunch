@@ -141,11 +141,11 @@ const ApplyForm = () => {
   ]);
 };
 
-  const uploadFiles = async (files) => {
+  const uploadFiles = async (files, type) => {
   try {
     return await pinata.upload.fileArray(files, {
       metadata: {
-            name: `MiniLaunch_${Date.now()}`, // Unique name
+            name: `MiniLaunch_${type}_${Date.now()}`, // Unique name
       },
     });
   } catch (error) {
@@ -208,7 +208,7 @@ const generateNFTs = async () => {
 
   
     // Upload images in parallel
-    const imageUpload = await uploadFiles(imageFiles);
+    const imageUpload = await uploadFiles(imageFiles, 'imageFiles');
     if (!imageUpload.IpfsHash) return alert("Failed to upload images to IPFS");
     
     const imageCID = imageUpload.IpfsHash;
@@ -230,7 +230,7 @@ const generateNFTs = async () => {
     }
 
     // Upload metadata in parallel
-    const metadataUpload = await uploadFiles(metadataFiles);
+    const metadataUpload = await uploadFiles(metadataFiles, 'metadataFiles');
     if (!metadataUpload.IpfsHash) return alert("Failed to upload metadata");
 
     setMetadataCID(metadataUpload.IpfsHash);
