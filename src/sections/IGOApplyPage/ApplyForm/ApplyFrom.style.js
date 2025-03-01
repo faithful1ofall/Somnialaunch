@@ -15,7 +15,7 @@ const ApplyFormStyleWrapper = styled.div`
     font-weight: 500;
     font-size: 16px;
     line-height: 45px;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.7);
     margin-bottom: 0;
     border-radius: 0;
 
