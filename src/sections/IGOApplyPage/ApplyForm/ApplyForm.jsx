@@ -43,11 +43,11 @@ const ApplyForm = () => {
     return newPreviews;
   });
 
-  return () => {
+  /*return () => {
     Object.values(imagePreviews)
       .flat()
       .forEach((url) => URL.revokeObjectURL(url));
-  };
+  };*/
 }, [layers]);
   
   // Compute total combinations dynamically
