@@ -211,11 +211,11 @@ const generateNFTs = async () => {
       uint8Array[k] = byteString.charCodeAt(k);
     }
 
-    const imageFile = new File([uint8Array], `NFT_${i + 1}.png`, { type: "image/png" });
+    const imageFile = new File([uint8Array], `${i + 1}.png`, { type: "image/png" });
     imageFiles.push(imageFile);
 
     // Create metadata
-    let nftMetadata = {
+  /*  let nftMetadata = {
       name: `NFT #${i + 1}`,
       attributes: metadataAttributes,
       image: `ipfs://<PLACEHOLDER>/${i + 1}.png`,
@@ -225,7 +225,7 @@ const generateNFTs = async () => {
     const metadataFile = new File([JSON.stringify(nftMetadata, null, 2)], `NFT_${i + 1}.json`, {
       type: "application/json",
     });
-    metadataFiles.push(metadataFile);
+    metadataFiles.push(metadataFile);*/
   }
 
   try {
@@ -236,24 +236,37 @@ const generateNFTs = async () => {
     imageCIDs = imageUpload.IpfsHash; // Store uploaded image CID
     setImageCID(imageCIDs);
 
-    // Update metadata with correct image IPFS URLs
-    metadataFiles.forEach((file, index) => {
-      let metadata = JSON.parse(file.text());
-      metadata.image = `ipfs://${imageCIDs}/${index + 1}.png`;
-      metadataFiles[index] = new File([JSON.stringify(metadata, null, 2)], file.name, {
-        type: "application/json",
-      });
-    });
+    // Generate metadata using the correct image IPFS URLs
+      for (let i = 0; i < nftCount; i++) {
+        let nftMetadata = {
+          name: `NFT #${i + 1}`,
+          attributes: [],
+          image: `ipfs://${imageCIDs}/${i + 1}.png`,
+        };
 
-    // Upload metadata
-    const metadataUpload = await pinata.upload.fileArray(metadataFiles);
-    if (!metadataUpload.IpfsHash) return alert("Failed to upload metadata");
+        layers.forEach((layer) => {
+          nftMetadata.attributes.push({ trait_type: layer.name, value: layer.rarity });
+        });
 
-    setMetadataCID(metadataUpload.IpfsHash);
+        // Create metadata file
+        const metadataFile = new File(
+          [JSON.stringify(nftMetadata, null, 2)],
+          `${i + 1}.json`,
+          { type: "application/json" }
+        );
 
-    alert(
-      `NFTs generated!\nImages: ipfs://${imageCIDs}\nMetadata: ipfs://${metadataUpload.IpfsHash}`
-    );
+        metadataFiles.push(metadataFile);
+      }
+
+      // Upload all metadata
+      const metadataUpload = await pinata.upload.fileArray(metadataFiles);
+      if (!metadataUpload.IpfsHash) return alert("Failed to upload metadata");
+
+      setMetadataCID(metadataUpload.IpfsHash);
+
+      alert(
+        `NFTs generated!\nImages: ipfs://${imageCIDs}\nMetadata: ipfs://${metadataUpload.IpfsHash}`
+      );
   } catch (error) {
     console.error("Error uploading to IPFS:", error);
     alert("Upload failed!");
