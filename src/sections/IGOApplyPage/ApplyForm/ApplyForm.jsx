@@ -19,7 +19,8 @@ const ApplyForm = () => {
   const [metadataCID, setMetadataCID] = useState(null);
   const [totalCombinations, setTotalCombinations] = useState(0);
   const [imagePreviews, setImagePreviews] = useState({});
-
+  const [loading, setLoading] = useState(false);
+  
   useEffect(() => {
   setImagePreviews((prevPreviews) => {
     const newPreviews = { ...prevPreviews };
@@ -48,17 +49,23 @@ const ApplyForm = () => {
       .forEach((url) => URL.revokeObjectURL(url));
   };
 }, [layers]);
+  
   // Compute total combinations dynamically
   useEffect(() => {
-    let combinations = layers.length > 0 ? layers[0].images.length : 0;
- //   let combinations = layers[0].images.length || 0; // Ensure at least one background
-    layers.forEach(layer => {
-      if (layer.images.length > 0) {
-        combinations *= layer.images.length;
-      }
-    });
-    setTotalCombinations(combinations);
-  }, [layers]);
+  if (layers.length === 0) {
+    setTotalCombinations(0);
+    return;
+  }
+
+  let combinations = 1;
+  layers.forEach((layer) => {
+    if (layer.images.length > 0) {
+      combinations *= layer.images.length;
+    }
+  });
+
+  setTotalCombinations(combinations);
+}, [layers]);
 
   const removeImage = (layerIndex, imageIndex) => {
   setLayers((prevLayers) => {
@@ -145,6 +152,7 @@ const ApplyForm = () => {
   
 
 const generateNFTs = async () => {
+  setLoading(true);
   if (!validateRarity()) return alert("Rarity percentages must sum to 100% per layer.");
   if (layers.length === 0) return alert("No layers added!");
 
@@ -221,9 +229,11 @@ const generateNFTs = async () => {
     if (!metadataUpload.IpfsHash) return alert("Failed to upload metadata");
 
     setMetadataCID(metadataUpload.IpfsHash);
+    setLoading(false);
     
     alert(`NFTs generated!\nImages: ipfs://${imageCID}\nMetadata: ipfs://${metadataUpload.IpfsHash}`);
   } catch (error) {
+    setLoading(false);
     console.error("Error uploading to IPFS:", error);
     alert("Upload failed!");
   }
@@ -310,8 +320,8 @@ const generateNFTs = async () => {
             className="form-control"
             placeholder="Number of NFTs to Generate"
           />
-          <Button variant="blue" onClick={generateNFTs}>
-            <FaMagic /> Generate & Upload
+          <Button variant="blue" onClick={generateNFTs} disabled={loading}>
+            <FaMagic /> {loading ? "Generating..." : "Generate & Upload"}
           </Button>
 
           {/* Display CIDs after generation */}
