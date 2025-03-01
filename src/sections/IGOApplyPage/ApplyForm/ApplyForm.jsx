@@ -18,9 +18,19 @@ const ApplyForm = () => {
   const [imageCID, setImageCID] = useState(null);
   const [metadataCID, setMetadataCID] = useState(null);
   const [totalCombinations, setTotalCombinations] = useState(0);
+  const [imagePreviews, setImagePreviews] = useState({});
 
   // Compute total combinations dynamically
   useEffect(() => {
+    const previews = {};
+  layers.forEach((layer, layerIndex) => {
+    previews[layerIndex] = layer.images.map(image => URL.createObjectURL(image.file));
+  });
+  setImagePreviews(previews);
+
+  return () => {
+    Object.values(previews).flat().forEach(url => URL.revokeObjectURL(url));
+  };
     let combinations = layers[0].images.length || 1; // Ensure at least one background
     layers.forEach(layer => {
       if (layer.images.length > 0) {
@@ -213,7 +223,7 @@ const ApplyForm = () => {
               {layer.images.map((image, imageIndex) => (
                 <div key={imageIndex} className="image-group">
                   <p>{image.file.name}</p>
-                  <img src={URL.createObjectURL(image.file)} alt="Layer Preview" className="preview-img" />
+                  <img src={imagePreviews[layerIndex]?.[imageIndex]} alt="Layer Preview" className="preview-img" />
                   <input
                     type="number"
                     placeholder="Rarity %"
