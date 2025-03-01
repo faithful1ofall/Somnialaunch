@@ -153,6 +153,7 @@ const ApplyForm = () => {
 
 const generateNFTs = async () => {
   setLoading(true);
+  try {
   if (!validateRarity()) return alert("Rarity percentages must sum to 100% per layer.");
   if (layers.length === 0) return alert("No layers added!");
 
@@ -201,7 +202,7 @@ const generateNFTs = async () => {
     imageFiles.push(new File([blob], `${i + 1}.png`, { type: "image/png" }));
   }
 
-  try {
+  
     // Upload images in parallel
     const imageUpload = await uploadFiles(imageFiles);
     if (!imageUpload.IpfsHash) return alert("Failed to upload images to IPFS");
@@ -229,14 +230,16 @@ const generateNFTs = async () => {
     if (!metadataUpload.IpfsHash) return alert("Failed to upload metadata");
 
     setMetadataCID(metadataUpload.IpfsHash);
-    setLoading(false);
+  //  setLoading(false);
     
     alert(`NFTs generated!\nImages: ipfs://${imageCID}\nMetadata: ipfs://${metadataUpload.IpfsHash}`);
   } catch (error) {
-    setLoading(false);
+  //  setLoading(false);
     console.error("Error uploading to IPFS:", error);
     alert("Upload failed!");
-  }
+  } finally {
+    setLoading(false); // Ensures loading state resets regardless of success or failure
+}
 };
   
   return (
