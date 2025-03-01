@@ -320,7 +320,7 @@ const generateNFTs = async () => {
             className="form-control"
             placeholder="Number of NFTs to Generate"
           />
-          <Button variant="blue" onClick={(e) => { e.preventDefault(); generateNFTs(); } disabled={loading}>
+          <Button variant="blue" onClick={(e) => { e.preventDefault(); generateNFTs(); }} disabled={loading}>
             <FaMagic /> {loading ? "Generating..." : "Generate & Upload"}
           </Button>
 
