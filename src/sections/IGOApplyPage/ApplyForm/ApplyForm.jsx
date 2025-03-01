@@ -321,8 +321,16 @@ const generateNFTs = async () => {
             placeholder="Number of NFTs to Generate"
           />
           <Button variant="blue" onClick={(e) => { e.preventDefault(); generateNFTs(); }} disabled={loading}>
-            <FaMagic /> {loading ? "Generating..." : "Generate & Upload"}
-          </Button>
+  {loading ? (
+    <>
+      <span className="spinner"></span> Generating...
+    </>
+  ) : (
+    <>
+      <FaMagic /> Generate & Upload
+    </>
+  )}
+</Button>
 
           {/* Display CIDs after generation */}
           {imageCID && metadataCID && (
