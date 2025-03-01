@@ -313,22 +313,30 @@ const generateNFTs = async () => {
 
           {/* Display CIDs after generation */}
           {imageCID && metadataCID && (
-            <div className="cid_display">
-              <h5>Uploaded CIDs</h5>
-              <p>
-                <strong>Images CID:</strong>{" "}
-                <a href={`https://gateway.pinata.cloud/ipfs/${imageCID}`} target="_blank" rel="noopener noreferrer">
-                  ipfs://{imageCID}
-                </a>
-              </p>
-              <p>
-                <strong>Metadata CID:</strong>{" "}
-                <a href={`https://gateway.pinata.cloud/ipfs/${metadataCID}`} target="_blank" rel="noopener noreferrer">
-                  ipfs://{metadataCID}
-                </a>
-              </p>
-            </div>
-          )}
+  <div className="cid_display">
+    <h5>Uploaded CIDs</h5>
+    <p>
+      <strong>Images CID:</strong>{" "}
+      <a
+        href={`https://gateway.pinata.cloud/ipfs/${imageCID}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ipfs://{`${imageCID.substring(0, 6)}...${imageCID.slice(-6)}`}
+      </a>
+    </p>
+    <p>
+      <strong>Metadata CID:</strong>{" "}
+      <a
+        href={`https://gateway.pinata.cloud/ipfs/${metadataCID}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ipfs://{`${metadataCID.substring(0, 6)}...${metadataCID.slice(-6)}`}
+      </a>
+    </p>
+  </div>
+)}
         </div>
 
         {/* Social Links */}
