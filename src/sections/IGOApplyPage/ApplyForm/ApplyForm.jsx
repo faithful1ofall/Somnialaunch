@@ -78,18 +78,30 @@ const ApplyForm = () => {
 
   const removeImage = (layerIndex, imageIndex) => {
   setLayers((prevLayers) => {
-    const newLayers = [...prevLayers];
-    newLayers[layerIndex].images.splice(imageIndex, 1);
-    return newLayers;
+    return prevLayers.map((layer, lIdx) => {
+      if (lIdx === layerIndex) {
+        return {
+          ...layer,
+          images: layer.images.filter((_, iIdx) => iIdx !== imageIndex),
+        };
+      }
+      return layer;
+    });
   });
 
   setImagePreviews((prevPreviews) => {
     const newPreviews = { ...prevPreviews };
-    URL.revokeObjectURL(newPreviews[layerIndex][imageIndex]); // Clean up URL
-    newPreviews[layerIndex].splice(imageIndex, 1);
+
+    if (newPreviews[layerIndex] && newPreviews[layerIndex][imageIndex]) {
+      URL.revokeObjectURL(newPreviews[layerIndex][imageIndex]); // Clean up URL
+    }
+
+    newPreviews[layerIndex] = newPreviews[layerIndex]?.filter((_, iIdx) => iIdx !== imageIndex) || [];
+
     return newPreviews;
   });
 };
+  
   const handleLayerUpload = (event, layerIndex) => {
   const files = Array.from(event.target.files);
   if (files.length > 0) {
