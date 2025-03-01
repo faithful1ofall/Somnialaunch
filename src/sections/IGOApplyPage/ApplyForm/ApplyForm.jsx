@@ -162,6 +162,13 @@ const generateNFTs = async () => {
   }
   }
   try {
+    // Fetch collection name and description from form
+    const collectionName = document.getElementById("collectionName").value.trim();
+    const collectionDescription = document.getElementById("collectionDescription").value.trim();
+
+    if (!collectionName || !collectionDescription) {
+      return alert("Please enter collection name and description.");
+    }
   if (!validateRarity()) return alert("Rarity percentages must sum to 100% per layer.");
   if (layers.length === 0) return alert("No layers added!");
 
@@ -221,7 +228,8 @@ const generateNFTs = async () => {
     // Generate metadata
     for (let i = 0; i < Math.min(nftCount, uniqueCombinations.length); i++) {
       let metadata = {
-        name: `NFT #${i + 1}`,
+        name: `${collectionName}  #${i + 1}`,
+        description: collectionDescription,
         image: `ipfs://${imageCID}/${i + 1}.png`,
         attributes: uniqueCombinations[i].map((image, index) => ({
           trait_type: layers[index].name,
@@ -232,6 +240,17 @@ const generateNFTs = async () => {
 
       metadataFiles.push(new File([JSON.stringify(metadata, null, 2)], `${i + 1}.json`, { type: "application/json" }));
     }
+
+    const metadataCollection = {
+      name: collectionName,
+      description: collectionDescription
+    };
+
+    const metadataCollectionFile = new File([JSON.stringify(metadataCollection, null, 2)], "_metadata.json", {
+      type: "application/json",
+    });
+
+    metadataFiles.push(metadataCollectionFile);
 
     // Upload metadata in parallel
     const metadataUpload = await uploadFiles(metadataFiles, 'metadataFiles');
