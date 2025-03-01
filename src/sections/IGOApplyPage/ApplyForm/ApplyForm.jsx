@@ -244,9 +244,13 @@ const generateNFTs = async () => {
           image: `ipfs://${imageCIDs}/${i + 1}.png`,
         };
 
-        layers.forEach((layer) => {
-          nftMetadata.attributes.push({ trait_type: layer.name, value: layer.rarity });
-        });
+        uniqueCombinations[i].forEach((image, index) => {
+  nftMetadata.attributes.push({
+    trait_type: layers[index].name,
+    value: image.file.name,
+    rarity: image.rarity, // Include the rarity value
+  });
+});
 
         // Create metadata file
         const metadataFile = new File(
