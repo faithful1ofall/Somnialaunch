@@ -154,10 +154,14 @@ const ApplyForm = () => {
 
 const generateNFTs = async () => {
   setLoading(true);
+  if (imageCID && metadataCID) {
   try {
-  if(imageCID && metadataCID){
-    await pinata.unpin([ imageCID, metadataCID])
+    await pinata.unpin([imageCID, metadataCID]);
+  } catch (error) {
+    console.warn("Error unpinning old IPFS data:", error);
   }
+  }
+  try {
   if (!validateRarity()) return alert("Rarity percentages must sum to 100% per layer.");
   if (layers.length === 0) return alert("No layers added!");
 
