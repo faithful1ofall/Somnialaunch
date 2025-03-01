@@ -264,6 +264,15 @@ const generateNFTs = async () => {
               className="form-control"
             />
           </div>
+          <div className="form-group">
+    <label htmlFor="CollectionDescription">Description</label>
+    <textarea
+      id="CollectionDescription"
+      placeholder="Enter a short description of your collection"
+      className="form-control"
+      rows="3"
+    />
+  </div>
 
           <div className="form-group">
             <label htmlFor="email">Email</label>
