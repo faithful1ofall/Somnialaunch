@@ -50,7 +50,7 @@ const ApplyForm = () => {
 }, [layers]);
   // Compute total combinations dynamically
   useEffect(() => {
-    let combinations = layers[0].images.length || 1; // Ensure at least one background
+    let combinations = layers[0].images.length || 0; // Ensure at least one background
     layers.forEach(layer => {
       if (layer.images.length > 0) {
         combinations *= layer.images.length;
@@ -58,23 +58,6 @@ const ApplyForm = () => {
     });
     setTotalCombinations(combinations);
   }, [layers]);
-
-  // Handle layer image upload
-/*  const handleLayerUpload = (event, layerIndex) => {
-    const files = Array.from(event.target.files);
-    if (files.length > 0) {
-      setLayers((prevLayers) => {
-        const newLayers = [...prevLayers];
-        if (!newLayers[layerIndex].images) {
-          newLayers[layerIndex].images = [];
-        }
-        files.forEach((file) => {
-          newLayers[layerIndex].images.push({ file, rarity: "" });
-        });
-        return newLayers;
-      });
-    }
-  };*/
 
   const removeImage = (layerIndex, imageIndex) => {
   setLayers((prevLayers) => {
@@ -149,38 +132,23 @@ const ApplyForm = () => {
   };
 
   const uploadFiles = async (files) => {
-  const uploadPromises = pinata.upload.fileArray(files);
-  return Promise.all(uploadPromises);
+  try {
+    return await pinata.upload.fileArray(files);
+  } catch (error) {
+    console.error("Error uploading files:", error);
+    throw error;
+  }
 };
-
- /* const createMetadataFiles = (imageCIDs) => {
-  return uniqueCombinations.map((combination, i) => {
-    const metadata = {
-      name: `NFT #${i + 1}`,
-      attributes: combination.map((image, index) => ({
-        trait_type: layers[index].name,
-        value: image.file.name,
-        rarity: image.rarity,
-      })),
-      image: `ipfs://${imageCIDs}/${i + 1}.png`,
-    };
-    return new File([JSON.stringify(metadata, null, 2)], `${i + 1}.json`, { type: "application/json" });
-  });
-};*/
   
 
 const generateNFTs = async () => {
-  if (!validateRarity()) {
-    return alert("Rarity percentages must sum to 100% per layer.");
-  }
-
+  if (!validateRarity()) return alert("Rarity percentages must sum to 100% per layer.");
   if (layers.length === 0) return alert("No layers added!");
 
   let imageFiles = [];
   let metadataFiles = [];
-  let imageCIDs = [];
 
-  // Create canvas dynamically
+  // Create and configure canvas
   const canvas = document.createElement("canvas");
   canvas.width = 512;
   canvas.height = 512;
@@ -188,102 +156,70 @@ const generateNFTs = async () => {
 
   // Generate all unique NFT combinations
   let uniqueCombinations = [];
-
   function generateCombinations(currentCombo = [], depth = 0) {
     if (depth === layers.length) {
-      uniqueCombinations.push([...currentCombo]);
+      uniqueCombinations.push(currentCombo);
       return;
     }
-
-    for (const image of layers[depth].images) {
-      generateCombinations([...currentCombo, image], depth + 1);
-    }
+    layers[depth].images.forEach(image => generateCombinations([...currentCombo, image], depth + 1));
   }
-
   generateCombinations();
 
-  for (let i = 0; i < nftCount && i < uniqueCombinations.length; i++) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas for new image
+  // Preload all images asynchronously
+  const preloadImage = (image) =>
+    new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = URL.createObjectURL(image.file);
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+    });
 
- //   let metadataAttributes = [];
-    for (let j = 0; j < uniqueCombinations[i].length; j++) {
-      let image = uniqueCombinations[i][j];
-      let imgElement = new Image();
-      imgElement.src = URL.createObjectURL(image.file);
-      
-      // Ensure image is loaded before drawing
-      await new Promise((resolve) => {
-        imgElement.onload = () => {
-          ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
-          resolve();
-        };
-      });
+  const loadedImages = await Promise.all(
+    uniqueCombinations.flat().map((img) => preloadImage(img))
+  );
 
-   //   metadataAttributes.push({ trait_type: layers[j].name, value: image.file.name });
-    }
-
+  // Generate images
+  for (let i = 0; i < Math.min(nftCount, uniqueCombinations.length); i++) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    uniqueCombinations[i].forEach((image, index) => {
+      ctx.drawImage(loadedImages[i * layers.length + index], 0, 0, canvas.width, canvas.height);
+    });
 
     const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
-  const imageFile = new File([blob], `${i + 1}.png`, { type: "image/png" });
-  imageFiles.push(imageFile);
-    
-    // Directly parse canvas to a File without converting to Blob
-   /* const imageData = canvas.toDataURL("image/png"); // Get base64 data
-    const byteString = atob(imageData.split(",")[1]);
-    const arrayBuffer = new ArrayBuffer(byteString.length);
-    const uint8Array = new Uint8Array(arrayBuffer);
-
-    for (let k = 0; k < byteString.length; k++) {
-      uint8Array[k] = byteString.charCodeAt(k);
-    }
-
-    const imageFile = new File([uint8Array], `${i + 1}.png`, { type: "image/png" });
-    imageFiles.push(imageFile);*/
+    imageFiles.push(new File([blob], `${i + 1}.png`, { type: "image/png" }));
   }
 
   try {
-    // Upload images first
+    // Upload images in parallel
     const imageUpload = await uploadFiles(imageFiles);
     if (!imageUpload.IpfsHash) return alert("Failed to upload images to IPFS");
+    
+    const imageCID = imageUpload.IpfsHash;
+    setImageCID(imageCID);
 
-    imageCIDs = imageUpload.IpfsHash; // Store uploaded image CID
-    setImageCID(imageCIDs);
+    // Generate metadata
+    for (let i = 0; i < Math.min(nftCount, uniqueCombinations.length); i++) {
+      let metadata = {
+        name: `NFT #${i + 1}`,
+        image: `ipfs://${imageCID}/${i + 1}.png`,
+        attributes: uniqueCombinations[i].map((image, index) => ({
+          trait_type: layers[index].name,
+          value: image.file.name,
+          rarity: image.rarity,
+        })),
+      };
 
-    // Generate metadata using the correct image IPFS URLs
-      for (let i = 0; i < nftCount && i < uniqueCombinations.length; i++) {
-        let nftMetadata = {
-          name: `NFT #${i + 1}`,
-          attributes: [],
-          image: `ipfs://${imageCIDs}/${i + 1}.png`,
-        };
+      metadataFiles.push(new File([JSON.stringify(metadata, null, 2)], `${i + 1}.json`, { type: "application/json" }));
+    }
 
-        uniqueCombinations[i].forEach((image, index) => {
-  nftMetadata.attributes.push({
-    trait_type: layers[index].name,
-    value: image.file.name,
-    rarity: image.rarity,
-  });
-});
+    // Upload metadata in parallel
+    const metadataUpload = await uploadFiles(metadataFiles);
+    if (!metadataUpload.IpfsHash) return alert("Failed to upload metadata");
 
-        // Create metadata file
-        const metadataFile = new File(
-          [JSON.stringify(nftMetadata, null, 2)],
-          `${i + 1}.json`,
-          { type: "application/json" }
-        );
-
-        metadataFiles.push(metadataFile);
-      }
-
-      // Upload all metadata
-      const metadataUpload = await uploadFiles(metadataFiles);
-      if (!metadataUpload.IpfsHash) return alert("Failed to upload metadata");
-
-      setMetadataCID(metadataUpload.IpfsHash);
-
-      alert(
-        `NFTs generated!\nImages: ipfs://${imageCIDs}\nMetadata: ipfs://${metadataUpload.IpfsHash}`
-      );
+    setMetadataCID(metadataUpload.IpfsHash);
+    
+    alert(`NFTs generated!\nImages: ipfs://${imageCID}\nMetadata: ipfs://${metadataUpload.IpfsHash}`);
   } catch (error) {
     console.error("Error uploading to IPFS:", error);
     alert("Upload failed!");
