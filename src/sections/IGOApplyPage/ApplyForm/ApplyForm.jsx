@@ -163,8 +163,8 @@ const generateNFTs = async () => {
   }
   try {
     // Fetch collection name and description from form
-    const collectionName = document.getElementById("collectionName").value.trim();
-    const collectionDescription = document.getElementById("collectionDescription").value.trim();
+    const collectionName = document.getElementById("CollectionName").value.trim();
+    const collectionDescription = document.getElementById("CollectionDescription").value.trim();
 
     if (!collectionName || !collectionDescription) {
       return alert("Please enter collection name and description.");
