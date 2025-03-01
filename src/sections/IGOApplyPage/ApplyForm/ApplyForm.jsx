@@ -305,7 +305,7 @@ const generateNFTs = async () => {
             {/* Display Total Combinations */}
         <h4>Total Possible Combinations: {totalCombinations}</h4>
 
-          <Button variant="blue" onClick={addLayer}>
+          <Button variant="blue" onClick={(e) => { e.preventDefault(); addLayer(); }}>
             <FaUpload /> Add Layer
           </Button>
         </div>
@@ -320,7 +320,7 @@ const generateNFTs = async () => {
             className="form-control"
             placeholder="Number of NFTs to Generate"
           />
-          <Button variant="blue" onClick={generateNFTs} disabled={loading}>
+          <Button variant="blue" onClick={(e) => { e.preventDefault(); generateNFTs(); } disabled={loading}>
             <FaMagic /> {loading ? "Generating..." : "Generate & Upload"}
           </Button>
 
