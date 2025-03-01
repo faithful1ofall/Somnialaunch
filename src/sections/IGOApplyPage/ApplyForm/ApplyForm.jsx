@@ -148,7 +148,7 @@ const ApplyForm = () => {
     setLayers([...layers, { name: "", images: [] }]);
   };
 
-  const generateNFTs = async () => {
+const generateNFTs = async () => {
   if (!validateRarity()) {
     return alert("Rarity percentages must sum to 100% per layer.");
   }
@@ -201,9 +201,17 @@ const ApplyForm = () => {
       metadataAttributes.push({ trait_type: layers[j].name, value: image.file.name });
     }
 
-    // Convert canvas to Blob and create a File
-    const imageBlob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
-    const imageFile = new File([imageBlob], `NFT_${i + 1}.png`, { type: "image/png" });
+    // Directly parse canvas to a File without converting to Blob
+    const imageData = canvas.toDataURL("image/png"); // Get base64 data
+    const byteString = atob(imageData.split(",")[1]);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const uint8Array = new Uint8Array(arrayBuffer);
+
+    for (let k = 0; k < byteString.length; k++) {
+      uint8Array[k] = byteString.charCodeAt(k);
+    }
+
+    const imageFile = new File([uint8Array], `NFT_${i + 1}.png`, { type: "image/png" });
     imageFiles.push(imageFile);
 
     // Create metadata
