@@ -143,7 +143,11 @@ const ApplyForm = () => {
 
   const uploadFiles = async (files) => {
   try {
-    return await pinata.upload.fileArray(files);
+    return await pinata.upload.fileArray(files, {
+      pinataMetadata: {
+        name: `MiniLaunch_${Date.now()}`, // Unique name
+      },
+    });
   } catch (error) {
     console.error("Error uploading files:", error);
     throw error;
