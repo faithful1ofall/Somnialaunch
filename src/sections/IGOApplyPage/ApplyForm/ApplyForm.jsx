@@ -31,7 +31,7 @@ const ApplyForm = () => {
   }, [layers]);
 
   // Handle layer image upload
-  const handleLayerUpload = (event, layerIndex) => {
+/*  const handleLayerUpload = (event, layerIndex) => {
     const files = Array.from(event.target.files);
     if (files.length > 0) {
       setLayers((prevLayers) => {
@@ -45,7 +45,24 @@ const ApplyForm = () => {
         return newLayers;
       });
     }
-  };
+  };*/
+  const handleLayerUpload = (event, layerIndex) => {
+  const files = Array.from(event.target.files);
+  if (files.length > 0) {
+    setLayers((prevLayers) => {
+      const newLayers = prevLayers.map((layer, index) => {
+        if (index === layerIndex) {
+          return {
+            ...layer,
+            images: [...layer.images, ...files.map(file => ({ file, rarity: "" }))]
+          };
+        }
+        return layer;
+      });
+      return newLayers;
+    });
+  }
+};
 
   // Handle rarity change per image
   const handleTraitChange = (layerIndex, imageIndex, value) => {
