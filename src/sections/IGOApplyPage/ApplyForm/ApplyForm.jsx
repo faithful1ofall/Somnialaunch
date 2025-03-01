@@ -10,10 +10,10 @@ const pinata = new PinataSDK({
 });
 
 const ApplyForm = () => {
-//  const [layers, setLayers] = useState([]);
-  const [layers, setLayers] = useState([
+ const [layers, setLayers] = useState([]);
+/*  const [layers, setLayers] = useState([
   { name: "Background", images: []}
-]);
+]);*/
   const [nftCount, setNftCount] = useState(1);
   const [imageCID, setImageCID] = useState(null);
   const [metadataCID, setMetadataCID] = useState(null);
@@ -126,10 +126,12 @@ const ApplyForm = () => {
     return true;
   };
 
-  // Add a new layer
   const addLayer = () => {
-    setLayers([...layers, { name: "", images: [] }]);
-  };
+  setLayers((prevLayers) => [
+    ...prevLayers,
+    { name: prevLayers.length === 0 ? "Background" : "", images: [] },
+  ]);
+};
 
   const uploadFiles = async (files) => {
   try {
