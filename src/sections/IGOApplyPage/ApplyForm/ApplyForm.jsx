@@ -20,17 +20,36 @@ const ApplyForm = () => {
   const [totalCombinations, setTotalCombinations] = useState(0);
   const [imagePreviews, setImagePreviews] = useState({});
 
-  // Compute total combinations dynamically
   useEffect(() => {
-    const previews = {};
-  layers.forEach((layer, layerIndex) => {
-    previews[layerIndex] = layer.images.map(image => URL.createObjectURL(image.file));
+  setImagePreviews((prevPreviews) => {
+    const newPreviews = { ...prevPreviews };
+
+    layers.forEach((layer, layerIndex) => {
+      if (!newPreviews[layerIndex]) {
+        newPreviews[layerIndex] = [];
+      }
+
+      layer.images.forEach((image, imageIndex) => {
+        if (!newPreviews[layerIndex][imageIndex] && image.file) {
+          newPreviews[layerIndex][imageIndex] = URL.createObjectURL(image.file);
+        }
+      });
+
+      // Remove previews for deleted images
+      newPreviews[layerIndex] = newPreviews[layerIndex].slice(0, layer.images.length);
+    });
+
+    return newPreviews;
   });
-  setImagePreviews(previews);
 
   return () => {
-    Object.values(previews).flat().forEach(url => URL.revokeObjectURL(url));
+    Object.values(imagePreviews)
+      .flat()
+      .forEach((url) => URL.revokeObjectURL(url));
   };
+}, [layers]);
+  // Compute total combinations dynamically
+  useEffect(() => {
     let combinations = layers[0].images.length || 1; // Ensure at least one background
     layers.forEach(layer => {
       if (layer.images.length > 0) {
