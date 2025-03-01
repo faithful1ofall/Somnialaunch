@@ -50,7 +50,8 @@ const ApplyForm = () => {
 }, [layers]);
   // Compute total combinations dynamically
   useEffect(() => {
-    let combinations = layers[0].images.length || 0; // Ensure at least one background
+    let combinations = layers.length > 0 ? layers[0].images.length : 0;
+ //   let combinations = layers[0].images.length || 0; // Ensure at least one background
     layers.forEach(layer => {
       if (layer.images.length > 0) {
         combinations *= layer.images.length;
