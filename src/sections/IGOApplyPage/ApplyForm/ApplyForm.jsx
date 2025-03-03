@@ -3,6 +3,7 @@ import { FaTelegramPlane, FaTwitter, FaUpload, FaMagic } from "react-icons/fa";
 import Button from "@components/button";
 import ApplyFormStyleWrapper from "./ApplyFrom.style";
 import { PinataSDK } from "pinata-web3";
+import openai from '@utils/openaimodel'
 
 const pinata = new PinataSDK({
   pinataJwt: process.env.NEXT_PUBLIC_PINATAJWT,
@@ -17,7 +18,25 @@ const ApplyForm = () => {
   const [totalCombinations, setTotalCombinations] = useState(0);
   const [imagePreviews, setImagePreviews] = useState({});
   const [loading, setLoading] = useState(false);
+
+
+  const  generateImage = async (formData: FormData) => {
+    const prompt = formData.get('prompt');
+    if (!prompt) {
+      return { error: 'Prompt is required' }
+    }
   
+    // generate an image using openai
+  
+    const res = await openai.images.generate({
+      prompt: prompt,
+      n: 1,
+      size: '512x512',
+    }) 
+  return JSON.parse(JSON.stringify(res));
+  }
+
+    
   useEffect(() => {
   setImagePreviews((prevPreviews) => {
     const newPreviews = { ...prevPreviews };
