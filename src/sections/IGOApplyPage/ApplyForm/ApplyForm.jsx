@@ -20,7 +20,7 @@ const ApplyForm = () => {
   const [loading, setLoading] = useState(false);
 
 
-  const  generateImage = async (formData: FormData) => {
+  const  generateImage = async (FormData) => {
     const prompt = formData.get('prompt');
     if (!prompt) {
       return { error: 'Prompt is required' }
