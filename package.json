@@ -15,7 +15,7 @@
     "next-compose-plugins": "^2.2.1",
     "next-plausible": "^3.7.1",
     "pinata-web3": "^0.5.4",
-    "pinata": "^1.10.1",
+    "pinata": "^0.4.0",
     "react": "18.2.0",
     "openai": "^4.47.1",
     "react-accessible-accordion": "^5.0.0",
