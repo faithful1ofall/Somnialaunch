@@ -2,7 +2,7 @@ import { useState, useEffect} from "react";
 import { FaTelegramPlane, FaTwitter, FaUpload, FaMagic } from "react-icons/fa";
 import Button from "@components/button";
 import ApplyFormStyleWrapper from "./ApplyFrom.style";
-import { PinataSDK } from "pinata";
+import { PinataSDK } from "pinata-web3";
 //import openai from '../../../utils/openaimodel'
 
 const pinata = new PinataSDK({
