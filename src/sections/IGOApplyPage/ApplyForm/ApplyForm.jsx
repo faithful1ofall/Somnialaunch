@@ -3,7 +3,8 @@ import { FaTelegramPlane, FaTwitter, FaUpload, FaMagic } from "react-icons/fa";
 import Button from "@components/button";
 import ApplyFormStyleWrapper from "./ApplyFrom.style";
 import { PinataSDK } from "pinata-web3";
-import { generateImage } from '../../../utils/openaigen'
+import { generateImage } from '../../../utils/openaigen';
+import imglyRemoveBackground from "@imgly/background-removal";
 //import Image from "next/image";
 
 const pinata = new PinataSDK({
@@ -125,6 +126,9 @@ const ApplyForm = () => {
     if (userPrompt && userPrompt.trim()) {
       try {
         const aiImage = await AIgenerateImage(userPrompt);
+        const rmbg = imglyRemoveBackground(aiImage);
+        console.log('rmbg',rmbg);
+        
         if (aiImage) {
           setLayers((prevLayers) =>
             prevLayers.map((layer, index) =>
