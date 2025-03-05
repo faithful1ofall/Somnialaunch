@@ -32,7 +32,9 @@ const ApplyForm = () => {
 
 //    if (!response.ok) throw new Error("Failed to fetch image");
 //   const blob = await response.blob();
-    console.log(imageData);
+    console.log('logged data',imageData);
+    console.log('next url',imageData.url);
+    
   //  const imageFile = new File([imageData], `${Date.now()}ai.png`, { type: "image/png" });
 
     return imageData.res.data[0].url;
