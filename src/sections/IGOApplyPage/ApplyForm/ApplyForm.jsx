@@ -35,7 +35,7 @@ const ApplyForm = () => {
     console.log(imageData);
   //  const imageFile = new File([imageData], `${Date.now()}ai.png`, { type: "image/png" });
 
-    return imageData.imageUrl;
+    return imageData.res.data[0].url;
   } catch (error) {
     console.error("Error generating AI image:", error);
     alert("AI image generation failed due to CORS restrictions.");
