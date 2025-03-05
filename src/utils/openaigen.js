@@ -1,7 +1,7 @@
 "use server";
 import openai from "./openaimodel";
 
-export const generateImage = async (FormData) => {
+export const generateImage = async (FormData, noimg) => {
   try {
     const prompt = FormData;
     if (!prompt) {
@@ -11,7 +11,7 @@ export const generateImage = async (FormData) => {
     // Generate an image using OpenAI
     const res = await openai.images.generate({
       prompt: prompt,
-      n: 1,
+      n: noimg || 1,
       size: "512x512",
     });
 
