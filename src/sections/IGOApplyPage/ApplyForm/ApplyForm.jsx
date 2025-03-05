@@ -23,10 +23,11 @@ const ApplyForm = () => {
   const AIgenerateImage = async (prompt) => {
   try {
     setLoading(true);
-    const imageBlob = await generateImage(prompt); // Ensure generateImage returns a Blob
-    const imageFile = new File([imageBlob], `${Date.now()}.png`, { type: "image/png" });
+    const imageData = await generateImage(prompt);
+    console.log(imageData);
+   // const imageFile = new File([imageBlob], `${Date.now()}.png`, { type: "image/png" });
 
-    return imageFile;
+    return imageData.data[0].url;
   } catch (error) {
     console.error("Error generating AI image:", error);
     alert("AI image generation failed.");
