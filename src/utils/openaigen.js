@@ -20,7 +20,7 @@ export const generateCollectionTheme = async (userPrompt) => {
 
     const response = await openai.chat.completions.create({
       model: "gpt-4-turbo",
-      messages: [{ role: "user", content: themePrompt }],
+      messages: [{ role: "user", content: userPrompt }],
       temperature: 0.7,
     });
 
