@@ -24,17 +24,23 @@ const ApplyForm = () => {
   try {
     setLoading(true);
     const imageData = await generateImage(prompt);
+    const imageUrl = imageData.data[0].url;
 
-    const response = await fetch(imageData.data[0].url);
-  const blob = await response.blob();
-    console.log(imageData);
-    console.log(blob);
+    // Fetch the image while handling CORS issues
+    const response = await fetch(imageUrl, {
+      mode: "cors", // Ensures CORS headers are respected
+      credentials: "omit", // Prevents sending cookies or authentication headers
+    });
+
+    if (!response.ok) throw new Error("Failed to fetch image");
+
+    const blob = await response.blob();
     const imageFile = new File([blob], `${Date.now()}ai.png`, { type: "image/png" });
 
     return imageFile;
   } catch (error) {
     console.error("Error generating AI image:", error);
-    alert("AI image generation failed.");
+    alert("AI image generation failed due to CORS restrictions.");
     return null;
   } finally {
     setLoading(false);
