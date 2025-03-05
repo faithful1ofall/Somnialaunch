@@ -24,10 +24,14 @@ const ApplyForm = () => {
   try {
     setLoading(true);
     const imageData = await generateImage(prompt);
-    console.log(imageData);
-   // const imageFile = new File([imageBlob], `${Date.now()}.png`, { type: "image/png" });
 
-    return imageData.data[0].url;
+    const response = await fetch(imageData.data[0].url);
+  const blob = await response.blob();
+    console.log(imageData);
+    console.log(blob);
+    const imageFile = new File([blob], `${Date.now()}ai.png`, { type: "image/png" });
+
+    return imageFile;
   } catch (error) {
     console.error("Error generating AI image:", error);
     alert("AI image generation failed.");
@@ -363,7 +367,7 @@ const generateNFTs = async () => {
               {/* Display Images with Rarity Inputs */}
               {layer.images.map((image, imageIndex) => (
                 <div key={imageIndex} className="image-group">
-                  <p>{image.file.name}</p>
+                  <p>{image.file.name || 'ai generated'}</p>
                   <img src={imagePreviews[layerIndex]?.[imageIndex]} alt="Layer Preview" className="preview-img" />
                   <button onClick={(e) => removeImage(layerIndex, imageIndex)}>Remove</button>
                   <input
