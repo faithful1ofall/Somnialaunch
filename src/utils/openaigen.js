@@ -30,7 +30,7 @@ export const generateCollectionTheme = async (userPrompt) => {
 
     const collectionTheme = JSON.parse(response.choices[0].message.content);
 
-    return { success: true, collectionTheme };
+    return { success: true, collectionTheme, response };
   } catch (error) {
     console.error("Error generating NFT collection theme:", error);
     return { error: error.message };
