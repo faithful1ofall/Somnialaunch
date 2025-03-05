@@ -117,9 +117,10 @@ const ApplyForm = () => {
   });
 };
 
-  const refineBackground = async (imgUrl: string) => {
+  const refineBackground = async (imgUrl) => {
     const img = new Image();
     img.src = imgUrl;
+ //   let dataurl;
     img.onload = () => {
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
@@ -146,8 +147,12 @@ const ApplyForm = () => {
       }
 
       ctx.putImageData(imgData, 0, 0);
-      setProcessedImage(canvas.toDataURL()); // Convert to Base64 image
-    };
+
+      return canvas.toDataURL();
+
+       
+  };
+     
   };
   
   const handleLayerUpload = async (event, layerIndex, useAI = false) => {
