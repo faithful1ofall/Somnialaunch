@@ -24,7 +24,7 @@ const ApplyForm = () => {
   const [useAI, setUseAI] = useState(false);
   const [idea, setIdea] = useState("");
   const [collectionTheme, setCollectionTheme] = useState("");
-  const [nftCount, setNftCount] = useState(1);
+ // const [nftCount, setNftCount] = useState(1);
   const [previewNFTs, setPreviewNFTs] = useState([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [step, setStep] = useState(1);
