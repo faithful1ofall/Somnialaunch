@@ -178,7 +178,7 @@ const ApplyForm = () => {
           setLayers((prevLayers) =>
             prevLayers.map((layer, index) =>
               index === layerIndex
-                ? { ...layer, images: [...layer.images, { url: aiImage, rarity: "" }] }
+                ? { ...layer, images: [...layer.images, { url: bgrm, rarity: "" }] }
                 : layer
             )
           );
