@@ -373,7 +373,7 @@ const generateNFTs = async () => {
               {/* Display Images with Rarity Inputs */}
               {layer.images.map((image, imageIndex) => (
                 <div key={imageIndex} className="image-group">
-                  <p>{image.file.name || 'ai generated'}</p>
+                  <p>{image?.file?.name || 'ai generated'}</p>
                   <img src={imagePreviews[layerIndex]?.[imageIndex]} alt="Layer Preview" className="preview-img" />
                   <button onClick={(e) => removeImage(layerIndex, imageIndex)}>Remove</button>
                   <input
