@@ -24,7 +24,7 @@ const ApplyForm = () => {
   const AIgenerateImage = async (prompt) => {
   try {
     setLoading(true);
-    const imageData = await generateImage(prompt);
+    const imageData = await generateImage(prompt, 2);
   //  const imageUrl = imageData.data[0].url;
 
     // Fetch the image while handling CORS issues
@@ -241,7 +241,12 @@ const generateNFTs = async () => {
   const preloadImage = (image) =>
     new Promise((resolve, reject) => {
       const img = new Image();
+      if(image.file){
       img.src = URL.createObjectURL(image.file);
+      } 
+      if(image.url){
+        img.src = image.url;
+      }
       img.onload = () => resolve(img);
       img.onerror = reject;
     });
