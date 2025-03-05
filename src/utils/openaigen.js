@@ -31,7 +31,7 @@ export const generateImage = async (FormData) => {
     console.log(response, imageUrl);
 
     const blob = await response.blob();
-    return { blob };
+    return { imageUrl };
   } catch (error) {
     console.error("Error generating AI image:", error);
     return { error: error.message };
