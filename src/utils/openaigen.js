@@ -20,7 +20,7 @@ export const generateCollectionTheme = async (userPrompt) => {
 
     const response = await openai.chat.completions.create({
       model: "gpt-4-turbo",
-      messages: [{ role: "user", content: userPrompt }],
+      messages: [{ role: "user", content: themePrompt }],
       temperature: 0.7,
     });
     console.log('server response', response);
@@ -29,7 +29,7 @@ export const generateCollectionTheme = async (userPrompt) => {
       throw new Error(`No theme generated.`);
     }
 
-    const collectionTheme = JSON.parse(response.choices[0].message.content);
+    const collectionTheme = response.choices[0].message.content;
 
     return { success: true, collectionTheme, response };
   } catch (error) {
