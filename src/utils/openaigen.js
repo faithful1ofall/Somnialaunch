@@ -28,6 +28,8 @@ export const generateImage = async (FormData) => {
       throw new Error(`Failed to fetch image: ${response.statusText}`);
     }
 
+    console.log(response, imageUrl);
+
     const blob = await response.blob();
     return { blob };
   } catch (error) {
