@@ -153,7 +153,11 @@ const ApplyForm = () => {
       }
 
       ctx.putImageData(imgData, 0, 0);
-      resolve(canvas.toDataURL()); // Return Base64 image
+      // Convert canvas to Blob
+      canvas.toBlob((blob) => {
+        if (!blob) return reject("Failed to create Blob");
+        resolve(blob); // Return Blob
+      }, "image/png");
     };
 
     img.onerror = (err) => reject("Image failed to load: " + err);
@@ -171,14 +175,16 @@ const ApplyForm = () => {
         const aiImage = await AIgenerateImage(userPrompt);
         const bgrm = await refineBackground(aiImage);
         console.log('bgrm', bgrm);
-     //   const rmbg = imglyRemoveBackground(aiImage);
+        const aifile = new File([bgrm], `${Date.now()}ai.png`, { type: "image/png" });
+        console.log('aifile', aifile);
+        //   const rmbg = imglyRemoveBackground(aiImage);
    //     console.log('rmbg',rmbg);
         
         if (aiImage) {
           setLayers((prevLayers) =>
             prevLayers.map((layer, index) =>
               index === layerIndex
-                ? { ...layer, images: [...layer.images, { url: bgrm, rarity: "" }] }
+                ? { ...layer, images: [...layer.images, { file: aifile, rarity: "" }] }
                 : layer
             )
           );
