@@ -9,7 +9,7 @@ export const generateCollectionTheme = async (userPrompt) => {
 
     // Generate structured collection theme
     const themePrompt = `
-      Based on the prompt: "${userPrompt}", create a structured NFT collection theme. 
+      Based on the prompt: ${userPrompt}, create a structured NFT collection theme. 
       Return a JSON object with:
       - Collection name
       - Description
