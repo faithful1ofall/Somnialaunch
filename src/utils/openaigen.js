@@ -15,21 +15,20 @@ export const generateImage = async (FormData) => {
       size: "512x512",
     });
 
-    // Extract image URL
     const imageUrl = res.data[0].url;
     if (!imageUrl) {
       throw new Error("Image URL not found in response");
     }
 
-    // Fetch the image and convert to blob
-    const response = await fetch(imageUrl, { mode: "cors" }); // Ensure CORS is allowed
+    // Fetch the image using our API proxy to avoid CORS issues
+    const proxyUrl = `/api/image?url=${encodeURIComponent(imageUrl)}`;
+    const response = await fetch(proxyUrl);
+
     if (!response.ok) {
       throw new Error(`Failed to fetch image: ${response.statusText}`);
     }
 
     const blob = await response.blob();
-//    const imageFile = new File([blob], `${Date.now()}_ai.png`, { type: "image/png" });
-
     return { blob };
   } catch (error) {
     console.error("Error generating AI image:", error);
