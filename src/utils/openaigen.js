@@ -16,24 +16,6 @@ export const generateCollectionTheme = async (userPrompt) => {
       - Art style
       - Layers with traits (Background, Characters, Clothing, Accessories)
       - Rarity distribution (Common, Rare, Epic, Legendary)
-
-      Example Output:
-      {
-        "name": "Cyberpunk Legends",
-        "description": "A futuristic cyberpunk-themed NFT collection...",
-        "art_style": "Cyberpunk, Neon, Digital Art",
-        "layers": {
-          "Backgrounds": ["Neon Alley", "Cyber City", "Underground Bunker"],
-          "Characters": ["Hacker", "Cyborg Soldier", "Tech Assassin"],
-          "Clothing": ["Hooded Jacket", "Battle Armor", "Holographic Suit"]
-        },
-        "rarity_distribution": {
-          "Common": 50,
-          "Rare": 30,
-          "Epic": 15,
-          "Legendary": 5
-        }
-      }
     `;
 
     const response = await openai.chat.completions.create({
