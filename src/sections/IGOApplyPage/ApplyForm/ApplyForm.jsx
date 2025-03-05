@@ -24,15 +24,15 @@ const ApplyForm = () => {
   try {
     setLoading(true);
     const imageData = await generateImage(prompt);
-    const imageUrl = imageData.data[0].url;
+  //  const imageUrl = imageData.data[0].url;
 
     // Fetch the image while handling CORS issues
-    const response = await fetch(imageUrl, { mode: "no-cors" });
+//    const response = await fetch(imageUrl, { mode: "no-cors" });
 
-    if (!response.ok) throw new Error("Failed to fetch image");
-
-    const blob = await response.blob();
-    const imageFile = new File([blob], `${Date.now()}ai.png`, { type: "image/png" });
+//    if (!response.ok) throw new Error("Failed to fetch image");
+//   const blob = await response.blob();
+    console.log(imageData);
+    const imageFile = new File([imageData], `${Date.now()}ai.png`, { type: "image/png" });
 
     return imageFile;
   } catch (error) {
