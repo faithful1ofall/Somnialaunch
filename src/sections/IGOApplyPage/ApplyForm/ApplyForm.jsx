@@ -285,8 +285,7 @@ const generateNFTs = async () => {
         image: `ipfs://${imageCID}/${i + 1}.png`,
         attributes: uniqueCombinations[i].map((image, index) => ({
           trait_type: layers[index].name,
-          value: image.file.name,
-          rarity: image.rarity,
+          value: image.rarity
         })),
       };
 
