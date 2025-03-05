@@ -117,15 +117,16 @@ const ApplyForm = () => {
   });
 };
 
-  const refineBackground = async (imgUrl) => {
+   const refineBackground = async (imgUrl) => {
+  return new Promise((resolve, reject) => {
     const img = new Image();
     img.src = imgUrl;
- //   let dataurl;
+    img.crossOrigin = "anonymous"; // Handle CORS issues
+
     img.onload = () => {
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d", { willReadFrequently: true });
-  //    const ctx = canvas.getContext("2d");
-      if (!ctx) return;
+      if (!ctx) return reject("Canvas context not available");
 
       canvas.width = img.width;
       canvas.height = img.height;
@@ -142,19 +143,22 @@ const ApplyForm = () => {
         const r = data[i], g = data[i + 1], b = data[i + 2];
 
         // Check if the pixel color is close to the background color
-        if (Math.abs(r - targetColor.r) < 20 && Math.abs(g - targetColor.g) < 20 && Math.abs(b - targetColor.b) < 20) {
+        if (
+          Math.abs(r - targetColor.r) < 20 &&
+          Math.abs(g - targetColor.g) < 20 &&
+          Math.abs(b - targetColor.b) < 20
+        ) {
           data[i + 3] = 0; // Make pixel transparent
         }
       }
 
       ctx.putImageData(imgData, 0, 0);
+      resolve(canvas.toDataURL()); // Return Base64 image
+    };
 
-      return canvas.toDataURL();
-
-       
-  };
-     
-  };
+    img.onerror = (err) => reject("Image failed to load: " + err);
+  });
+};
   
   const handleLayerUpload = async (event, layerIndex, useAI = false) => {
   if (useAI) {
@@ -166,7 +170,7 @@ const ApplyForm = () => {
       try {
         const aiImage = await AIgenerateImage(userPrompt);
         const bgrm = await refineBackground(aiImage);
-        console.log('bgrm',bgrm);
+        console.log('bgrm', bgrm);
      //   const rmbg = imglyRemoveBackground(aiImage);
    //     console.log('rmbg',rmbg);
         
