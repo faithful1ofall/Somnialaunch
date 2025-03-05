@@ -20,9 +20,21 @@ const ApplyForm = () => {
   const [loading, setLoading] = useState(false);
 
 
-  const  AIgenerateImage = async (prompt) => {
-    const image = generateImage(prompt);
+  const AIgenerateImage = async (prompt) => {
+  try {
+    setLoading(true);
+    const imageBlob = await generateImage(prompt); // Ensure generateImage returns a Blob
+    const imageFile = new File([imageBlob], `${Date.now()}.png`, { type: "image/png" });
+
+    return imageFile;
+  } catch (error) {
+    console.error("Error generating AI image:", error);
+    alert("AI image generation failed.");
+    return null;
+  } finally {
+    setLoading(false);
   }
+};
 
   useEffect(() => {
   setImagePreviews((prevPreviews) => {
@@ -90,21 +102,28 @@ const ApplyForm = () => {
   });
 };
   
-  const handleLayerUpload = (event, layerIndex) => {
-  const files = Array.from(event.target.files);
-  if (files.length > 0) {
-    setLayers((prevLayers) => {
-      const newLayers = prevLayers.map((layer, index) => {
-        if (index === layerIndex) {
-          return {
-            ...layer,
-            images: [...layer.images, ...files.map(file => ({ file, rarity: "" }))]
-          };
-        }
-        return layer;
-      });
-      return newLayers;
-    });
+  const handleLayerUpload = async (event, layerIndex, useAI = false) => {
+  let newImages = [];
+
+  if (useAI) {
+    const prompt = prompt("Enter an AI prompt for image generation:");
+    if (!prompt) return;
+    
+    const aiImage = await AIgenerateImage(prompt);
+    if (aiImage) newImages.push({ file: aiImage, rarity: "" });
+  } else {
+    const files = Array.from(event.target.files);
+    newImages = files.map((file) => ({ file, rarity: "" }));
+  }
+
+  if (newImages.length > 0) {
+    setLayers((prevLayers) =>
+      prevLayers.map((layer, index) =>
+        index === layerIndex
+          ? { ...layer, images: [...layer.images, ...newImages] }
+          : layer
+      )
+    );
   }
 };
 
@@ -322,6 +341,9 @@ const generateNFTs = async () => {
                 onChange={(e) => handleLayerUpload(e, layerIndex)}
                 className="form-control"
               />
+              <button onClick={(e) => { e.preventDefault(); handleLayerUpload(e, layerIndex, true); }}>
+  <FaMagic /> AI Generate
+</button>
 
               {/* Display Images with Rarity Inputs */}
               {layer.images.map((image, imageIndex) => (
