@@ -32,9 +32,9 @@ const ApplyForm = () => {
 //    if (!response.ok) throw new Error("Failed to fetch image");
 //   const blob = await response.blob();
     console.log(imageData);
-    const imageFile = new File([imageData], `${Date.now()}ai.png`, { type: "image/png" });
+  //  const imageFile = new File([imageData], `${Date.now()}ai.png`, { type: "image/png" });
 
-    return imageFile;
+    return imageData;
   } catch (error) {
     console.error("Error generating AI image:", error);
     alert("AI image generation failed due to CORS restrictions.");
@@ -56,6 +56,9 @@ const ApplyForm = () => {
       layer.images.forEach((image, imageIndex) => {
         if (!newPreviews[layerIndex][imageIndex] && image.file) {
           newPreviews[layerIndex][imageIndex] = URL.createObjectURL(image.file);
+        }
+        if (!newPreviews[layerIndex][imageIndex] && image.url) {
+          newPreviews[layerIndex][imageIndex] = image.url;
         }
       });
 
@@ -123,7 +126,7 @@ const ApplyForm = () => {
           setLayers((prevLayers) =>
             prevLayers.map((layer, index) =>
               index === layerIndex
-                ? { ...layer, images: [...layer.images, { file: aiImage, rarity: "" }] }
+                ? { ...layer, images: [...layer.images, { url: aiImage, rarity: "" }] }
                 : layer
             )
           );
