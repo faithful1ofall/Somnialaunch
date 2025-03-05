@@ -1,6 +1,60 @@
 "use server";
 import openai from "./openaimodel";
 
+export const generateCollectionTheme = async (userPrompt) => {
+  try {
+    if (!userPrompt) {
+      return { error: "Prompt is required" };
+    }
+
+    // Generate structured collection theme
+    const themePrompt = `
+      Based on the prompt: "${userPrompt}", create a structured NFT collection theme. 
+      Return a JSON object with:
+      - Collection name
+      - Description
+      - Art style
+      - Layers with traits (Background, Characters, Clothing, Accessories)
+      - Rarity distribution (Common, Rare, Epic, Legendary)
+
+      Example Output:
+      {
+        "name": "Cyberpunk Legends",
+        "description": "A futuristic cyberpunk-themed NFT collection...",
+        "art_style": "Cyberpunk, Neon, Digital Art",
+        "layers": {
+          "Backgrounds": ["Neon Alley", "Cyber City", "Underground Bunker"],
+          "Characters": ["Hacker", "Cyborg Soldier", "Tech Assassin"],
+          "Clothing": ["Hooded Jacket", "Battle Armor", "Holographic Suit"]
+        },
+        "rarity_distribution": {
+          "Common": 50,
+          "Rare": 30,
+          "Epic": 15,
+          "Legendary": 5
+        }
+      }
+    `;
+
+    const response = await openai.chat.completions.create({
+      model: "gpt-4-turbo",
+      messages: [{ role: "user", content: themePrompt }],
+      temperature: 0.7,
+    });
+
+    if (!response.choices || !response.choices[0].message.content) {
+      throw new Error(`No theme generated.`);
+    }
+
+    const collectionTheme = JSON.parse(response.choices[0].message.content);
+
+    return { success: true, collectionTheme };
+  } catch (error) {
+    console.error("Error generating NFT collection theme:", error);
+    return { error: error.message };
+  }
+};
+
 export const generateNFTCollection = async (collectionTheme, numNFTs = 10) => {
   try {
     if (!collectionTheme) {
