@@ -116,6 +116,39 @@ const ApplyForm = () => {
     return newPreviews;
   });
 };
+
+  const refineBackground = async (imgUrl: string) => {
+    const img = new Image();
+    img.src = imgUrl;
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+
+      // Get the first pixel color (assuming solid background)
+      const firstPixel = ctx.getImageData(0, 0, 1, 1).data;
+      const targetColor = { r: firstPixel[0], g: firstPixel[1], b: firstPixel[2] };
+
+      const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imgData.data;
+
+      for (let i = 0; i < data.length; i += 4) {
+        const r = data[i], g = data[i + 1], b = data[i + 2];
+
+        // Check if the pixel color is close to the background color
+        if (Math.abs(r - targetColor.r) < 20 && Math.abs(g - targetColor.g) < 20 && Math.abs(b - targetColor.b) < 20) {
+          data[i + 3] = 0; // Make pixel transparent
+        }
+      }
+
+      ctx.putImageData(imgData, 0, 0);
+      setProcessedImage(canvas.toDataURL()); // Convert to Base64 image
+    };
+  };
   
   const handleLayerUpload = async (event, layerIndex, useAI = false) => {
   if (useAI) {
@@ -126,8 +159,10 @@ const ApplyForm = () => {
     if (userPrompt && userPrompt.trim()) {
       try {
         const aiImage = await AIgenerateImage(userPrompt);
-        const rmbg = imglyRemoveBackground(aiImage);
-        console.log('rmbg',rmbg);
+        const bgrm = refineBackground(aiImage);
+        console.log('bgrm',bgrm);
+     //   const rmbg = imglyRemoveBackground(aiImage);
+   //     console.log('rmbg',rmbg);
         
         if (aiImage) {
           setLayers((prevLayers) =>
@@ -159,6 +194,8 @@ const ApplyForm = () => {
   }
 };
 
+
+  
   // Handle rarity change per image
   const handleTraitChange = (layerIndex, imageIndex, value) => {
     setLayers((prevLayers) => {
