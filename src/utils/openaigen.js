@@ -23,6 +23,7 @@ export const generateCollectionTheme = async (userPrompt) => {
       messages: [{ role: "user", content: userPrompt }],
       temperature: 0.7,
     });
+    console.log('server response', response);
 
     if (!response.choices || !response.choices[0].message.content) {
       throw new Error(`No theme generated.`);
