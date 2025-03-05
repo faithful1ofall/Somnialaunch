@@ -106,7 +106,7 @@ const ApplyForm = () => {
   let newImages = [];
 
   if (useAI) {
-    const prompt = prompt("Enter an AI prompt for image generation:");
+    const prompt = window.prompt("Enter an AI prompt for image generation:");
     if (!prompt) return;
     
     const aiImage = await AIgenerateImage(prompt);
