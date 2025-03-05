@@ -27,10 +27,7 @@ const ApplyForm = () => {
     const imageUrl = imageData.data[0].url;
 
     // Fetch the image while handling CORS issues
-    const response = await fetch(imageUrl, {
-      mode: "cors", // Ensures CORS headers are respected
-      credentials: "omit", // Prevents sending cookies or authentication headers
-    });
+    const response = await fetch(imageUrl, { mode: "no-cors" });
 
     if (!response.ok) throw new Error("Failed to fetch image");
 
