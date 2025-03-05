@@ -36,7 +36,8 @@ const ApplyForm = () => {
     try {
       // Call AI function to get collection theme
       const theme = await generateCollectionTheme(idea);
-      setCollectionTheme(theme);
+      console.log(theme)
+      setCollectionTheme(theme.collectionTheme);
       setStep(2); // Move to next step
     } catch (error) {
       console.error("Error generating theme:", error);
@@ -49,7 +50,8 @@ const ApplyForm = () => {
     setIsGenerating(true);
     try {
       const previews = await generateNFTCollection(collectionTheme, nftCount, true); // True for preview mode
-      setPreviewNFTs(previews);
+      console.log(previews);
+      setPreviewNFTs(previews.nftCollection);
       setStep(3); // Move to review step
     } catch (error) {
       console.error("Error generating previews:", error);
@@ -499,7 +501,7 @@ const generateNFTs = async () => {
           <h3>Preview</h3>
           <div className="nft-previews">
             {previewNFTs.map((nft, index) => (
-              <img key={index} src={nft.image} alt={`NFT ${index}`} />
+              <img key={index} src={nft.proxyUrl} alt={`NFT ${index}`} />
             ))}
           </div>
           <button onClick={handleConfirmAndUpload} disabled={isGenerating}>
