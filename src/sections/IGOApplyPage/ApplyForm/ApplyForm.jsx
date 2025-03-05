@@ -4,6 +4,7 @@ import Button from "@components/button";
 import ApplyFormStyleWrapper from "./ApplyFrom.style";
 import { PinataSDK } from "pinata-web3";
 import { generateImage } from '../../../utils/openaigen'
+//import Image from "next/image";
 
 const pinata = new PinataSDK({
   pinataJwt: process.env.NEXT_PUBLIC_PINATAJWT,
@@ -34,7 +35,7 @@ const ApplyForm = () => {
     console.log(imageData);
   //  const imageFile = new File([imageData], `${Date.now()}ai.png`, { type: "image/png" });
 
-    return imageData;
+    return imageData.imageUrl;
   } catch (error) {
     console.error("Error generating AI image:", error);
     alert("AI image generation failed due to CORS restrictions.");
