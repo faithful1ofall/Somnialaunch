@@ -2,7 +2,7 @@
 import openai from './openaimodel'
 
   export const  generateImage = async (FormData) => {
-    const prompt = formData.get('prompt');
+    const prompt = FormData;
     if (!prompt) {
       return { error: 'Prompt is required' }
     }
