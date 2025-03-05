@@ -15,23 +15,8 @@ export const generateImage = async (FormData, noimg) => {
       size: "512x512",
     });
 
-    const imageUrl = res.data[0].url;
-    if (!imageUrl) {
-      throw new Error("Image URL not found in response");
-    }
-
-    // Fetch the image using our API proxy to avoid CORS issues
-    const proxyUrl = `/api/image?url=${encodeURIComponent(imageUrl)}`;
-    const response = await fetch(proxyUrl);
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch image: ${response.statusText}`);
-    }
-
-    console.log(response, imageUrl);
-
-    const blob = await response.blob();
-    return { imageUrl };
+    
+    return { res };
   } catch (error) {
     console.error("Error generating AI image:", error);
     return { error: error.message };
