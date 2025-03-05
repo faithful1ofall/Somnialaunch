@@ -9,14 +9,16 @@ export const generateCollectionTheme = async (userPrompt) => {
 
     // Generate structured collection theme
     const themePrompt = `
-      Based on the prompt: ${userPrompt}, create a structured NFT collection theme. 
-      Return a JSON object with:
-      - Collection name
-      - Description
-      - Art style
-      - Layers with traits (Background, Characters, Clothing, Accessories)
-      - Rarity distribution (Common, Rare, Epic, Legendary)
-    `;
+  Based on the prompt: ${userPrompt}, create a structured NFT collection theme.
+  Return a JSON object with:
+  - Collection name (max 50 chars)
+  - Description (max 200 chars)
+  - Art style (max 50 chars)
+  - Layers with traits: Background, Characters, Clothing, Accessories (each max 100 chars)
+  - Rarity distribution: Common, Rare, Epic, Legendary (max 50 chars each)
+  
+  Ensure the total response does not exceed 950 characters.
+`;
 
     const response = await openai.chat.completions.create({
       model: "gpt-4-turbo",
