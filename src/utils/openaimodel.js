@@ -7,7 +7,7 @@ if (!apiKey) {
 }
 
 const openai = new OpenAI({
-    apiKey 
+    apiKey, dangerouslyAllowBrowser: true
   });
 
 export default openai
