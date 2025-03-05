@@ -3,7 +3,7 @@ import { FaTelegramPlane, FaTwitter, FaUpload, FaMagic } from "react-icons/fa";
 import Button from "@components/button";
 import ApplyFormStyleWrapper from "./ApplyFrom.style";
 import { PinataSDK } from "pinata-web3";
-import { generateImage } from '../../../utils/openaigen';
+import { generateImage, generateCollectionTheme, generateNFTCollection } from '../../../utils/openaigen';
 import imglyRemoveBackground from "@imgly/background-removal";
 //import Image from "next/image";
 
@@ -20,6 +20,55 @@ const ApplyForm = () => {
   const [totalCombinations, setTotalCombinations] = useState(0);
   const [imagePreviews, setImagePreviews] = useState({});
   const [loading, setLoading] = useState(false);
+  
+  const [useAI, setUseAI] = useState(false);
+  const [idea, setIdea] = useState("");
+  const [collectionTheme, setCollectionTheme] = useState("");
+  const [nftCount, setNftCount] = useState(1);
+  const [previewNFTs, setPreviewNFTs] = useState([]);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [step, setStep] = useState(1);
+
+  const handleGenerateTheme = async () => {
+    if (!idea.trim()) return alert("Enter an idea first!");
+    setIsGenerating(true);
+
+    try {
+      // Call AI function to get collection theme
+      const theme = await generateCollectionTheme(idea);
+      setCollectionTheme(theme);
+      setStep(2); // Move to next step
+    } catch (error) {
+      console.error("Error generating theme:", error);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  const handleGeneratePreview = async () => {
+    setIsGenerating(true);
+    try {
+      const previews = await generateNFTCollection(collectionTheme, nftCount, true); // True for preview mode
+      setPreviewNFTs(previews);
+      setStep(3); // Move to review step
+    } catch (error) {
+      console.error("Error generating previews:", error);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  const handleConfirmAndUpload = async () => {
+    setIsGenerating(true);
+    try {
+      await uploadNFTs(collectionTheme, nftCount);
+      alert("NFTs successfully uploaded!");
+    } catch (error) {
+      console.error("Error uploading NFTs:", error);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
 
   const AIgenerateImage = async (prompt) => {
@@ -406,6 +455,59 @@ const generateNFTs = async () => {
             <input type="email" id="email" placeholder="Email" className="form-control" />
           </div>
         </div>
+
+        <div className="ai-nft-generator">
+      <label>
+        <input type="checkbox" checked={useAI} onChange={() => setUseAI(!useAI)} />
+        Use AI-Generated NFTs
+      </label>
+
+      {useAI && step === 1 && (
+        <div>
+          <input
+            type="text"
+            value={idea}
+            onChange={(e) => setIdea(e.target.value)}
+            placeholder="Enter your idea..."
+          />
+          <button onClick={handleGenerateTheme} disabled={isGenerating}>
+            Generate Theme
+          </button>
+        </div>
+      )}
+
+      {useAI && step === 2 && (
+        <div>
+          <textarea
+            value={collectionTheme}
+            onChange={(e) => setCollectionTheme(e.target.value)}
+          />
+          <input
+            type="number"
+            value={nftCount}
+            onChange={(e) => setNftCount(Math.max(1, parseInt(e.target.value)))}
+            min="1"
+          />
+          <button onClick={handleGeneratePreview} disabled={isGenerating}>
+            Generate Preview
+          </button>
+        </div>
+      )}
+
+      {useAI && step === 3 && (
+        <div>
+          <h3>Preview</h3>
+          <div className="nft-previews">
+            {previewNFTs.map((nft, index) => (
+              <img key={index} src={nft.image} alt={`NFT ${index}`} />
+            ))}
+          </div>
+          <button onClick={handleConfirmAndUpload} disabled={isGenerating}>
+            Confirm & Upload
+          </button>
+        </div>
+      )}
+    </div>
 
         {/* NFT Layer Management */}
         <div className="form_widgets">
