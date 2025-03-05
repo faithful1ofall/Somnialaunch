@@ -123,7 +123,8 @@ const ApplyForm = () => {
  //   let dataurl;
     img.onload = () => {
       const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
+  //    const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
       canvas.width = img.width;
