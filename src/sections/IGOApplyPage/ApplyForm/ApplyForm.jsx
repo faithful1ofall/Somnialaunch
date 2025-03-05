@@ -164,7 +164,7 @@ const ApplyForm = () => {
     if (userPrompt && userPrompt.trim()) {
       try {
         const aiImage = await AIgenerateImage(userPrompt);
-        const bgrm = refineBackground(aiImage);
+        const bgrm = await refineBackground(aiImage);
         console.log('bgrm',bgrm);
      //   const rmbg = imglyRemoveBackground(aiImage);
    //     console.log('rmbg',rmbg);
