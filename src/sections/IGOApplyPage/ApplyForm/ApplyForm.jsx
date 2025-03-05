@@ -103,18 +103,32 @@ const ApplyForm = () => {
 };
   
   const handleLayerUpload = async (event, layerIndex, useAI = false) => {
-  let newImages = [];
-
   if (useAI) {
-    const prompt = window.prompt("Enter an AI prompt for image generation:");
-    if (!prompt) return;
-    
-    const aiImage = await AIgenerateImage(prompt);
-    if (aiImage) newImages.push({ file: aiImage, rarity: "" });
-  } else {
-    const files = Array.from(event.target.files);
-    newImages = files.map((file) => ({ file, rarity: "" }));
+    const layerName = layers[layerIndex]?.name || "this layer"; // Use the layer name if available
+    const prePrompt = `You are generating an image layer for an NFT. The layer name is "${layerName}". `;
+    const userPrompt = window.prompt(prePrompt + "Describe your NFT image:");
+
+    if (userPrompt && userPrompt.trim()) {
+      try {
+        const aiImage = await AIgenerateImage(userPrompt);
+        if (aiImage) {
+          setLayers((prevLayers) =>
+            prevLayers.map((layer, index) =>
+              index === layerIndex
+                ? { ...layer, images: [...layer.images, { file: aiImage, rarity: "" }] }
+                : layer
+            )
+          );
+        }
+      } catch (error) {
+        console.error("Error generating AI image:", error);
+      }
+    }
+    return;
   }
+
+  const files = Array.from(event.target.files);
+  const newImages = files.map((file) => ({ file, rarity: "" }));
 
   if (newImages.length > 0) {
     setLayers((prevLayers) =>
