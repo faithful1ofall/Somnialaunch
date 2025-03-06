@@ -89,7 +89,7 @@ const ApplyForm = () => {
     }
 
     const metadataCollection = {
-      ...previewNFTs[0].metadata
+      ...collectionTheme
     };
 
     const metadataCollectionFile = new File([JSON.stringify(metadataCollection, null, 2)], "metadata.json", {
