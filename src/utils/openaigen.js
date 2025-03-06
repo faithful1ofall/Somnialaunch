@@ -70,10 +70,13 @@ export const generateNFTCollection = async (collectionTheme, numNFTs = 10) => {
 
     // Step 2: Generate Metadata for all NFTs in one batch
     const metadataPrompt = `
-      Create unique metadata for a set of ${numNFTs} NFTs called '${collectionTheme}'. 
-      Each NFT should have attributes like Background, Clothing, Magic, Accessories, 
-      and Special Effects. Provide output in JSON array format.
-    `;
+      Generate unique metadata for a set of ${numNFTs} 
+      NFTs called '${collectionTheme}'. Each NFT should have 
+      attributes with the following format: an array of objects, 
+      where each object contains 'display_type' (either 'string' or 'number'), 
+      'trait_type' (e.g., Background, Clothing, Magic, Accessories, Special Effects), 
+      and 'value' (a descriptive string or numerical value). Provide the output in a JSON array format.
+      `;
 
     const metadataRes = await openai.chat.completions.create({
       model: "gpt-4-turbo",
