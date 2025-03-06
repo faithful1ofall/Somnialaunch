@@ -1,5 +1,5 @@
 import { useState, useEffect} from "react";
-import { FaTelegramPlane, FaTwitter, FaUpload, FaMagic } from "react-icons/fa";
+import { FaTelegramPlane, FaLink, FaUpload, FaMagic } from "react-icons/fa";
 import Button from "@components/button";
 import ApplyFormStyleWrapper from "./ApplyFrom.style";
 import { PinataSDK } from "pinata-web3";
@@ -500,13 +500,13 @@ const generateNFTs = async () => {
     />
   </div>
       )}
-          {!useAI && (
+          {/* {!useAI && (
 
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input type="email" id="email" placeholder="Email" className="form-control" />
           </div>
-      )}
+      )} */}
         </div>
       
 
@@ -693,7 +693,7 @@ const generateNFTs = async () => {
             <label htmlFor="nftfile">NFT files link</label>
             <div className="input_with_icon">
               <div className="input_social_icon">
-                <FaTelegramPlane />
+                <FaLink />
               </div>
               <input type="text" id="nftfile" placeholder="Enter nft files link ipfs/anylink type: json" className="form-control" />
             </div>
@@ -707,7 +707,7 @@ const generateNFTs = async () => {
             <label htmlFor="nftmeta">NFT metadata link</label>
             <div className="input_with_icon">
               <div className="input_social_icon">
-                <FaTelegramPlane />
+                <FaLink />
               </div>
               <input type="text" id="nftmeta" placeholder="Enter nft metadata link ipfs/anylink type: json" className="form-control" />
             </div>
@@ -716,17 +716,17 @@ const generateNFTs = async () => {
       )}
         
         {/* Social Links */}
-        <div className="form_widgets">
+        {/* <div className="form_widgets">
           <div className="form-group">
             <label htmlFor="telegram">TELEGRAM GROUP</label>
             <div className="input_with_icon">
               <div className="input_social_icon">
-                <FaTelegramPlane />
+                <FaLink />
               </div>
               <input type="text" id="telegram" placeholder="Enter telegram group link" className="form-control" />
             </div>
           </div>
-        </div>
+        </div>*/}
 
         <Button variant="blue" lg>
           Submit Collection
