@@ -15,10 +15,10 @@ import walletIcon2 from "@assets/images/icons/uniswap.png"
 import walletIcon3 from "@assets/images/icons/market.png"
 import walletIcon4 from "@assets/images/icons/gate.png"
 
-import { ConnectButton, darkTheme } from "thirdweb/react";
+import { ConnectButton, darkTheme, ChainProvider, ChainIcon } from "thirdweb/react";
 import { client } from "src/lib/client";
 import { createWallet } from "thirdweb/wallets";
-
+import { sonicTestnet } from "thirdweb/chains";
 
 
 const Header = () => {
@@ -125,6 +125,7 @@ const Header = () => {
               </div> */}
               <ConnectButton
             client={client}
+                chain={sonicTestnet}
                 wallets={wallets}
                 theme={darkTheme({
         colors: {
