@@ -431,8 +431,10 @@ const generateNFTs = async () => {
   return (
     <ApplyFormStyleWrapper>
       <form>
+        
         {/* Existing Collection Form Fields */}
         <div className="form_widgets">
+          {!useAI && (
           <div className="form-group">
             <label htmlFor="CollectionName">Collection Name</label>
             <input
@@ -442,6 +444,8 @@ const generateNFTs = async () => {
               className="form-control"
             />
           </div>
+      )}
+          {!useAI && (
           <div className="form-group">
     <label htmlFor="CollectionDescription">Description</label>
     <textarea
@@ -451,12 +455,15 @@ const generateNFTs = async () => {
       rows="3"
     />
   </div>
+      )}
+          {!useAI && (
 
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input type="email" id="email" placeholder="Email" className="form-control" />
           </div>
         </div>
+      )}
 
         <div className="ai-nft-generator">
       <label>
