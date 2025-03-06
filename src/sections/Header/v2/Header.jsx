@@ -15,7 +15,7 @@ import walletIcon2 from "@assets/images/icons/uniswap.png"
 import walletIcon3 from "@assets/images/icons/market.png"
 import walletIcon4 from "@assets/images/icons/gate.png"
 
-import { ConnectButton, darkTheme, ChainProvider, ChainIcon } from "thirdweb/react";
+import { ConnectButton, darkTheme, lightTheme, ChainProvider, ChainIcon } from "thirdweb/react";
 import { client } from "src/lib/client";
 import { createWallet } from "thirdweb/wallets";
 import { defineChain, sonicBlazeTestnet } from "thirdweb/chains";
@@ -137,7 +137,7 @@ decimals: 18,
             client={client}
                 chain={sonicBlazeTestnet}
                 wallets={wallets}
-                theme={darkTheme({
+                theme={lightTheme({
         colors: {
       accentText: "black", // ✅ Ensure text is black
       accentButtonText: "black", // ✅ Alternative
