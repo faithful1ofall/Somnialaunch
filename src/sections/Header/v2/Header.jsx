@@ -133,12 +133,15 @@ decimals: 18,
                   </Link>
                 </div>
               </div> */}
+        
               <ConnectButton
             client={client}
                 chain={sonicBlazeTestnet}
                 wallets={wallets}
-                theme="dark"
                 className="connect_btn"
+                style={{
+    color: "black !important", // Force text color
+  }}
           />
               <Button
                 sm
