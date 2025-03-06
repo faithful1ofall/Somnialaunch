@@ -10,16 +10,29 @@ export const generateCollectionTheme = async (userPrompt) => {
 
     // Generate structured collection theme
     const themePrompt = `
-  Based on the prompt: ${userPrompt}, create a structured NFT collection theme.
-  Return a JSON object with:
-  - Collection name (max 50 chars)
-  - Description (max 200 chars)
-  - Art style (max 50 chars)
-  - Layers with traits: Background, Characters, Clothing, Accessories (each max 100 chars)
-  - Rarity distribution: Common, Rare, Epic, Legendary (max 50 chars each)
-  
-  Ensure the total response does not exceed 950 characters.
-`;
+  Based on the prompt: ${userPrompt}, generate a structured NFT collection theme.  
+Return **only** a JSON object with the following structure, with no extra text, explanations, or formatting:  
+
+{
+  "CollectionName": "string (max 50 chars)",
+  "Description": "string (max 200 chars)",
+  "ArtStyle": "string (max 50 chars)",
+  "Layers": {
+    "Background": "string (max 100 chars)",
+    "Characters": "string (max 100 chars)",
+    "Clothing": "string (max 100 chars)",
+    "Accessories": "string (max 100 chars)"
+  },
+  "RarityDistribution": {
+    "Common": "string (max 50 chars)",
+    "Rare": "string (max 50 chars)",
+    "Epic": "string (max 50 chars)",
+    "Legendary": "string (max 50 chars)"
+  }
+}  
+
+Ensure the entire JSON response does not exceed **950 characters**.  
+Do **not** include any introductions, explanations, or additional text—return **only** valid JSON.`;
 
     const response = await openai.chat.completions.create({
       model: "gpt-4-turbo",
@@ -34,11 +47,11 @@ export const generateCollectionTheme = async (userPrompt) => {
 
     
     const cleanResponse = response.choices[0].message.content;
-  //  const collectionTheme = cleanResponse.replace(/```json|```/g, '').trim();
+    const collectionTheme = cleanResponse.replace(/```json|```/g, '').trim();
 
-    const match = cleanResponse.match(/```json\n([\s\S]*?)\n```/);
+  //  const match = cleanResponse.match(/```json\n([\s\S]*?)\n```/);
     
-    const collectionTheme = match[1];
+   // const collectionTheme = match[1];
     
 
     return { success: true, collectionTheme, response };
@@ -70,13 +83,33 @@ export const generateNFTCollection = async (collectionTheme, numNFTs = 10) => {
 
     // Step 2: Generate Metadata for all NFTs in one batch
     const metadataPrompt = `
-      Generate unique metadata for a set of ${numNFTs} 
-      NFTs called '${collectionTheme}'. Each NFT should have 
-      attributes with the following format: an array of objects, 
-      where each object contains 'display_type' (either 'string' or 'number'), 
-      'trait_type' (e.g., Background, Clothing, Magic, Accessories, Special Effects), 
-      and 'value' (a descriptive string or numerical value). Provide the output in a JSON array format.
-      `;
+      Generate unique metadata for a set of ${numNFTs} NFTs called '${collectionTheme}'.  
+
+Each NFT should have attributes in the following format:  
+An **array of objects**, where each object contains:  
+- `"display_type"`: `"string"` or `"number"`,  
+- `"trait_type"`: Trait name (e.g., `"Background"`, `"Clothing"`, `"Magic"`, `"Accessories"`, `"Special Effects"`),  
+- `"value"`: A descriptive string or numerical value.  
+
+### **Example Format:**
+[
+  {
+    "name": "NFT Name 1",
+    "description": "Brief description",
+    "attributes": [
+      { "display_type": "string", "trait_type": "Background", "value": "Starry Night" },
+      { "display_type": "string", "trait_type": "Clothing", "value": "Golden Armor" },
+      { "display_type": "number", "trait_type": "Magic", "value": 85 }
+    ]
+  },
+  { 
+    "name": "NFT Name 2",
+    "description": "Brief description",
+    "attributes": [ ... ]
+  }
+]
+
+Ensure the response **only** contains **a valid JSON array**—do **not** include any explanations, formatting, or additional text.`;
 
     const metadataRes = await openai.chat.completions.create({
       model: "gpt-4-turbo",
@@ -91,13 +124,13 @@ export const generateNFTCollection = async (collectionTheme, numNFTs = 10) => {
 
     const rawres = metadataRes.choices[0].message.content;
     
-   // const cleanres = rawres.replace(/```json|```/g, '').trim();
-    const match = rawres.match(/```json\n([\s\S]*?)\n```/);
+    const cleanres = rawres.replace(/```json|```/g, '').trim();
+  //  const match = rawres.match(/```json\n([\s\S]*?)\n```/);
     
-    const metadataArray = JSON.parse(match[1]);
+  //  const metadataArray = JSON.parse(match[1]);
     
     
-  //  const metadataArray = JSON.parse(cleanres);
+    const metadataArray = JSON.parse(cleanres);
 
     if (!Array.isArray(metadataArray) || metadataArray.length !== numNFTs) {
       throw new Error(`Metadata response is not in the expected array format.`);
