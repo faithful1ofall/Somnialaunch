@@ -15,8 +15,9 @@ import walletIcon2 from "@assets/images/icons/uniswap.png"
 import walletIcon3 from "@assets/images/icons/market.png"
 import walletIcon4 from "@assets/images/icons/gate.png"
 
-import { ConnectButton } from "thirdweb/react";
+import { ConnectButton, darkTheme } from "thirdweb/react";
 import { client } from "src/lib/client";
+import { createWallet } from "thirdweb/wallets";
 
 
 
@@ -32,6 +33,20 @@ const Header = () => {
     e.preventDefault();
     walletModalHandle()
   }
+
+  const wallets = [
+  createWallet("io.metamask"),
+  createWallet("com.coinbase.wallet"),
+  createWallet("me.rainbow"),
+  createWallet("io.rabby"),
+  createWallet("io.zerion.wallet"),
+  createWallet("com.trustwallet.app"),
+  createWallet("com.okex.wallet"),
+  createWallet("com.bitget.web3"),
+  createWallet("com.binance"),
+  createWallet("org.uniswap"),
+  createWallet("com.bybit"),
+];
 
   return (
     <NavWrapper className="gamfi_header" id="navbar">
