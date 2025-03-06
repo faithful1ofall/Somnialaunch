@@ -695,7 +695,11 @@ const generateNFTs = async () => {
               <div className="input_social_icon">
                 <FaLink />
               </div>
-              <input type="text" id="nftfile" placeholder="Enter nft files link ipfs/anylink type: json" className="form-control" />
+              <input 
+                type="text" 
+                value={imageCID}
+                onChange={(e) => setImageCID(e.target.value)}
+                id="nftfile" placeholder="Enter nft files link ipfs/anylink type: json" className="form-control" />
             </div>
           </div>
         </div>
@@ -709,7 +713,11 @@ const generateNFTs = async () => {
               <div className="input_social_icon">
                 <FaLink />
               </div>
-              <input type="text" id="nftmeta" placeholder="Enter nft metadata link ipfs/anylink type: json" className="form-control" />
+              <input 
+                type="text" 
+                value={metadataCID}
+                onChange={(e) => setMetadataCID(e.target.value)}
+                id="nftmeta" placeholder="Enter nft metadata link ipfs/anylink type: json" className="form-control" />
             </div>
           </div>
         </div>
