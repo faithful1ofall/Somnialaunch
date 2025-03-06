@@ -31,7 +31,10 @@ export const generateCollectionTheme = async (userPrompt) => {
       throw new Error(`No theme generated.`);
     }
 
-    const collectionTheme = response.choices[0].message.content;
+    
+    const cleanResponse = response.choices[0].message.content;
+    const collectionTheme = cleanResponse.replace(/```json|```/g, '').trim();
+    
 
     return { success: true, collectionTheme, response };
   } catch (error) {
