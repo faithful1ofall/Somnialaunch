@@ -66,7 +66,7 @@ const ApplyForm = () => {
     setIsGenerating(true);
     try {
       let imageFiles;
-      for (i < previewNFTs.length){
+      for (let i = 0; i < previewNFTs.length; i++){
         
       imageFiles.push(new File([previewNFTs[i].blob], `${i + 1}.png`, { type: "image/png" }));
       }
