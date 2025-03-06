@@ -129,7 +129,7 @@ const Header = () => {
                 onClick={e => handleWalletBtn(e)}
               >
                 <img src={connectIcon.src} alt="icon" />
-                Connect
+                Connected
               </Button>
             </div>
           </div>
