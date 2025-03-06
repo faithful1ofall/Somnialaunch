@@ -267,13 +267,10 @@ const ApplyForm = () => {
     if (userPrompt && userPrompt.trim()) {
       try {
         const aiImage = await AIgenerateImage(userPrompt);
-
-        if (aiImage) {
   let bgrm = aiImage.blob; // Default to AI blob
   if (layers[layerIndex]?.name !== "Background" && aiImage.proxyUrl) {
     bgrm = await refineBackground(aiImage.proxyUrl);
   }
-        }
         console.log('bgrm', bgrm);
         const aifile = new File([bgrm], `${Date.now()}ai.png`, { type: "image/png" });
         console.log('aifile', aifile);
