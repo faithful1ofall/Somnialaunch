@@ -7,12 +7,20 @@ import { generateImage, generateCollectionTheme, generateNFTCollection } from '.
 import imglyRemoveBackground from "@imgly/background-removal";
 import { useSendTransaction } from "thirdweb/react";
 import { getContract, prepareContractCall } from "thirdweb";
-import { sonicBlazeTestnet } from "thirdweb/chains";
+import { defineChain, sonicBlazeTestnet } from "thirdweb/chains";
 //import client from '../../../lib/client';
 import { client } from "src/lib/client";
 //import Image from "next/image";
 
-
+const sonicTestnet = defineChain({
+id: 57054,
+rpc: "https://rpc.blaze.soniclabs.com",
+nativeCurrency: {
+name: "Sonic",
+symbol: "S",
+decimals: 18,
+},
+});
 
 
 
@@ -45,7 +53,7 @@ const ApplyForm = () => {
 
   const contract = getContract({
   address: "0xAF93888cbD250300470A1618206e036E11470149",
-  chain: sonicBlazeTestnet,
+  chain: sonicTestnet,
   client,
 });
 
