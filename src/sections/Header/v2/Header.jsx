@@ -16,7 +16,7 @@ import walletIcon3 from "@assets/images/icons/market.png"
 import walletIcon4 from "@assets/images/icons/gate.png"
 
 import { ConnectButton } from "thirdweb/react";
-import { client } from "src/utils/client";
+import { client } from "src/lib/client";
 
 
 
