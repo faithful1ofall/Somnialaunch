@@ -18,7 +18,7 @@ import walletIcon4 from "@assets/images/icons/gate.png"
 import { ConnectButton, darkTheme, ChainProvider, ChainIcon } from "thirdweb/react";
 import { client } from "src/lib/client";
 import { createWallet } from "thirdweb/wallets";
-import { defineChain } from "thirdweb/chains";
+import { defineChain, sonicBlazeTestnet } from "thirdweb/chains";
 
 
 const Header = () => {
@@ -135,7 +135,7 @@ decimals: 18,
               </div> */}
               <ConnectButton
             client={client}
-                chain={sonicTestnet}
+                chain={sonicBlazeTestnet}
                 wallets={wallets}
                 theme={darkTheme({
         colors: {
