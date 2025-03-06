@@ -8,7 +8,8 @@ import imglyRemoveBackground from "@imgly/background-removal";
 import { useSendTransaction } from "thirdweb/react";
 import { getContract, prepareContractCall } from "thirdweb";
 import { sonicBlazeTestnet } from "thirdweb/chains";
-import client from '../../../lib/client';
+//import client from '../../../lib/client';
+import { client } from "src/lib/client";
 //import Image from "next/image";
 
 
