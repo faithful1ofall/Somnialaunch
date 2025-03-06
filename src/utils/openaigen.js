@@ -83,19 +83,20 @@ export const generateNFTCollection = async (collectionTheme, numNFTs = 10) => {
 
     // Step 2: Generate Metadata for all NFTs in one batch
     const metadataPrompt = `
-      Generate unique metadata for a set of ${numNFTs} NFTs called '${collectionTheme}'.  
+Generate unique metadata for a set of ${numNFTs} NFTs called '${collectionTheme}'.  
 
 Each NFT should have attributes in the following format:  
 An **array of objects**, where each object contains:  
-- `"display_type"`: `"string"` or `"number"`,  
-- `"trait_type"`: Trait name (e.g., `"Background"`, `"Clothing"`, `"Magic"`, `"Accessories"`, `"Special Effects"`),  
-- `"value"`: A descriptive string or numerical value.  
+- **"display_type"**: Either **"string"** or **"number"**  
+- **"trait_type"**: Trait name (e.g., **"Background"**, **"Clothing"**, **"Magic"**, **"Accessories"**, **"Special Effects"**)  
+- **"value"**: A descriptive string or numerical value  
 
- **Example Format:**
+**Example Format:**
+\`\`\`json
 [
   {
     "name": "NFT Name 1",
-    "description": "Brief description",
+    "description": "Brief description of the NFT",
     "attributes": [
       { "display_type": "string", "trait_type": "Background", "value": "Starry Night" },
       { "display_type": "string", "trait_type": "Clothing", "value": "Golden Armor" },
@@ -104,13 +105,18 @@ An **array of objects**, where each object contains:
   },
   { 
     "name": "NFT Name 2",
-    "description": "Brief description",
-    "attributes": [ ... ]
+    "description": "Brief description of the NFT",
+    "attributes": [
+      { "display_type": "string", "trait_type": "Background", "value": "Cyber City" },
+      { "display_type": "string", "trait_type": "Accessories", "value": "Neon Glasses" },
+      { "display_type": "number", "trait_type": "Special Effects", "value": 95 }
+    ]
   }
 ]
+\`\`\`
 
-Ensure the response **only** contains **a valid JSON array**—do **not** include any explanations, formatting, or additional text.`;
-
+Ensure the response **only** contains **a valid JSON array**—do **not** include any explanations, formatting, or additional text.`
+;
     const metadataRes = await openai.chat.completions.create({
       model: "gpt-4-turbo",
       messages: [{ role: "user", content: metadataPrompt }],
