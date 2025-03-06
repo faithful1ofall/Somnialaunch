@@ -137,16 +137,8 @@ decimals: 18,
             client={client}
                 chain={sonicBlazeTestnet}
                 wallets={wallets}
-                theme={lightTheme({
-        colors: {
-      accentText: "black", // ✅ Ensure text is black
-      accentButtonText: "black", // ✅ Alternative
-      primaryButtonBg: "white", // ✅ Ensure background is white for contrast
-      primaryButtonText: "black", // ✅ Set button text color
-      secondaryButtonBg: "white",
-      secondaryButtonText: "black",
-    },
-      })}
+                theme="dark"
+                )}
           />
               <Button
                 sm
