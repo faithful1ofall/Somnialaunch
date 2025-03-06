@@ -448,7 +448,8 @@ const generateNFTs = async () => {
           {!useAI && (
           <div className="form-group">
     <label htmlFor="CollectionDescription">Description</label>
-    <textarea
+      <input
+      type="text"
       id="CollectionDescription"
       placeholder="Enter a short description of your collection"
       className="form-control"
@@ -462,8 +463,9 @@ const generateNFTs = async () => {
             <label htmlFor="email">Email</label>
             <input type="email" id="email" placeholder="Email" className="form-control" />
           </div>
-        </div>
       )}
+        </div>
+      
 
         <div className="ai-nft-generator">
       <label>
