@@ -34,8 +34,11 @@ export const generateCollectionTheme = async (userPrompt) => {
 
     
     const cleanResponse = response.choices[0].message.content;
-    const collectionTheme = cleanResponse.replace(/```json|```/g, '').trim();
-  //  const collectionTheme = JSON.parse(cleanres);
+  //  const collectionTheme = cleanResponse.replace(/```json|```/g, '').trim();
+
+    const match = cleanResponse.match(/```json\n([\s\S]*?)\n```/);
+    
+    const collectionTheme = match[1];
     
 
     return { success: true, collectionTheme, response };
@@ -85,9 +88,13 @@ export const generateNFTCollection = async (collectionTheme, numNFTs = 10) => {
 
     const rawres = metadataRes.choices[0].message.content;
     
-    const cleanres = rawres.replace(/```json|```/g, '').trim();
+   // const cleanres = rawres.replace(/```json|```/g, '').trim();
+    const match = rawres.match(/```json\n([\s\S]*?)\n```/);
     
-    const metadataArray = JSON.parse(cleanres);
+    const metadataArray = JSON.parse(match[1]);
+    
+    
+  //  const metadataArray = JSON.parse(cleanres);
 
     if (!Array.isArray(metadataArray) || metadataArray.length !== numNFTs) {
       throw new Error(`Metadata response is not in the expected array format.`);
