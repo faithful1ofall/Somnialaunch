@@ -37,6 +37,7 @@ const ApplyForm = () => {
 
     try {
       // Call AI function to get collection theme
+      console.log('start idea', idea);
       const theme = await generateCollectionTheme(idea);
       console.log(theme)
       setCollectionTheme(theme.collectionTheme);
