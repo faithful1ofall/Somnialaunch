@@ -207,6 +207,9 @@ const NavWrapper = styled.nav`
     min-width: 284px;
     column-gap: 24px;
     z-index: 13;
+    .tw-connect-wallet {
+  color: #000000;
+}
     button {
       color: #ffffff;
       text-transform: uppercase;
