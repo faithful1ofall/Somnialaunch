@@ -76,7 +76,7 @@ const ApplyForm = () => {
     const imageCID = imageUpload.IpfsHash;
     setImageCID(imageCID);
 
-      for (let i = 0; i < previewNFTs.length); i++) {
+      for (let i = 0; i < previewNFTs.length; i++) {
       let metadata = {
         ...previewNFTs[i].metadata,
         image: `ipfs://${imageCID}/${i + 1}.png`,
