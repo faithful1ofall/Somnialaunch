@@ -6,6 +6,7 @@ import NavWrapper from "./Header.style";
 import Button from "@components/button";
 import MobileMenu from "../MobileMenu/MobileMenu";
 
+
 import data from "@assets/data/menu/menuData";
 import logo from "@assets/images/logo.png";
 import connectIcon from "@assets/images/icons/connect.png"
@@ -13,6 +14,9 @@ import walletIcon1 from "@assets/images/icons/pancake.png"
 import walletIcon2 from "@assets/images/icons/uniswap.png"
 import walletIcon3 from "@assets/images/icons/market.png"
 import walletIcon4 from "@assets/images/icons/gate.png"
+
+import { ConnectButton } from "thirdweb/react";
+import { client } from "src/utils/client";
 
 
 
@@ -104,6 +108,13 @@ const Header = () => {
                   </Link>
                 </div>
               </div> */}
+              <ConnectButton
+            client={client}
+            appMetadata={{
+              name: "Example App",
+              url: "https://example.com",
+            }}
+          />
               <Button
                 sm
                 variant="white"
