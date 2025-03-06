@@ -20,6 +20,8 @@ const ApplyForm = () => {
   const [totalCombinations, setTotalCombinations] = useState(0);
   const [imagePreviews, setImagePreviews] = useState({});
   const [loading, setLoading] = useState(false);
+
+  const [useCustomLinks, setUseCustomLinks] = useState(false);
   
   const [useAI, setUseAI] = useState(false);
   const [idea, setIdea] = useState("");
@@ -63,8 +65,48 @@ const ApplyForm = () => {
   const handleConfirmAndUpload = async () => {
     setIsGenerating(true);
     try {
-      await uploadNFTs(collectionTheme, nftCount);
-      alert("NFTs successfully uploaded!");
+      let imageFiles;
+      for (i < previewNFTs.length){
+        
+      imageFiles.push(new File([previewNFTs[i].blob], `${i + 1}.png`, { type: "image/png" }));
+      }
+      const imageUpload = await uploadFiles(imageFiles, 'imageFiles');
+    if (!imageUpload.IpfsHash) return alert("Failed to upload images to IPFS");
+    
+    const imageCID = imageUpload.IpfsHash;
+    setImageCID(imageCID);
+
+      for (let i = 0; i < previewNFTs.length); i++) {
+      let metadata = {
+        ...previewNFTs[i].metadata,
+        image: `ipfs://${imageCID}/${i + 1}.png`,
+        
+      };
+
+      metadataFiles.push(new File([JSON.stringify(metadata, null, 2)], `${i + 1}.json`, { type: "application/json" }));
+    }
+
+    const metadataCollection = {
+      ...previewNFTs[0].metadata
+    };
+
+    const metadataCollectionFile = new File([JSON.stringify(metadataCollection, null, 2)], "metadata.json", {
+      type: "application/json",
+    });
+
+    metadataFiles.push(metadataCollectionFile);
+
+    // Upload metadata in parallel
+    const metadataUpload = await uploadFiles(metadataFiles, 'metadataFiles');
+    if (!metadataUpload.IpfsHash) return alert("Failed to upload metadata");
+
+    setMetadataCID(metadataUpload.IpfsHash);
+  
+    
+    alert(`NFTs generated!\nImages: ipfs://${imageCID}\nMetadata: ipfs://${metadataUpload.IpfsHash}`);
+      
+   //   await uploadNFTs(collectionTheme, nftCount);
+   //   alert("NFTs successfully uploaded!");
     } catch (error) {
       console.error("Error uploading NFTs:", error);
     } finally {
@@ -475,6 +517,9 @@ const generateNFTs = async () => {
 
       {useAI && (
         <div>
+          <label>
+           Step 1
+      </label>
           <input
             type="text"
             value={idea}
@@ -489,6 +534,9 @@ const generateNFTs = async () => {
 
       {useAI && (
         <div>
+          <label>
+           Step 2
+      </label>
           <textarea
             value={collectionTheme}
             style={{ marginTop: '10px' }}
@@ -521,9 +569,17 @@ const generateNFTs = async () => {
       )}
     </div>
 
-        {/* NFT Layer Management */}
         {!useAI && (
+        <label>
+        <input type="checkbox" checked={useCustomLinks} onChange={() => setUseCustomLinks(!useCustomLinks)} />
+        Use custom links
+      </label>
+      )}
+
+        {/* NFT Layer Management */}
+        {!useAI || !useCustomLinks && (
         <div className="form_widgets">
+          
           <h5>NFT Layer Management</h5>
           {layers.map((layer, layerIndex) => (
             <div key={layerIndex} className="layer-group">
@@ -580,7 +636,7 @@ const generateNFTs = async () => {
         
 
         {/* NFT Generation Options */}
-        {!useAI && (
+        {!useAI || !useCustomLinks && (
         <div className="form_widgets">
           <h5>Generate NFTs</h5>
           <input
@@ -630,7 +686,34 @@ const generateNFTs = async () => {
     </p>
   </div>
 )}
-
+  {useCustomLinks && (      
+<div className="form_widgets">
+          <div className="form-group">
+            <label htmlFor="nftfile">NFT files link</label>
+            <div className="input_with_icon">
+              <div className="input_social_icon">
+                <FaTelegramPlane />
+              </div>
+              <input type="text" id="nftfile" placeholder="Enter nft files link ipfs/anylink type: json" className="form-control" />
+            </div>
+          </div>
+        </div>
+      )}
+        {useCustomLinks && (
+        
+        <div className="form_widgets">
+          <div className="form-group">
+            <label htmlFor="nftmeta">NFT metadata link</label>
+            <div className="input_with_icon">
+              <div className="input_social_icon">
+                <FaTelegramPlane />
+              </div>
+              <input type="text" id="nftmeta" placeholder="Enter nft metadata link ipfs/anylink type: json" className="form-control" />
+            </div>
+          </div>
+        </div>
+      )}
+        
         {/* Social Links */}
         <div className="form_widgets">
           <div className="form-group">
