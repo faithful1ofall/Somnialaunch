@@ -647,7 +647,7 @@ const generateNFTs = async () => {
             className="form-control"
             placeholder="Number of NFTs to Generate"
           />
-          <Button variant="blue" style={{ marginTop: '10px' }} onClick={(e) => { e.preventDefault(); generateNFTs(); }} disabled={loading}>
+          <Button variant="blue" style={{ marginTop: '10px', marginBottom: '10px' }} onClick={(e) => { e.preventDefault(); generateNFTs(); }} disabled={loading}>
   {loading ? (
     <>
       <span className="spinner"></span> Generating...
