@@ -17,6 +17,8 @@ const ApplyForm = () => {
   const [nftCount, setNftCount] = useState(1);
   const [imageCID, setImageCID] = useState(null);
   const [metadataCID, setMetadataCID] = useState(null);
+  const [cusnftlink, setCusnftlink] = useState(null);
+  const [cusmetalink, setCusmetalink] = useState(null);
   const [totalCombinations, setTotalCombinations] = useState(0);
   const [imagePreviews, setImagePreviews] = useState({});
   const [loading, setLoading] = useState(false);
@@ -697,8 +699,8 @@ const generateNFTs = async () => {
               </div>
               <input 
                 type="text" 
-                value={imageCID}
-                onChange={(e) => setImageCID(e.target.value)}
+                value={cusnftlink}
+                onChange={(e) => setCusnftlink(e.target.value)}
                 id="nftfile" placeholder="Enter nft files link ipfs/anylink type: json" className="form-control" />
             </div>
           </div>
@@ -715,8 +717,8 @@ const generateNFTs = async () => {
               </div>
               <input 
                 type="text" 
-                value={metadataCID}
-                onChange={(e) => setMetadataCID(e.target.value)}
+                value={cusmetalink}
+                onChange={(e) => setCusmetalink(e.target.value)}
                 id="nftmeta" placeholder="Enter nft metadata link ipfs/anylink type: json" className="form-control" />
             </div>
           </div>
