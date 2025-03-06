@@ -208,7 +208,7 @@ const NavWrapper = styled.nav`
     column-gap: 24px;
     z-index: 13;
     button {
-      color: #000000;
+      color: #ffffff;
       text-transform: uppercase;
       font-family: "Russo One", sans-serif;
       font-weight: 400;
