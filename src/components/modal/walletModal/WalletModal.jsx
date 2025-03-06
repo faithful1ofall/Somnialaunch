@@ -26,7 +26,7 @@ const WalletModal = () => {
         <div className="mint_modal_box">
           <div className="mint_modal_content">
             <div className="modal_header">
-              <h2>CONNECT WALLET</h2>
+              <h2>CONNECT YOUR WALLET</h2>
               <p>
                 Please select a wallet to connect to this marketplace
               </p>
