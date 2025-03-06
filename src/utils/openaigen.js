@@ -80,7 +80,10 @@ export const generateNFTCollection = async (collectionTheme, numNFTs = 10) => {
       throw new Error(`No metadata generated for the collection`);
     }
 
-    const metadataArray = JSON.parse(metadataRes.choices[0].message.content);
+    const rawres = metadataRes.choices[0].message.content;
+    const cleanres = rawres.replace(/```json|```/g, '').trim();
+    
+    const metadataArray = JSON.parse(cleanres);
 
     if (!Array.isArray(metadataArray) || metadataArray.length !== numNFTs) {
       throw new Error(`Metadata response is not in the expected array format.`);
