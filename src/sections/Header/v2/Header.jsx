@@ -139,7 +139,8 @@ decimals: 18,
                 wallets={wallets}
                 theme={darkTheme({
         colors: {
-          modalBg: "hsl(0, 0%, 0%)",
+          secondaryButtonText: "hsl(0, 0%, 0%)",
+          
           primaryButtonText: "hsl(0, 0%, 0%)",
         },
       })}
