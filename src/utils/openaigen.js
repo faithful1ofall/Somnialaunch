@@ -33,7 +33,8 @@ export const generateCollectionTheme = async (userPrompt) => {
 
     
     const cleanResponse = response.choices[0].message.content;
-    const collectionTheme = cleanResponse.replace(/```json|```/g, '').trim();
+    const cleanres = cleanResponse.replace(/```json|```/g, '').trim();
+    const collectionTheme = JSON.parse(cleanres);
     
 
     return { success: true, collectionTheme, response };
