@@ -37,7 +37,7 @@ const ApplyForm = () => {
 
     try {
       // Call AI function to get collection theme
-      console.log('start idea', idea);
+      
       const theme = await generateCollectionTheme(idea);
       console.log(theme)
       setCollectionTheme(theme.collectionTheme);
@@ -527,7 +527,7 @@ const generateNFTs = async () => {
             onChange={(e) => setIdea(e.target.value)}
             placeholder="Enter your idea..."
           />
-          <Button variant="blue" style={{ marginTop: '10px' }} onClick={(e) => { e.preventDefault(); handleGenerateTheme}} disabled={isGenerating}>
+          <Button variant="blue" style={{ marginTop: '10px' }} onClick={(e) => { e.preventDefault(); handleGenerateTheme();}} disabled={isGenerating}>
             Generate Theme
           </Button>
         </div>
@@ -549,7 +549,7 @@ const generateNFTs = async () => {
             onChange={(e) => setNftCount(Math.max(1, parseInt(e.target.value)))}
             min="1"
           />
-          <Button  variant="blue" style={{ marginTop: '10px' }} onClick={ (e) => { e.preventDefault(); handleGeneratePreview}} disabled={isGenerating}>
+          <Button  variant="blue" style={{ marginTop: '10px' }} onClick={ (e) => { e.preventDefault(); handleGeneratePreview();}} disabled={isGenerating}>
             Generate Preview
           </Button>
         </div>
@@ -563,7 +563,7 @@ const generateNFTs = async () => {
               <img key={index} src={nft.proxyUrl} alt={`NFT ${index}`} style={{ marginTop: '10px' }} />
         ))}
           </div>
-          <Button style={{ marginTop: '10px' }} variant="blue" onClick={(e) => { e.preventDefault(); handleConfirmAndUpload}} disabled={isGenerating}>
+          <Button style={{ marginTop: '10px' }} variant="blue" onClick={(e) => { e.preventDefault(); handleConfirmAndUpload();}} disabled={isGenerating}>
             Confirm & Upload
           </Button>
         </div>
