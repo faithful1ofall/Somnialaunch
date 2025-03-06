@@ -138,6 +138,7 @@ decimals: 18,
                 chain={sonicBlazeTestnet}
                 wallets={wallets}
                 theme="dark"
+                className="connect_btn"
           />
               <Button
                 sm
