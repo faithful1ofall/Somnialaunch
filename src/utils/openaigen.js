@@ -6,6 +6,7 @@ export const generateCollectionTheme = async (userPrompt) => {
     if (!userPrompt) {
       return { error: "Prompt is required" };
     }
+    console.log('start collection theme', userPrompt);
 
     // Generate structured collection theme
     const themePrompt = `
