@@ -523,7 +523,6 @@ const generateNFTs = async () => {
 
         {/* NFT Layer Management */}
         {!useAI && (
-      <>
         <div className="form_widgets">
           <h5>NFT Layer Management</h5>
           {layers.map((layer, layerIndex) => (
@@ -577,8 +576,11 @@ const generateNFTs = async () => {
             <FaUpload /> Add Layer
           </Button>
         </div>
+      )}
+        
 
         {/* NFT Generation Options */}
+        {!useAI && (
         <div className="form_widgets">
           <h5>Generate NFTs</h5>
           <input
@@ -599,10 +601,10 @@ const generateNFTs = async () => {
     </>
   )}
 </Button>
-          </>
-          )}
+        </div>
+      )}
 
-          {/* Display CIDs after generation */}
+        {/* Display CIDs after generation */}
           {imageCID && metadataCID && (
   <div className="cid_display">
     <h5>Uploaded CIDs</h5>
@@ -628,7 +630,6 @@ const generateNFTs = async () => {
     </p>
   </div>
 )}
-        </div>
 
         {/* Social Links */}
         <div className="form_widgets">
