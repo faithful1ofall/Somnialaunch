@@ -471,7 +471,7 @@ const generateNFTs = async () => {
         Use AI-Generated NFTs
       </label>
 
-      {useAI && step === 1 && (
+      {useAI && (
         <div>
           <input
             type="text"
@@ -479,13 +479,13 @@ const generateNFTs = async () => {
             onChange={(e) => setIdea(e.target.value)}
             placeholder="Enter your idea..."
           />
-          <button onClick={handleGenerateTheme} disabled={isGenerating}>
+          <Button variant="blue" onClick={handleGenerateTheme} disabled={isGenerating}>
             Generate Theme
-          </button>
+          </Button>
         </div>
       )}
 
-      {useAI && step === 2 && (
+      {useAI && (
         <div>
           <textarea
             value={collectionTheme}
@@ -497,9 +497,9 @@ const generateNFTs = async () => {
             onChange={(e) => setNftCount(Math.max(1, parseInt(e.target.value)))}
             min="1"
           />
-          <button onClick={handleGeneratePreview} disabled={isGenerating}>
+          <Button variant="blue" onClick={handleGeneratePreview} disabled={isGenerating}>
             Generate Preview
-          </button>
+          </Button>
         </div>
       )}
 
@@ -511,9 +511,9 @@ const generateNFTs = async () => {
               <img key={index} src={nft.proxyUrl} alt={`NFT ${index}`} />
             ))}
           </div>
-          <button onClick={handleConfirmAndUpload} disabled={isGenerating}>
+          <Button variant="blue" onClick={handleConfirmAndUpload} disabled={isGenerating}>
             Confirm & Upload
-          </button>
+          </Button>
         </div>
       )}
     </div>
@@ -541,9 +541,9 @@ const generateNFTs = async () => {
                 onChange={(e) => handleLayerUpload(e, layerIndex)}
                 className="form-control"
               />
-              <button onClick={(e) => { e.preventDefault(); handleLayerUpload(e, layerIndex, true); }}>
+              <Button variant="blue" onClick={(e) => { e.preventDefault(); handleLayerUpload(e, layerIndex, true); }}>
   <FaMagic /> AI Generate
-</button>
+</Button>
 
               {/* Display Images with Rarity Inputs */}
               {layer.images.map((image, imageIndex) => (
