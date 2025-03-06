@@ -104,7 +104,7 @@ const Header = () => {
                 <MdNotes />
               </button>
 
-              <div className="wallet_btn">
+              {/* <div className="wallet_btn">
                 Buy token <MdOutlineKeyboardArrowDown />
 
                 <div className="wallet_token_list">
@@ -121,7 +121,7 @@ const Header = () => {
                     <img src={walletIcon4.src} alt="icon" />  Gate.io
                   </Link>
                 </div>
-              </div>
+              </div> */}
               <Button
                 sm
                 variant="white"

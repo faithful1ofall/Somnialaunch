@@ -40,7 +40,7 @@ const Banner = () => {
                   </Button>
                 </div>
 
-                <div className="buy_token">
+                {/* <div className="buy_token">
                   <h6>BUY TOKEN ON</h6>
                   <div className="token-list">
                     {tokenImages?.map((token, i) => (
@@ -53,7 +53,7 @@ const Banner = () => {
                       </Link>
                     ))}
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="col-md-6">
