@@ -91,7 +91,7 @@ const ApplyForm = () => {
 
     const metadataCollection = collectionTheme;
 
-    const metadataCollectionFile = new File([JSON.stringify(metadataCollection, null, 2)], "metadata.json", {
+    const metadataCollectionFile = new File([metadataCollection], "metadata.json", {
       type: "application/json",
     });
 
