@@ -481,7 +481,7 @@ const generateNFTs = async () => {
             onChange={(e) => setIdea(e.target.value)}
             placeholder="Enter your idea..."
           />
-          <Button variant="blue" onClick={handleGenerateTheme} disabled={isGenerating}>
+          <Button variant="blue" style={{ marginTop: '10px' }} onClick={handleGenerateTheme} disabled={isGenerating}>
             Generate Theme
           </Button>
         </div>
@@ -491,6 +491,7 @@ const generateNFTs = async () => {
         <div>
           <textarea
             value={collectionTheme}
+            style={{ marginTop: '10px' }}
             onChange={(e) => setCollectionTheme(e.target.value)}
           />
           <input
@@ -499,7 +500,7 @@ const generateNFTs = async () => {
             onChange={(e) => setNftCount(Math.max(1, parseInt(e.target.value)))}
             min="1"
           />
-          <Button variant="blue" onClick={handleGeneratePreview} disabled={isGenerating}>
+          <Button  variant="blue" style={{ marginTop: '10px' }} onClick={handleGeneratePreview} disabled={isGenerating}>
             Generate Preview
           </Button>
         </div>
@@ -510,10 +511,10 @@ const generateNFTs = async () => {
           <h3>Preview</h3>
           <div className="nft-previews">
             {previewNFTs.map((nft, index) => (
-              <img key={index} src={nft.proxyUrl} alt={`NFT ${index}`} />
-            ))}
+              <img key={index} src={nft.proxyUrl} alt={`NFT ${index}`} style={{ marginTop: '10px' }} />
+        ))}
           </div>
-          <Button variant="blue" onClick={handleConfirmAndUpload} disabled={isGenerating}>
+          <Button style={{ marginTop: '10px' }} variant="blue" onClick={handleConfirmAndUpload} disabled={isGenerating}>
             Confirm & Upload
           </Button>
         </div>
@@ -527,6 +528,7 @@ const generateNFTs = async () => {
             <div key={layerIndex} className="layer-group">
               <input
                 type="text"
+                style={{ marginTop: '10px' }}
                 placeholder="Layer Name"
                 value={layer.name}
                 onChange={(e) => {
@@ -538,12 +540,13 @@ const generateNFTs = async () => {
               />
               <input
                 type="file"
+                style={{ marginTop: '10px' }}
                 accept="image/*"
                 multiple
                 onChange={(e) => handleLayerUpload(e, layerIndex)}
                 className="form-control"
               />
-              <Button variant="blue" onClick={(e) => { e.preventDefault(); handleLayerUpload(e, layerIndex, true); }}>
+              <Button variant="blue" style={{ marginTop: '10px' }} onClick={(e) => { e.preventDefault(); handleLayerUpload(e, layerIndex, true); }}>
   <FaMagic /> AI Generate
 </Button>
 
@@ -583,7 +586,7 @@ const generateNFTs = async () => {
             className="form-control"
             placeholder="Number of NFTs to Generate"
           />
-          <Button variant="blue" onClick={(e) => { e.preventDefault(); generateNFTs(); }} disabled={loading}>
+          <Button variant="blue" style={{ marginTop: '10px' }} onClick={(e) => { e.preventDefault(); generateNFTs(); }} disabled={loading}>
   {loading ? (
     <>
       <span className="spinner"></span> Generating...
