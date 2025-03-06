@@ -110,10 +110,9 @@ const Header = () => {
               </div> */}
               <ConnectButton
             client={client}
-            appMetadata={{
-              name: "Example App",
-              url: "https://example.com",
-            }}
+                theme={darkTheme({
+        colors: { modalBg: "hsl(0, 0%, 0%)" },
+      })}
           />
               <Button
                 sm
