@@ -88,9 +88,7 @@ const ApplyForm = () => {
       metadataFiles.push(new File([JSON.stringify(metadata, null, 2)], `${i + 1}.json`, { type: "application/json" }));
     }
 
-    const metadataCollection = {
-      ...collectionTheme
-    };
+    const metadataCollection = collectionTheme;
 
     const metadataCollectionFile = new File([JSON.stringify(metadataCollection, null, 2)], "metadata.json", {
       type: "application/json",
