@@ -91,7 +91,7 @@ An **array of objects**, where each object contains:
 - `"trait_type"`: Trait name (e.g., `"Background"`, `"Clothing"`, `"Magic"`, `"Accessories"`, `"Special Effects"`),  
 - `"value"`: A descriptive string or numerical value.  
 
-### **Example Format:**
+ **Example Format:**
 [
   {
     "name": "NFT Name 1",
