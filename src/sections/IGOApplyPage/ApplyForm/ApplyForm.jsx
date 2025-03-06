@@ -132,7 +132,7 @@ const ApplyForm = () => {
     
   //  const imageFile = new File([imageData], `${Date.now()}ai.png`, { type: "image/png" });
 
-    return imageData.proxyUrl;
+    return imageData;
   } catch (error) {
     console.error("Error generating AI image:", error);
     alert("AI image generation failed due to CORS restrictions.");
@@ -267,13 +267,15 @@ const ApplyForm = () => {
     if (userPrompt && userPrompt.trim()) {
       try {
         const aiImage = await AIgenerateImage(userPrompt);
-        const bgrm = await refineBackground(aiImage);
+
+        if (aiImage) {
+  let bgrm = aiImage.blob; // Default to AI blob
+  if (layers[layerIndex]?.name !== "Background" && aiImage.proxyUrl) {
+    bgrm = await refineBackground(aiImage.proxyUrl);
+  }
         console.log('bgrm', bgrm);
         const aifile = new File([bgrm], `${Date.now()}ai.png`, { type: "image/png" });
         console.log('aifile', aifile);
-        //   const rmbg = imglyRemoveBackground(aiImage);
-   //     console.log('rmbg',rmbg);
-        
         if (aiImage) {
           setLayers((prevLayers) =>
             prevLayers.map((layer, index) =>
