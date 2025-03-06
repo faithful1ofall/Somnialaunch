@@ -615,7 +615,7 @@ const generateNFTs = async () => {
                 <div key={imageIndex} className="image-group">
                   <p>{image?.file?.name || 'ai generated'}</p>
                   <img src={imagePreviews[layerIndex]?.[imageIndex]} alt="Layer Preview" className="preview-img" />
-                  <button onClick={(e) => removeImage(layerIndex, imageIndex)}>Remove</button>
+                  <button onClick={(e) =>{ e.preventDefault(); removeImage(layerIndex, imageIndex);}}>Remove</button>
                   <input
                     type="number"
                     placeholder="Rarity %"
