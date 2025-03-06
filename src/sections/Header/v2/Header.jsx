@@ -139,10 +139,13 @@ decimals: 18,
                 wallets={wallets}
                 theme={darkTheme({
         colors: {
-          secondaryButtonText: "hsl(0, 0%, 0%)",
-          
-          primaryButtonText: "hsl(0, 0%, 0%)",
-        },
+      accentText: "black", // ✅ Ensure text is black
+      accentButtonText: "black", // ✅ Alternative
+      primaryButtonBg: "white", // ✅ Ensure background is white for contrast
+      primaryButtonText: "black", // ✅ Set button text color
+      secondaryButtonBg: "white",
+      secondaryButtonText: "black",
+    },
       })}
           />
               <Button
