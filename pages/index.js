@@ -5,7 +5,7 @@ import SEO from "@components/SEO";
 import WalletModal from "@components/modal/walletModal/WalletModal";
 import MetamaskModal from "@components/modal/metamaskModal/MetamaskModal";
 import Banner from "@sections/Banner/v1";
-import Header from "@sections/Header/v1";
+import Header from "@sections/Header/v2";
 import About from "@sections/About/v1";
 import NextProjects from "@sections/Projects/v1";
 import PreviousProjects from "@sections/Projects/v3";
