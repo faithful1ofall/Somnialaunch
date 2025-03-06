@@ -125,8 +125,12 @@ const Header = () => {
               </div> */}
               <ConnectButton
             client={client}
+                wallets={wallets}
                 theme={darkTheme({
-        colors: { modalBg: "hsl(0, 0%, 0%)" },
+        colors: {
+          modalBg: "hsl(0, 0%, 0%)",
+          primaryButtonText: "hsl(0, 0%, 0%)",
+        },
       })}
           />
               <Button
