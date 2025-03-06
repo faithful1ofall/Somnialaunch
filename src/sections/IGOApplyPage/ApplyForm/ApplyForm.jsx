@@ -577,7 +577,7 @@ const generateNFTs = async () => {
       )}
 
         {/* NFT Layer Management */}
-        {!useAI || !useCustomLinks && (
+        {(!useAI || !useCustomLinks) && (
         <div className="form_widgets">
           
           <h5>NFT Layer Management</h5>
@@ -636,7 +636,7 @@ const generateNFTs = async () => {
         
 
         {/* NFT Generation Options */}
-        {!useAI || !useCustomLinks && (
+        {(!useAI || !useCustomLinks) && (
         <div className="form_widgets">
           <h5>Generate NFTs</h5>
           <input
