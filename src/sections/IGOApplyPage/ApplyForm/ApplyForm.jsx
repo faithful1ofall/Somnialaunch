@@ -44,7 +44,7 @@ const ApplyForm = () => {
   const [step, setStep] = useState(1);
 
   const contract = getContract({
-  address: "0x...",
+  address: "0xAF93888cbD250300470A1618206e036E11470149",
   chain: sonicBlazeTestnet,
   client,
 });
