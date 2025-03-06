@@ -65,7 +65,9 @@ const ApplyForm = () => {
   const handleConfirmAndUpload = async () => {
     setIsGenerating(true);
     try {
-      let imageFiles;
+      let imageFiles = [];
+        let metadataFiles = [];
+      
       for (let i = 0; i < previewNFTs.length; i++){
         
       imageFiles.push(new File([previewNFTs[i].blob], `${i + 1}.png`, { type: "image/png" }));
