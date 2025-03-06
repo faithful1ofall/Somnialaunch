@@ -5,7 +5,16 @@ import ApplyFormStyleWrapper from "./ApplyFrom.style";
 import { PinataSDK } from "pinata-web3";
 import { generateImage, generateCollectionTheme, generateNFTCollection } from '../../../utils/openaigen';
 import imglyRemoveBackground from "@imgly/background-removal";
+import { useSendTransaction } from "thirdweb/react";
+import { getContract, prepareContractCall } from "thirdweb";
+import { sonicBlazeTestnet } from "thirdweb/chains";
+import client from '../../../lib/client';
 //import Image from "next/image";
+
+
+
+
+
 
 const pinata = new PinataSDK({
   pinataJwt: process.env.NEXT_PUBLIC_PINATAJWT,
@@ -32,6 +41,24 @@ const ApplyForm = () => {
   const [previewNFTs, setPreviewNFTs] = useState([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [step, setStep] = useState(1);
+
+  const contract = getContract({
+  address: "0x...",
+  chain: sonicBlazeTestnet,
+  client,
+});
+
+const { sendTx, transactionResult } =
+  useSendTransaction();
+
+const onClick = () => {
+  const transaction = prepareContractCall({
+    contract,
+    method: "function transfer(address to, uint256 value)",
+    params: [to, value],
+  });
+  sendTx(transaction);
+};
 
   const handleGenerateTheme = async () => {
     if (!idea.trim()) return alert("Enter an idea first!");
@@ -738,7 +765,7 @@ const generateNFTs = async () => {
           </div>
         </div>*/}
 
-        <Button variant="blue" lg>
+        <Button variant="blue" lg onClick={(e) => { e.preventDefault(); onClick();}}>
           Submit Collection
         </Button>
       </form>
