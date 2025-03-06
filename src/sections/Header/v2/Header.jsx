@@ -18,7 +18,7 @@ import walletIcon4 from "@assets/images/icons/gate.png"
 import { ConnectButton, darkTheme, ChainProvider, ChainIcon } from "thirdweb/react";
 import { client } from "src/lib/client";
 import { createWallet } from "thirdweb/wallets";
-import { sonicTestnet } from "thirdweb/chains";
+import { defineChain } from "thirdweb/chains";
 
 
 const Header = () => {
@@ -47,6 +47,16 @@ const Header = () => {
   createWallet("org.uniswap"),
   createWallet("com.bybit"),
 ];
+
+  const sonicTestnet = defineChain({
+id: 57054,
+rpc: "https://rpc.blaze.soniclabs.com",
+nativeCurrency: {
+name: "Sonic",
+symbol: "S",
+decimals: 18,
+},
+});
 
   return (
     <NavWrapper className="gamfi_header" id="navbar">
