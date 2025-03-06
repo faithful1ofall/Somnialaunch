@@ -75,12 +75,14 @@ export const generateNFTCollection = async (collectionTheme, numNFTs = 10) => {
       messages: [{ role: "user", content: metadataPrompt }],
       temperature: 0.7,
     });
+    console.log('metadataRes', metadataRes);
 
     if (!metadataRes.choices || !metadataRes.choices[0].message.content) {
       throw new Error(`No metadata generated for the collection`);
     }
 
     const rawres = metadataRes.choices[0].message.content;
+    
     const cleanres = rawres.replace(/```json|```/g, '').trim();
     
     const metadataArray = JSON.parse(cleanres);
