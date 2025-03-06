@@ -57,8 +57,8 @@ const ApplyForm = () => {
   client,
 });
 
-const { sendTx, transactionResult } =
-  useSendTransaction();
+const { mutate: sendTx, data: transactionResult } =
+useSendTransaction();
 
 const onClick = () => {
   const transaction = prepareContractCall({
