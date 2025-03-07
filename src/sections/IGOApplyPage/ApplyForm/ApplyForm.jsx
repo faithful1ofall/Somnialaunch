@@ -10,6 +10,7 @@ import { getContract, prepareContractCall } from "thirdweb";
 import { defineChain, sonicBlazeTestnet } from "thirdweb/chains";
 //import client from '../../../lib/client';
 import { client } from "src/lib/client";
+import factoryabi from "src/lib/factoryabi.json";
 //import Image from "next/image";
 
 const sonicTestnet = defineChain({
@@ -52,8 +53,9 @@ const ApplyForm = () => {
   const [step, setStep] = useState(1);
 
   const contract = getContract({
-  address: "0xAF93888cbD250300470A1618206e036E11470149",
+  address: "0x8f7eF78491F93a07b6f80CEFF98D2E456e7486f6",
   chain: sonicTestnet,
+  abi: factoryabi,
   client,
 });
 
@@ -63,8 +65,9 @@ useSendTransaction();
 const onClick = () => {
   const transaction = prepareContractCall({
     contract,
-    method: "function transfer(address to, uint256 value)",
-    params: ['0x5AdA0f2f59d2acDbE33Cc87f354E2c1357C4E9C9', 100000],
+    method: "createCollection",
+    params: ['name', 'nametest', 100, 10, 10],
+    value: 2000000000,
   });
   sendTx(transaction);
 };
