@@ -69,14 +69,45 @@ method: "creationFee"
 const { mutate: sendTx, data: transactionResult } =
 useSendTransaction();
 
-const onClick = () => {
+const onSubmit = () => {
+
+  const collectionName = document.getElementById("CollectionName").value.trim();
+  const collectionDescription = document.getElementById("CollectionDescription").value.trim();
+if(!collectionName || !collectionTheme){
+  return alert("No Collection details found")
+}
+  if(!cusmetalink || !metadataCID){
+      return alert("No BASEURLfound")
+  }
+  if(nftCount > totalCombinations || nftCount > previewNFTs.length){
+    return alert("check the num of nfts specified doesn't match the no created")
+  }
+  let link = '';
+  let name = '';
+  if(cusmetalink){
+    link = cusmetalink
+  } else if(metadataCID) {
+    link = `ipfs://${metadataCID}/`
+  }
+  if(collectionName){
+    mame = collectionName;
+  } else if (collectionTheme) {
+    const parsedtheme = JSON.parse(collectionTheme);
+    name = parsedtheme.name;
+  }
+    
+  
+  if(!data){
+    return alert("Error fetching Blockchain try connecting/refreshing");
+  }
   const transaction = prepareContractCall({
     contract,
     method: "createCollection",
-    params: ['name', 'nametest', 100, 10, 10],
-    value: 2000000000,
+    params: [name, link, 100, nftCount, 10],
+    value: data,
   });
   sendTx(transaction);
+  
 };
 
   const handleGenerateTheme = async () => {
@@ -784,7 +815,7 @@ const generateNFTs = async () => {
           </div>
         </div>*/}
 
-        <Button variant="blue" lg onClick={(e) => { e.preventDefault(); onClick();}}>
+        <Button variant="blue" lg onClick={(e) => { e.preventDefault(); onSubmit();}}>
           Submit Collection
         </Button>
       </form>
