@@ -28,7 +28,7 @@ export default {
         {
           thumb: projectThumb1,
           title: "Galaxy War",
-          price: "0.59 BUSD",
+          price: "0.87 BUSD",
           saleEnd: "08",
           coinIcon: coinIcon1,
           projectDetails: [
