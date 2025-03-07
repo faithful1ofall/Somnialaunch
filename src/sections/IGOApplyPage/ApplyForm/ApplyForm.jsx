@@ -87,9 +87,9 @@ if(!collectionName && !useAI){
   
   if(useCustomLinks && !cusnftcount){
     return alert("check the num of nfts specified")
-  } else if(nftCount > totalCombinations && !useAI){
+  } else if(nftCount > totalCombinations && !useAI && !useCustomLinks){
     return alert("check the num of nfts specified doesn't match the no created for layers")
-  } else if (nftCount > previewNFTs.length && useAI){
+  } else if (nftCount > previewNFTs.length && useAI && !useCustomLinks){
     return alert("check the num of nfts specified doesn't match the no created")
   }
 
