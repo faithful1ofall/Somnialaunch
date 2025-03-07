@@ -94,7 +94,7 @@ if(!collectionName && !useAI){
   }
 
   const link = useCustomLinks ? cusmetalink : metadataCID ? `ipfs://${metadataCID}/` : "";
-  const name = useAI ? JSON.parse(collectionTheme).name : collectionName;
+  const name = useAI ? JSON.parse(collectionTheme).CollectionName : collectionName;
 
   const count = useCustomLinks ? cusnftcount : useAI ? previewNFTs.length : nftCount;
   
