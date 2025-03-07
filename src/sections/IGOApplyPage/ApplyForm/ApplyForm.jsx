@@ -7,28 +7,14 @@ import { generateImage, generateCollectionTheme, generateNFTCollection } from '.
 import imglyRemoveBackground from "@imgly/background-removal";
 import { useSendTransaction, useReadContract } from "thirdweb/react";
 import { getContract, prepareContractCall } from "thirdweb";
-import { defineChain, sonicBlazeTestnet } from "thirdweb/chains";
-//import client from '../../../lib/client';
 import { client } from "src/lib/client";
+import { sonicTestnet } from "src/lib/Customchains";
 import factoryabi from "src/lib/factoryabi.json";
-//import Image from "next/image";
-
-const sonicTestnet = defineChain({
-id: 57054,
-rpc: "https://rpc.blaze.soniclabs.com",
-nativeCurrency: {
-name: "Sonic",
-symbol: "S",
-decimals: 18,
-},
-});
-
-
 
 
 const pinata = new PinataSDK({
   pinataJwt: process.env.NEXT_PUBLIC_PINATAJWT,
-  pinataGateway: "example-gateway.mypinata.cloud",
+  pinataGateway: process.env.NEXT_PUBLIC_PINATAGATEWAY || "example-gateway.mypinata.cloud",
 });
 
 const ApplyForm = () => {
@@ -48,13 +34,12 @@ const ApplyForm = () => {
   const [useAI, setUseAI] = useState(false);
   const [idea, setIdea] = useState("");
   const [collectionTheme, setCollectionTheme] = useState("");
- // const [nftCount, setNftCount] = useState(1);
   const [previewNFTs, setPreviewNFTs] = useState([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [step, setStep] = useState(1);
 
   const contract = getContract({
-  address: "0x8f7eF78491F93a07b6f80CEFF98D2E456e7486f6",
+  address: process.env.NEXT_PUBLIC_FACTORY,
   chain: sonicTestnet,
   abi: factoryabi,
   client,
@@ -64,8 +49,6 @@ const { data, isLoading } = useReadContract({
 contract,
 method: "creationFee"
 });
-
-  console.log('creationfee', data);
 
 const { mutate: sendTx, data: transactionResult } =
 useSendTransaction();
@@ -115,7 +98,7 @@ if(!collectionName && !useAI){
   });
   try{
     const hash = sendTx(transaction);
-    alert(`transaction sent ${hash}`);
+    alert('trasaction sent for confirmation');
   } catch (error){
     alert(error);
   }
@@ -128,10 +111,7 @@ if(!collectionName && !useAI){
     setIsGenerating(true);
 
     try {
-      // Call AI function to get collection theme
-      
       const theme = await generateCollectionTheme(idea);
-      console.log(theme)
       setCollectionTheme(theme.collectionTheme);
       setStep(2); // Move to next step
     } catch (error) {
@@ -145,7 +125,7 @@ if(!collectionName && !useAI){
     setIsGenerating(true);
     try {
       const previews = await generateNFTCollection(collectionTheme, nftCount, true); // True for preview mode
-      console.log(previews);
+      
       setPreviewNFTs(previews.nftCollection);
       setStep(3); // Move to review step
     } catch (error) {
@@ -212,18 +192,6 @@ if(!collectionName && !useAI){
   try {
     setLoading(true);
     const imageData = await generateImage(prompt, 2);
-  //  const imageUrl = imageData.data[0].url;
-
-    // Fetch the image while handling CORS issues
-//    const response = await fetch(imageUrl, { mode: "no-cors" });
-
-//    if (!response.ok) throw new Error("Failed to fetch image");
-//   const blob = await response.blob();
-    console.log('logged data', imageData);
-    
-    
-  //  const imageFile = new File([imageData], `${Date.now()}ai.png`, { type: "image/png" });
-
     return imageData;
   } catch (error) {
     console.error("Error generating AI image:", error);
@@ -363,9 +331,9 @@ if(!collectionName && !useAI){
   if (layers[layerIndex]?.name !== "Background" && aiImage.proxyUrl) {
     bgrm = await refineBackground(aiImage.proxyUrl);
   }
-        console.log('bgrm', bgrm);
+        
         const aifile = new File([bgrm], `${Date.now()}ai.png`, { type: "image/png" });
-        console.log('aifile', aifile);
+        
         if (aiImage) {
           setLayers((prevLayers) =>
             prevLayers.map((layer, index) =>
