@@ -17,7 +17,6 @@ import walletIcon4 from "@assets/images/icons/gate.png"
 
 import { ConnectButton, darkTheme, lightTheme, ChainProvider, ChainIcon } from "thirdweb/react";
 import { client, wallets } from "src/lib/client";
-import { createWallet } from "thirdweb/wallets";
 import { sonicTestnet } from "src/lib/Customchains";
 
 const Header = () => {
