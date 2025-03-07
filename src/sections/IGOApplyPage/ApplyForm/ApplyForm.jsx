@@ -5,7 +5,7 @@ import ApplyFormStyleWrapper from "./ApplyFrom.style";
 import { PinataSDK } from "pinata-web3";
 import { generateImage, generateCollectionTheme, generateNFTCollection } from '../../../utils/openaigen';
 import imglyRemoveBackground from "@imgly/background-removal";
-import { useSendTransaction } from "thirdweb/react";
+import { useSendTransaction, useReadContract } from "thirdweb/react";
 import { getContract, prepareContractCall } from "thirdweb";
 import { defineChain, sonicBlazeTestnet } from "thirdweb/chains";
 //import client from '../../../lib/client';
@@ -58,6 +58,13 @@ const ApplyForm = () => {
   abi: factoryabi,
   client,
 });
+
+const { data, isLoading } = useReadContract({
+contract,
+method: "creationFee"
+});
+
+  console.log('creationfee', data);
 
 const { mutate: sendTx, data: transactionResult } =
 useSendTransaction();
