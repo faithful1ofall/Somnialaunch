@@ -37,7 +37,9 @@ const ApplyForm = () => {
   const [imageCID, setImageCID] = useState(null);
   const [metadataCID, setMetadataCID] = useState(null);
   const [cusnftlink, setCusnftlink] = useState(null);
-  const [cusmetalink, setCusmetalink] = useState(null);  const [totalCombinations, setTotalCombinations] = useState(0);
+  const [cusmetalink, setCusmetalink] = useState(null);
+  const [cusnftcount, setCusnftcount] = useState(null);  
+  const [totalCombinations, setTotalCombinations] = useState(0);
   const [imagePreviews, setImagePreviews] = useState({});
   const [loading, setLoading] = useState(false);
   const [nftprice, setNftprice] = useState(null);
@@ -83,10 +85,11 @@ if(!collectionName && !useAI){
     return alert("No CID found")
   }
   
-  if(!nftCount && useCustomLinks){
+  if(!cusnftcount){
     return alert("check the num of nfts specified")
-  } else if(nftCount > totalCombinations){
-    return alert("check the num of nfts specified doesn't match the no created")
+  }
+  if(nftCount > totalCombinations){
+    return alert("check the num of nfts specified doesn't match the no created for layers")
   } else if (nftCount > previewNFTs.length){
     return alert("check the num of nfts specified doesn't match the no created")
   }
@@ -816,8 +819,8 @@ const generateNFTs = async () => {
               </div>
               <input 
                 type="number" 
-                value={nftCount}
-                onChange={(e) => setNftCount(e.target.value)}
+                value={cusnftcount}
+                onChange={(e) => setCusnftcount(e.target.value)}
                 id="nftfile" placeholder="Enter the max number of nfts" className="form-control" />
             </div>
           </div>
