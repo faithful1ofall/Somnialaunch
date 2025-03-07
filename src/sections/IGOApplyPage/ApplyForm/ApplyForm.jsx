@@ -78,8 +78,8 @@ if(!collectionName && !useAI){
   return alert("No Collection details found")
   }
   if(!cusmetalink){
-      return alert("No BASEURL found")
-  } else if (!metadataCID){
+      return alert("No URL found")
+  } else if (!metadataCID && !useCustomLinks){
     return alert("No CID found")
   }
   if(nftCount > totalCombinations){
