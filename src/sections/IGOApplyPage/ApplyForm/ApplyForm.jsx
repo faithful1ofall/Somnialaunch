@@ -37,11 +37,10 @@ const ApplyForm = () => {
   const [imageCID, setImageCID] = useState(null);
   const [metadataCID, setMetadataCID] = useState(null);
   const [cusnftlink, setCusnftlink] = useState(null);
-  const [cusmetalink, setCusmetalink] = useState(null);
-  const [totalCombinations, setTotalCombinations] = useState(0);
+  const [cusmetalink, setCusmetalink] = useState(null);  const [totalCombinations, setTotalCombinations] = useState(0);
   const [imagePreviews, setImagePreviews] = useState({});
   const [loading, setLoading] = useState(false);
-
+  const [nftprice, setNftprice] = useState(null);
   const [useCustomLinks, setUseCustomLinks] = useState(false);
   
   const [useAI, setUseAI] = useState(false);
@@ -95,6 +94,15 @@ if(!collectionName || !collectionTheme){
     const parsedtheme = JSON.parse(collectionTheme);
     name = parsedtheme.name;
   }
+  let count = 0;
+  if(!useAI){
+    count = nftCount;
+  } else if (useAI) {
+    count = previewNFTs.length;
+  }
+  if(!nftprice){
+    return alert("check nft price not set")
+  }
     
   
   if(!data){
@@ -103,7 +111,7 @@ if(!collectionName || !collectionTheme){
   const transaction = prepareContractCall({
     contract,
     method: "createCollection",
-    params: [name, link, 100, nftCount, 10],
+    params: [name, link, nftprice, count, 10],
     value: data,
   });
   sendTx(transaction);
@@ -801,6 +809,22 @@ const generateNFTs = async () => {
           </div>
         </div>
       )}
+        <div className="form_widgets">
+          <div className="form-group">
+            <label htmlFor="nftprice">NFT Price</label>
+            <div className="input_with_icon">
+              <div className="input_social_icon">
+                <FaLink />
+              </div>
+              <input 
+                type="number" 
+                value={nftprice}
+                onChange={(e) => setNftprice(e.target.value)}
+                id="nftfile" placeholder="Enter nft price in S token" className="form-control" />
+            </div>
+          </div>
+        </div>
+        
         
         {/* Social Links */}
         {/* <div className="form_widgets">
