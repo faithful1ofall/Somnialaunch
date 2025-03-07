@@ -11,3 +11,17 @@ if (!clientId) {
 export const client = createThirdwebClient({
   clientId: clientId,
 });
+
+export const wallets = [
+  createWallet("io.metamask"),
+  createWallet("com.coinbase.wallet"),
+  createWallet("me.rainbow"),
+  createWallet("io.rabby"),
+  createWallet("io.zerion.wallet"),
+  createWallet("com.trustwallet.app"),
+  createWallet("com.okex.wallet"),
+  createWallet("com.bitget.web3"),
+  createWallet("com.binance"),
+  createWallet("org.uniswap"),
+  createWallet("com.bybit"),
+];
