@@ -85,12 +85,11 @@ if(!collectionName && !useAI){
     return alert("No CID found")
   }
   
-  if(!cusnftcount){
+  if(useCustomLinks && !cusnftcount){
     return alert("check the num of nfts specified")
-  }
-  if(nftCount > totalCombinations){
+  } else if(nftCount > totalCombinations && !useAI){
     return alert("check the num of nfts specified doesn't match the no created for layers")
-  } else if (nftCount > previewNFTs.length){
+  } else if (nftCount > previewNFTs.length && useAI){
     return alert("check the num of nfts specified doesn't match the no created")
   }
 
