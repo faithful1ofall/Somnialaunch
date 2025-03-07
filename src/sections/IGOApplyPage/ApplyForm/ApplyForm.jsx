@@ -79,7 +79,7 @@ if(!collectionName && !useAI){
 } else if (!collectionTheme && useAI){
   return alert("No Collection details found")
   }
-  if(!cusmetalink){
+  if(!cusmetalink && useCustomLinks){
       return alert("No URL found")
   } else if (!metadataCID && !useCustomLinks){
     return alert("No CID found")
