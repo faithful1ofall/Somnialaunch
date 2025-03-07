@@ -72,8 +72,8 @@ useSendTransaction();
 
 const onSubmit = () => {
 
-  const collectionName = document.getElementById("CollectionName").value.trim();
-  const collectionDescription = document.getElementById("CollectionDescription").value.trim();
+  const collectionName = document.getElementById("CollectionName")?.value.trim();
+  const collectionDescription = document.getElementById("CollectionDescription")?.value.trim();
 if(!collectionName && !useAI){
   return alert("No Collection details found")
 } else if (!collectionTheme && useAI){
