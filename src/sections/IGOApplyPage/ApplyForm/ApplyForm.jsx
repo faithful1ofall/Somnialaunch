@@ -803,6 +803,24 @@ const generateNFTs = async () => {
           </div>
         </div>
       )}
+        {useCustomLinks && (
+        <div className="form_widgets">
+          <div className="form-group">
+            <label htmlFor="nftnum">No of NFTs</label>
+            <div className="input_with_icon">
+              <div className="input_social_icon">
+                <FaLink />
+              </div>
+              <input 
+                type="number" 
+                value={nftCount}
+                onChange={(e) => setNftCount(e.target.value)}
+                id="nftfile" placeholder="Enter the max number of nfts" className="form-control" />
+            </div>
+          </div>
+        </div>
+        )}
+        
         <div className="form_widgets">
           <div className="form-group">
             <label htmlFor="nftprice">NFT Price</label>
