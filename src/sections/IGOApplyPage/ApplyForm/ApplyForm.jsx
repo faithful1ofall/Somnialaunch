@@ -93,10 +93,10 @@ if(!collectionName && !useAI){
     return alert("check the num of nfts specified doesn't match the no created")
   }
 
-  const link = cusmetalink || (metadataCID ? `ipfs://${metadataCID}/` : "");
-  const name = collectionName || (collectionTheme ? JSON.parse(collectionTheme).name : "");
+  const link = useCustomLinks ? cusmetalink : metadataCID ? `ipfs://${metadataCID}/` : "";
+  const name = useAI ? JSON.parse(collectionTheme).name : collectionName;
 
-  const count = useAI ? previewNFTs.length : nftCount;
+  const count = useCustomLinks ? cusnftcount : useAI ? previewNFTs.length : nftCount;
   
 
   if(!nftprice){
@@ -113,7 +113,13 @@ if(!collectionName && !useAI){
     params: [name, link, nftprice, count, 10],
     value: data,
   });
-  sendTx(transaction);
+  try{
+    const hash = sendTx(transaction);
+    alert(`transaction sent ${hash}`);
+  } catch (error){
+    alert(error);
+  }
+  
   
 };
 
