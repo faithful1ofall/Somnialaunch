@@ -72,34 +72,28 @@ const onSubmit = () => {
 
   const collectionName = document.getElementById("CollectionName").value.trim();
   const collectionDescription = document.getElementById("CollectionDescription").value.trim();
-if(!collectionName || !collectionTheme){
+if(!collectionName && !useAI){
   return alert("No Collection details found")
-}
-  if(!cusmetalink || !metadataCID){
-      return alert("No BASEURLfound")
+} else if (!collectionTheme && useAI){
+  return alert("No Collection details found")
   }
-  if(nftCount > totalCombinations || nftCount > previewNFTs.length){
+  if(!cusmetalink){
+      return alert("No BASEURL found")
+  } else if (!metadataCID){
+    return alert("No CID found")
+  }
+  if(nftCount > totalCombinations){
+    return alert("check the num of nfts specified doesn't match the no created")
+  } else if (nftCount > previewNFTs.length){
     return alert("check the num of nfts specified doesn't match the no created")
   }
-  let link = '';
-  let name = '';
-  if(cusmetalink){
-    link = cusmetalink
-  } else if(metadataCID) {
-    link = `ipfs://${metadataCID}/`
-  }
-  if(collectionName){
-    mame = collectionName;
-  } else if (collectionTheme) {
-    const parsedtheme = JSON.parse(collectionTheme);
-    name = parsedtheme.name;
-  }
-  let count = 0;
-  if(!useAI){
-    count = nftCount;
-  } else if (useAI) {
-    count = previewNFTs.length;
-  }
+
+  const link = cusmetalink || (metadataCID ? `ipfs://${metadataCID}/` : "");
+  const name = collectionName || (collectionTheme ? JSON.parse(collectionTheme).name : "");
+
+  const count = useAI ? previewNFTs.length : nftCount;
+  
+
   if(!nftprice){
     return alert("check nft price not set")
   }
