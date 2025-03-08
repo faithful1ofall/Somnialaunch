@@ -100,7 +100,7 @@ const loadNFTCollections = async () => {
       const collect = await fetchCollection(collectionAddress);
       console.log('collect', collect);
 
-      if (baseURI) {
+      if (collect) {
         const collectionData = await fetchCollectionMetadata(collect);
         if (collectionData) projects.push(collectionData);
       }
@@ -110,7 +110,7 @@ const loadNFTCollections = async () => {
       data: [
         {
        //   projectStatus: "On Going",
-          projects,
+          ...projects,
         },
       ],
     };
