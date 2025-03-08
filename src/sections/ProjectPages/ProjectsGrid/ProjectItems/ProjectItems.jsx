@@ -14,6 +14,8 @@ import loadNFTCollections from "../../../../lib/CollectionData";
 
 const ProjectItems = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -22,21 +24,22 @@ const ProjectItems = () => {
         setData(data); // Store fetched data in state
       } catch (error) {
         console.error("Error loading NFT collections:", error);
+      } finally {
+        setLoading(false); // Set loading to false after fetching
       }
     };
 
     fetchData();
   }, []);
   
-//  const { data } = projectData;
-//  console.log('olddata', data);
-  
-  
   return (
     <ProjectItemsStyleWrapper>
       <div className="container">
         <div className="single-project-row">
 
+          {loading ? (
+            <p>Loading...</p> // Display loading message while fetching
+          ) : (
           <Tabs>
             <TabList>
               <div className="tab_btn_wrapper">
@@ -84,6 +87,7 @@ const ProjectItems = () => {
             ))}
 
           </Tabs>
+      )}
         </div>
       </div>
     </ProjectItemsStyleWrapper>
