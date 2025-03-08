@@ -27,6 +27,7 @@ loadNFTCollections().then((data) => console.log('loadNFTCollections', data));
 export default {
   data: [
     //  tab item
+    ...colldata.data,
     {
       projectStatus: "On Going",
       projects: [
