@@ -6,12 +6,7 @@ import factoryabi from "./factoryabi.json";
 import nftabi from "./nftabi.json";
 
 
-const factorycontract = getContract({
-  address: process.env.NEXT_PUBLIC_FACTORY,
-  chain: sonicTestnet,
-  abi: factoryabi,
-  client,
-});
+
 
 
 
@@ -67,13 +62,20 @@ const fetchCollectionMetadata = async (baseURI) => {
 // Load NFT collections and format data
 const loadNFTCollections = async () => {
   try {
-   /* const { data, isLoading } = useReadContract({
-factorycontract,
-method: "getCollections"
-});*/
-    const collectionAddresses = await factorycontract.call("getCollections");
-    console.log('collectionadd', collectionAddresses);
-   // const collectionAddresses = data;
+    const factorycontract = getContract({
+  address: process.env.NEXT_PUBLIC_FACTORY,
+  chain: sonicTestnet,
+  abi: factoryabi,
+  client,
+});
+    const { data, isLoading } = useReadContract({
+         factorycontract,
+         chain: sonicTestnet,
+         method: "getCollections"
+     });
+   // const collectionAddresses = await factorycontract.call("getCollections");
+    console.log('collectionadd', data);
+    const collectionAddresses = data;
     
        let projects = [];
 
