@@ -47,7 +47,7 @@ const fetchCollectionMetadata = async (baseURI) => {
 
     return {
       thumb: metadata.image,
-      title: metadata.name,
+      title: metadata.CollectionName,
       price: metadata.price || "N/A",
       saleEnd: metadata.saleEnd || "N/A",
       coinIcon: metadata.icon || metadata.image,
