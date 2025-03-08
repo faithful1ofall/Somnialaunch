@@ -110,7 +110,7 @@ const loadNFTCollections = async () => {
       data: [
         {
        //   projectStatus: "On Going",
-          ...projects,
+          projects,
         },
       ],
     };
