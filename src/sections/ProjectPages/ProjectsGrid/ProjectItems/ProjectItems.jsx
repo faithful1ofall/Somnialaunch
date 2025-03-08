@@ -19,28 +19,18 @@ const ProjectItems = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await loadNFTCollections((newCollection) => {
-      setData(newCollection); // Append progressively
-    });
-       /* const { data: fetchedData } = await loadNFTCollections();
-
-        if (Array.isArray(fetchedData)) {
-          fetchedData.forEach((item, index) => {
-            setTimeout(() => {
-              setData((prevData) => [...prevData, item]); // Append progressively
-            }, index * 200); // Delay each item slightly for smoother UI updates
-          });
-        }*/
+        const { data } = await loadNFTCollections();
+        console.log("newdata", data);
+        setData(data); // Store fetched data in state
       } catch (error) {
         console.error("Error loading NFT collections:", error);
       } finally {
-        setLoading(false); // Hide loading when fetching is complete
+        setLoading(false); // Set loading to false after fetching
       }
     };
 
     fetchData();
   }, []);
-  
   return (
     <ProjectItemsStyleWrapper>
       <div className="container">
