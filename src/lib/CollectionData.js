@@ -1,4 +1,3 @@
-//import { useReadContract } from "thirdweb/react";
 import { getContract, readContract } from "thirdweb";
 import { client } from "./client";
 import { sonicTestnet } from "./Customchains";
@@ -7,25 +6,30 @@ import nftabi from "./nftabi.json";
 
 
 
-
-
-
 // Function to fetch baseURI from a collection contract
 const fetchBaseURI = async (collectionAddress) => {
   try {
     const contract = getContract({
-  address: collectionAddress,
-  chain: sonicTestnet,
-  abi: nftabi,
-  client,
-});
+      address: collectionAddress,
+      chain: sonicTestnet,
+      abi: nftabi,
+      client,
+    });
+
     const data = await readContract({
-contract,
-method: "baseURI"
-});
-    console.log('baseuri', data);
-if(data){
-    return data;
+      contract,
+      method: "baseURI",
+    });
+
+    
+
+    if (data) {
+      // Check if it's an IPFS URI and replace it with the Pinata gateway
+      if (data.startsWith("ipfs://")) {
+        return data.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/");
+      }
+      console.log('baseuri', data);
+      return data; // Return as is if it's already a complete URL
     }
   } catch (error) {
     console.error(`Error fetching baseURI for ${collectionAddress}:`, error);
