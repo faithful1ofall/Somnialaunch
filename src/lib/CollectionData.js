@@ -94,7 +94,7 @@ const fetchCollectionMetadata = async (collection) => {
 };
 
 // Load NFT collections and format data
-const loadNFTCollections = async () => {
+/*const loadNFTCollections = async () => {
   try {
     console.log(sonicTestnet);
     const contract = getContract({
@@ -134,6 +134,45 @@ const loadNFTCollections = async () => {
   } catch (error) {
     console.error("Error loading NFT collections:", error);
     return { data: [] };
+  }
+};
+
+export default loadNFTCollections;*/
+const loadNFTCollections = async (onNewCollection) => {
+  try {
+    console.log(sonicTestnet);
+    const contract = getContract({
+      address: process.env.NEXT_PUBLIC_FACTORY,
+      chain: sonicTestnet,
+      abi: factoryabi,
+      client,
+    });
+
+    const data = await readContract({
+      contract,
+      method: "getAllCollections",
+    });
+
+    console.log("collectionadd", data);
+    const collectionAddresses = data;
+
+    for (const collectionAddress of collectionAddresses) {
+      try {
+        const collect = await fetchCollection(collectionAddress);
+        console.log("collect", collect);
+
+        if (collect) {
+          const collectionData = await fetchCollectionMetadata(collect);
+          if (collectionData) {
+            onNewCollection(collectionData); // Send data progressively
+          }
+        }
+      } catch (error) {
+        console.error(`Error processing collection ${collectionAddress}:`, error);
+      }
+    }
+  } catch (error) {
+    console.error("Error loading NFT collections:", error);
   }
 };
 
