@@ -67,12 +67,13 @@ const fetchCollectionMetadata = async (baseURI) => {
 // Load NFT collections and format data
 const loadNFTCollections = async () => {
   try {
-    const { data, isLoading } = useReadContract({
+   /* const { data, isLoading } = useReadContract({
 factorycontract,
 method: "getCollections"
-});
-    console.log('collectionadd', data);
-    const collectionAddresses = data;
+});*/
+    const collectionAddresses = await factorycontract.call("getCollections");
+    console.log('collectionadd', collectionAddresses);
+   // const collectionAddresses = data;
     
        let projects = [];
 
