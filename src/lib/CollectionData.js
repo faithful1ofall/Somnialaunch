@@ -40,7 +40,7 @@ const fetchCollection = async (collectionAddress) => {
   totalSupplyLimit,
   totalSupply
 }; // Return as is if it's already a complete URL
-    }
+
   } catch (error) {
     console.error(`Error fetching baseURI for ${collectionAddress}:`, error);
     return null;
