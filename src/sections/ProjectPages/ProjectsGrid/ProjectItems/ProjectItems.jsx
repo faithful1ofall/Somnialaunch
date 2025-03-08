@@ -19,7 +19,10 @@ const ProjectItems = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: fetchedData } = await loadNFTCollections();
+        await loadNFTCollections((newCollection) => {
+      setData((prevData) => [...prevData, newCollection]); // Append progressively
+    });
+       /* const { data: fetchedData } = await loadNFTCollections();
 
         if (Array.isArray(fetchedData)) {
           fetchedData.forEach((item, index) => {
@@ -27,7 +30,7 @@ const ProjectItems = () => {
               setData((prevData) => [...prevData, item]); // Append progressively
             }, index * 200); // Delay each item slightly for smoother UI updates
           });
-        }
+        }*/
       } catch (error) {
         console.error("Error loading NFT collections:", error);
       } finally {
