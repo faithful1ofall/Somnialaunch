@@ -20,7 +20,7 @@ const ProjectItems = () => {
     const fetchData = async () => {
       try {
         await loadNFTCollections((newCollection) => {
-      setData((prevData) => [...prevData, newCollection]); // Append progressively
+      setData(newCollection); // Append progressively
     });
        /* const { data: fetchedData } = await loadNFTCollections();
 
