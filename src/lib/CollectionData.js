@@ -68,15 +68,16 @@ const fetchCollectionMetadata = async (collection) => {
     const image = metadatanft.image.startsWith("ipfs://")
     ? metadatanft.image.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
     : metadatanft.image
-    
+
+    const imagesrc = { src: image }
     console.log('metadata base uri && nft1', metadata, metadatanft);
 
     return {
-      thumb: image,
+      thumb: imagesrc,
       title: metadata.CollectionName,
       price: collection.basePrice ? `${collection.basePrice}` : "N/A",
       saleEnd: metadata.saleEnd || "N/A",
-      coinIcon: metadata.icon || image,
+      coinIcon: metadata.icon || imagesrc,
       projectDetails: [
         { title: "Min allocation", text: collection.totalSupply ? collection.totalSupply.toString() : "N/A", },
         { title: "Max allocation", text: collection.totalSupplyLimit ? collection.totalSupplyLimit.toString() : "N/A"},
