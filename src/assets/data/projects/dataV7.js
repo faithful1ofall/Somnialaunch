@@ -18,10 +18,10 @@ import coinIcon4 from "@assets/images/project/project-single-image4.png";
 import coinIcon5 from "@assets/images/project/project-single-image5.png";
 import coinIcon6 from "@assets/images/project/project-single-image6.png";
 
-import loadNFTCollections from "../../../lib/CollectionData";
+//import loadNFTCollections from "../../../lib/CollectionData";
 
 
-loadNFTCollections().then((data) => console.log('loadNFTCollections', data));
+//loadNFTCollections().then((data) => console.log('loadNFTCollections', data));
 
 
 export default {
