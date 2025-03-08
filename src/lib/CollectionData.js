@@ -71,8 +71,7 @@ const loadNFTCollections = async () => {
 });
     const { data, isLoading } = useReadContract({
          factorycontract,
-         chain: sonicTestnet,
-         method: "getCollections"
+         method: "getAllCollections"
      });
    // const collectionAddresses = await factorycontract.call("getCollections");
     console.log('collectionadd', data);
