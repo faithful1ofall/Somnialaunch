@@ -508,7 +508,7 @@ const generateNFTs = async () => {
       description: collectionDescription
     };
 
-    const metadataCollectionFile = new File([JSON.stringify(metadataCollection, null, 2)], "_metadata.json", {
+    const metadataCollectionFile = new File([JSON.stringify(metadataCollection, null, 2)], "metadata.json", {
       type: "application/json",
     });
 
