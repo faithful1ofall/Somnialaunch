@@ -13,14 +13,14 @@ import nftabi from "./nftabi.json";
 // Function to fetch baseURI from a collection contract
 const fetchBaseURI = async (collectionAddress) => {
   try {
-    const nftcontract = getContract({
+    const contract = getContract({
   address: collectionAddress,
   chain: sonicTestnet,
   abi: nftabi,
   client,
 });
     const { data, isLoading } = useReadContract({
-contract: nftcontract,
+contract,
 method: "baseURI"
 });
     console.log('baseuri', data, isLoading);
@@ -63,14 +63,14 @@ const fetchCollectionMetadata = async (baseURI) => {
 const loadNFTCollections = async () => {
   try {
     console.log(sonicTestnet);
-    const factorycontract = getContract({
+    const contract = getContract({
   address: process.env.NEXT_PUBLIC_FACTORY,
   chain: sonicTestnet,
   abi: factoryabi,
   client,
 });
     const { data, isLoading } = useReadContract({
-         contract: factorycontract,
+         contract,
          method: "getAllCollections"
      });
    // const collectionAddresses = await factorycontract.call("getCollections");
