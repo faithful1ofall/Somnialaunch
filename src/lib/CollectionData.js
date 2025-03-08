@@ -1,5 +1,5 @@
 import { useReadContract } from "thirdweb/react";
-import { getContract } from "thirdweb";
+import { getContract, readContract } from "thirdweb";
 import { client } from "./client";
 import { sonicTestnet } from "./Customchains";
 import factoryabi from "./factoryabi.json";
@@ -69,7 +69,7 @@ const loadNFTCollections = async () => {
   abi: factoryabi,
   client,
 });
-    const { data, isLoading } = useReadContract({
+    const data = await readContract({
          contract,
          method: "getAllCollections"
      });
