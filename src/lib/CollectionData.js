@@ -70,6 +70,7 @@ const fetchCollectionMetadata = async (collection) => {
     : metadatanft.image
 
     const imagesrc = { src: image }
+    const soniciconsrc = { src: 'https://s2.coinmarketcap.com/static/img/coins/64x64/32684.png' }
     console.log('metadata base uri && nft1', metadata, metadatanft);
 
     return {
@@ -77,7 +78,7 @@ const fetchCollectionMetadata = async (collection) => {
       title: metadata.CollectionName,
       price: collection.basePrice ? `${collection.basePrice}` : "N/A",
       saleEnd: metadata.saleEnd || "N/A",
-      coinIcon: metadata.icon || imagesrc,
+      coinIcon: soniciconsrc,
       projectDetails: [
         { title: "Min allocation", text: collection.totalSupply ? collection.totalSupply.toString() : "N/A", },
         { title: "Max allocation", text: collection.totalSupplyLimit ? collection.totalSupplyLimit.toString() : "N/A"},
