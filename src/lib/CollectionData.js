@@ -6,7 +6,7 @@ import nftabi from "./nftabi.json";
 
 
 // Function to fetch baseURI from a collection contract
-const fetchBaseURI = async (collectionAddress) => {
+const fetchCollection = async (collectionAddress) => {
   try {
     const contract = getContract({
       address: collectionAddress,
@@ -19,16 +19,27 @@ const fetchBaseURI = async (collectionAddress) => {
       contract,
       method: "baseURI",
     });
+    const basePrice = await readContract({
+      contract,
+      method: "basePrice",
+    });
+    const totalSupplyLimit = await readContract({
+      contract,
+      method: "totalSupplyLimit",
+    });
+    const totalSupply = await readContract({
+      contract,
+      method: "totalSupply",
+    });
 
-    
-
-    if (data) {
-      // Check if it's an IPFS URI and replace it with the Pinata gateway
-      if (data.startsWith("ipfs://")) {
-        return data.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/");
-      }
-      console.log('baseuri', data);
-      return data; // Return as is if it's already a complete URL
+      return {
+  baseURI: data.startsWith("ipfs://")
+    ? data.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
+    : data,
+  basePrice,
+  totalSupplyLimit,
+  totalSupply
+}; // Return as is if it's already a complete URL
     }
   } catch (error) {
     console.error(`Error fetching baseURI for ${collectionAddress}:`, error);
@@ -37,9 +48,9 @@ const fetchBaseURI = async (collectionAddress) => {
 };
 
 // Fetch metadata.json from baseURI
-const fetchCollectionMetadata = async (baseURI) => {
+const fetchCollectionMetadata = async (collection) => {
   try {
-    const response = await fetch(`${baseURI}metadata.json`);
+    const response = await fetch(`${collection.baseURI}metadata.json`);
     console.log('response base uri', response);
     const metadata = await response.json();
 
@@ -48,19 +59,19 @@ const fetchCollectionMetadata = async (baseURI) => {
     return {
       thumb: metadata.image,
       title: metadata.CollectionName,
-      price: metadata.price || "N/A",
+      price: collection.basePrice || "N/A",
       saleEnd: metadata.saleEnd || "N/A",
       coinIcon: metadata.icon || metadata.image,
       projectDetails: [
         { title: "Min allocation", text: metadata.minAllocation || "N/A" },
-        { title: "Max allocation", text: metadata.maxAllocation || "N/A" },
+        { title: "Max allocation", text: collection.totalSupplyLimit || "N/A" },
         { title: "Targeted raise", text: metadata.targetedRaise || "N/A" },
         { title: "Access type", text: metadata.accessType || "N/A" },
       ],
       socialLinks: metadata.socialLinks || [],
     };
   } catch (error) {
-    console.error(`Error fetching metadata from ${baseURI}:`, error);
+    console.error(`Error fetching metadata from ${collection}:`, error);
     return null;
   }
 };
@@ -86,11 +97,11 @@ const loadNFTCollections = async () => {
        let projects = [];
 
     for (const collectionAddress of collectionAddresses) {
-      const baseURI = await fetchBaseURI(collectionAddress);
-      console.log('baseURI', baseURI);
+      const collect = await fetchCollection(collectionAddress);
+      console.log('collect', collect);
 
       if (baseURI) {
-        const collectionData = await fetchCollectionMetadata(baseURI);
+        const collectionData = await fetchCollectionMetadata(collect);
         if (collectionData) projects.push(collectionData);
       }
     }
