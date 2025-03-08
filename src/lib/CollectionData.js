@@ -67,7 +67,7 @@ const fetchCollectionMetadata = async (collection) => {
 
     const image = metadatanft.image.startsWith("ipfs://")
     ? metadatanft.image.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
-    : metadatanft.image,
+    : metadatanft.image
     
     console.log('metadata base uri && nft1', metadata, metadatanft);
 
