@@ -20,7 +20,7 @@ const fetchBaseURI = async (collectionAddress) => {
   client,
 });
     const { data, isLoading } = useReadContract({
-nftcontract,
+contract: nftcontract,
 method: "baseURI"
 });
     console.log('baseuri', data, isLoading);
@@ -70,7 +70,7 @@ const loadNFTCollections = async () => {
   client,
 });
     const { data, isLoading } = useReadContract({
-         factorycontract,
+         contract: factorycontract,
          method: "getAllCollections"
      });
    // const collectionAddresses = await factorycontract.call("getCollections");
