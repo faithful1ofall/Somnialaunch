@@ -12,9 +12,20 @@ import coinIcon4 from "@assets/images/project/chain.png"
 import loadNFTCollections from "../../../../lib/CollectionData";
 
 const ProjectItems = () => {
-  const { data1 } = await loadNFTCollections();
+  const [data1, setData1] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data1 } = await loadNFTCollections();
+        console.log("newdata", data1);
+        setData1(data1); // Store fetched data in state
+      } catch (error) {
+        console.error("Error loading NFT collections:", error);
+      }
+    };
 
-  console.log('newdata', data1);
+    fetchData();
+  }, []);
   
   const { data } = projectData;
   console.log('olddata', data);
