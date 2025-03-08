@@ -28,6 +28,7 @@ const fetchBaseURI = async (collectionAddress) => {
 nftcontract,
 method: "baseURI"
 });
+    console.log('baseuri', data, isLoading);
 if(data){
     return data;
     }
@@ -70,11 +71,14 @@ const loadNFTCollections = async () => {
 factorycontract,
 method: "getCollections"
 });
+    console.log('collectionadd', data);
     const collectionAddresses = data;
+    
        let projects = [];
 
     for (const collectionAddress of collectionAddresses) {
       const baseURI = await fetchBaseURI(collectionAddress);
+      console.log('baseURI', baseURI);
 
       if (baseURI) {
         const collectionData = await fetchCollectionMetadata(baseURI);
