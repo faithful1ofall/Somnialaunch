@@ -23,7 +23,7 @@ const ProjectCard = ({
               {title}
             </Link>
           </h4>
-          <div className="dsc">PRICE (GAC) = {price}</div>
+          <div className="dsc">PRICE (S) = {price}</div>
         </div>
       </div>
       <div className="project-content">
