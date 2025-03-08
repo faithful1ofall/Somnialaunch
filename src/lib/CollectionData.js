@@ -62,6 +62,7 @@ const fetchCollectionMetadata = async (baseURI) => {
 // Load NFT collections and format data
 const loadNFTCollections = async () => {
   try {
+    console.log(sonicTestnet);
     const factorycontract = getContract({
   address: process.env.NEXT_PUBLIC_FACTORY,
   chain: sonicTestnet,
