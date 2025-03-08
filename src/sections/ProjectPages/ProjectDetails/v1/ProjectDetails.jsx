@@ -28,7 +28,7 @@ const ProjectDetails = () => {
                         </div>
                     ))}
                 </div>
-                <div className="row">
+                {/*<div className="row">
                     <div className="col-md-4">
                         <Sidebar />
                     </div>
@@ -41,7 +41,7 @@ const ProjectDetails = () => {
                         <Team />
                         <Partner />
                     </div>
-                </div>
+                </div>*/}
             </div>
         </ProjectDetailsStyleWrapper>
     )
