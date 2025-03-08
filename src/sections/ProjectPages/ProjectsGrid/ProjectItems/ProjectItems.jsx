@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import nextArrowIcon from "@assets/images/icons/next-arrow.png"
 import ProjectCard from "../ProjectCard/ProjectCard";
