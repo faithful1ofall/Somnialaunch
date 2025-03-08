@@ -5,7 +5,6 @@ import factoryabi from "./factoryabi.json";
 import nftabi from "./nftabi.json";
 
 
-
 // Function to fetch baseURI from a collection contract
 const fetchBaseURI = async (collectionAddress) => {
   try {
@@ -43,6 +42,8 @@ const fetchCollectionMetadata = async (baseURI) => {
     const response = await fetch(`${baseURI}metadata.json`);
     console.log('response base uri', response);
     const metadata = await response.json();
+
+    console.log('metadata base uri', metadata);
 
     return {
       thumb: metadata.image,
