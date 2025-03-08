@@ -41,6 +41,7 @@ const fetchBaseURI = async (collectionAddress) => {
 const fetchCollectionMetadata = async (baseURI) => {
   try {
     const response = await fetch(`${baseURI}metadata.json`);
+    console.log('response base uri', response);
     const metadata = await response.json();
 
     return {
