@@ -9,8 +9,17 @@ import coinIcon2 from "@assets/images/project/previous-image2.png"
 import coinIcon3 from "@assets/images/project/previous-image3.png"
 import coinIcon4 from "@assets/images/project/chain.png"
 
+import loadNFTCollections from "../../../../lib/CollectionData";
+
 const ProjectItems = () => {
+  const { data1 } = await loadNFTCollections();
+
+  console.log('newdata', data1);
+  
   const { data } = projectData;
+  console.log('olddata', data);
+  
+  
   return (
     <ProjectItemsStyleWrapper>
       <div className="container">
