@@ -59,20 +59,27 @@ const fetchCollection = async (collectionAddress) => {
 const fetchCollectionMetadata = async (collection) => {
   try {
     const response = await fetch(`${collection.baseURI}metadata.json`);
-    console.log('response base uri', response);
+    const responsenft = await fetch(`${collection.baseURI}1.json`);
+    
     const metadata = await response.json();
 
-    console.log('metadata base uri', metadata);
+    const metadatanft = await responsenft.json();
+
+    const image = metadatanft.image.startsWith("ipfs://")
+    ? metadatanft.image.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
+    : metadatanft.image,
+    
+    console.log('metadata base uri && nft1', metadata, metadatanft);
 
     return {
-      thumb: metadata.image,
+      thumb: image,
       title: metadata.CollectionName,
-      price: collection.basePrice || "N/A",
+      price: collection.basePrice ? `${collection.basePrice}` : "N/A",
       saleEnd: metadata.saleEnd || "N/A",
-      coinIcon: metadata.icon || metadata.image,
+      coinIcon: metadata.icon || image,
       projectDetails: [
-        { title: "Min allocation", text: metadata.minAllocation || "N/A" },
-        { title: "Max allocation", text: collection.totalSupplyLimit || "N/A" },
+        { title: "Min allocation", text: collection.totalSupply ? collection.totalSupply.toString() : "N/A", },
+        { title: "Max allocation", text: collection.totalSupplyLimit ? collection.totalSupplyLimit.toString() : "N/A"},
         { title: "Targeted raise", text: metadata.targetedRaise || "N/A" },
         { title: "Access type", text: metadata.accessType || "N/A" },
       ],
@@ -117,7 +124,7 @@ const loadNFTCollections = async () => {
     return {
       data: [
         {
-       //   projectStatus: "On Going",
+          projectStatus: "On Going",
           projects,
         },
       ],
