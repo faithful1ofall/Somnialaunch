@@ -32,13 +32,21 @@ const fetchCollection = async (collectionAddress) => {
       method: "totalSupply",
     });
 
+    const creator = await readContract({
+      contract,
+      method: "creator",
+    });
+
+    
+
       return {
   baseURI: data.startsWith("ipfs://")
     ? data.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
     : data,
   basePrice,
   totalSupplyLimit,
-  totalSupply
+  totalSupply,
+  creator
 }; // Return as is if it's already a complete URL
 
   } catch (error) {
