@@ -1,4 +1,4 @@
-import { useReadContract } from "thirdweb/react";
+//import { useReadContract } from "thirdweb/react";
 import { getContract, readContract } from "thirdweb";
 import { client } from "./client";
 import { sonicTestnet } from "./Customchains";
@@ -19,11 +19,11 @@ const fetchBaseURI = async (collectionAddress) => {
   abi: nftabi,
   client,
 });
-    const { data, isLoading } = useReadContract({
+    const data = await readContract({
 contract,
 method: "baseURI"
 });
-    console.log('baseuri', data, isLoading);
+    console.log('baseuri', data);
 if(data){
     return data;
     }
