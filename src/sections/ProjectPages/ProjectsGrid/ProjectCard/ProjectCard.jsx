@@ -89,6 +89,17 @@ value: basePrice.data,
             </li>
           ))}
         </ul>
+        {/* Collection Address Link */}
+        <div className="collection-address">
+          <strong>Collection:</strong>{" "}
+          <Link
+            href={`https://testnet.sonicscan.org/address/${address}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {address}
+          </Link>
+        </div>
         <div className="social-links">
           {socialLinks?.map((profile, i) => (
             <Link key={i} href={profile.url}>
