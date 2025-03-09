@@ -76,7 +76,7 @@ value: basePrice.data,
       <div className="project-content">
         <div className="project-header d-flex justify-content-between align-items-center">
           <div className="heading-title">
-            <h4>{saleEnd} Days Left</h4>
+            <h4>{saleEnd} Mints Left</h4>
           </div>
           <div className="project-icon">
             <img src={coinIcon.src} alt="coin icon" />
