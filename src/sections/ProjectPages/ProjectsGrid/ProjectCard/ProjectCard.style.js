@@ -138,6 +138,22 @@ const ProjectCardStyleWrapper = styled.div`
       row-gap: 20px;
     }
   }
+  .collection-address a {
+  display: inline-block;
+  font-weight: bold;
+  word-break: break-word;
+}
+
+/* Truncate address for mobile view */
+@media (max-width: 768px) {
+  .truncate-address {
+    display: inline-block;
+    max-width: 150px; /* Adjust width as needed */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
 `;
 
 export default ProjectCardStyleWrapper;
