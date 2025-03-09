@@ -20,6 +20,24 @@ const ProjectItemsStyleWrapper = styled.div`
   .react-tabs {
     position: relative;
   }
+
+  /* Spinner Styles */
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
   .tabs-row {
     row-gap: 30px;
     transition: all 0.4s;
