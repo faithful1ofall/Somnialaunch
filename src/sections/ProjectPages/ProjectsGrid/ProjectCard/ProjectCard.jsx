@@ -14,7 +14,7 @@ const ProjectCard = ({
   return (
     <ProjectCardStyleWrapper className="project_item_wrapper">
       <div className="project-info d-flex">
-        <Link href="/projects-details-1">
+        <Link href="#">
           <img src={thumb.src} alt="project thumb" />
         </Link>
         <div className="project-auother">
