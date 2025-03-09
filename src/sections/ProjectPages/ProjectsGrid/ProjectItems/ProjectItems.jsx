@@ -41,7 +41,7 @@ const ProjectItems = () => {
           ) : (
           <Tabs>
             <TabList>
-              <div className="tab_btn_wrapper">
+              {/*   <div className="tab_btn_wrapper">
                 {data?.map((child, i) => (
                   <Tab key={i}>
                     <button>
@@ -49,7 +49,7 @@ const ProjectItems = () => {
                     </button>
                   </Tab>
                 ))}
-              </div>
+              </div>*/}
 
               <div className="item_sorting_list">
                 <button>
@@ -66,7 +66,7 @@ const ProjectItems = () => {
                   All Block Chain
                   <img src={nextArrowIcon.src} alt="icon" />
                   <ul className="sub-menu">
-                    <li><img src={coinIcon1.src} alt="icon" /> Sonic</li>
+                    <li><img src={'https://s2.coinmarketcap.com/static/img/coins/64x64/32684.png'} alt="icon" /> Sonic</li>
                     {/* <li><img src={coinIcon2.src} alt="icon" /> Ethereum (ETH)</li>
                     <li><img src={coinIcon3.src} alt="icon" /> Polygon</li>
                     <li><img src={coinIcon4.src} alt="icon" /> All Block Chain</li>*/}
