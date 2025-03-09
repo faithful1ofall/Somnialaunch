@@ -47,7 +47,7 @@ useSendTransaction();
 const transaction = prepareContractCall({
 contract,
 method: "mint",
-params: [data + 1],
+params: [data + BigInt(1)],
 value: basePrice.data,
 });
    
