@@ -1,11 +1,13 @@
 import Link from "next/link";
 import CardHover from "@components/cardHover";
 import ProjectCardStyleWrapper from "./ProjectCard.style";
-import { getContract, sendTransaction, prepareContractCall } from "thirdweb";
+import { getContract, prepareContractCall } from "thirdweb";
 import { client } from "src/lib/client";
 import { sonicTestnet } from "src/lib/Customchains";
 import nftabi from "src/lib/nftabi.json";
 import Button from "@components/button";
+
+import { useSendTransaction, useReadContract } from "thirdweb/react";
 
 const ProjectCard = ({
   thumb,
@@ -17,7 +19,7 @@ const ProjectCard = ({
   address,
   socialLinks,
 }) => {
- const mintnft = async () => {
+ const mintnft = () => {
 
    const contract = getContract({
 address: address,
@@ -25,24 +27,26 @@ chain: sonicTestnet,
 abi: nftabi,
 client,
 });
+
+   const { data, isLoading } = useReadContract({
+contract,
+method: "totalSupply"
+});
+   
 const transaction = prepareContractCall({
 contract,
 method: "mint",
-params: [],
+params: [data + 1],
+value: price.toNumber(),
 });
-
-/* const { data, isLoading } = useReadContract({
-contract,
-method: "creationFee"
-});
+   
 
 const { mutate: sendTx, data: transactionResult } =
-useSendTransaction();*/
+useSendTransaction();
 
-const { transactionHash } = await sendTransaction({
-account,
-transaction,
-});
+   sendTx(transaction);
+
+   alert('trasaction sent for confirmation');
 
  }
 
@@ -86,7 +90,7 @@ transaction,
           ))}
         </div>
         <Button variant="mint" lg onClick={(e) => { e.preventDefault(); mintnft();}}>
-          Submit Collection
+          Mint
         </Button>
       </div>
 
