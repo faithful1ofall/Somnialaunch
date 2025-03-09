@@ -43,21 +43,29 @@ method: "basePrice"
   const { mutate: sendTx, data: transactionResult } =
 useSendTransaction();
 
-  
-  
- const mintnft = () => {
-const transaction = prepareContractCall({
-contract,
-method: "mint",
-params: [data + BigInt(1)],
-value: basePrice.data,
-});
-   
-   sendTx(transaction, {
-    onSuccess: () => alert("Transaction sent successfully!"),
-    onError: (error) => alert(`Transaction failed: ${error.message}`),
+
+
+const mintnft = () => {
+  setLoading(true); 
+
+  const transaction = prepareContractCall({
+    contract,
+    method: "mint",
+    params: [data + BigInt(1)],
+    value: basePrice.data,
   });
- }
+
+  sendTx(transaction, {
+    onSuccess: () => {
+      alert("Transaction sent successfully!");
+      setLoading(false); // Stop loading on success
+    },
+    onError: (error) => {
+      alert(`Transaction failed: ${error.message}`);
+      setLoading(false); // Stop loading on error
+    },
+  });
+};
 
   
   return (
