@@ -19,9 +19,8 @@ const ProjectCard = ({
   address,
   socialLinks,
 }) => {
- const mintnft = () => {
 
-   const contract = getContract({
+  const contract = getContract({
 address: address,
 chain: sonicTestnet,
 abi: nftabi,
@@ -32,6 +31,12 @@ client,
 contract,
 method: "totalSupply"
 });
+
+  const { mutate: sendTx, data: transactionResult } =
+useSendTransaction();
+
+  
+ const mintnft = () => {
    
 const transaction = prepareContractCall({
 contract,
@@ -40,10 +45,6 @@ params: [data + 1],
 value: price.toNumber(),
 });
    
-
-const { mutate: sendTx, data: transactionResult } =
-useSendTransaction();
-
    sendTx(transaction);
 
    alert('trasaction sent for confirmation');
