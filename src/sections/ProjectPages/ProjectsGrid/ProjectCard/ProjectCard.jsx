@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Link from "next/link";
 import CardHover from "@components/cardHover";
 import ProjectCardStyleWrapper from "./ProjectCard.style";
@@ -19,6 +20,7 @@ const ProjectCard = ({
   address,
   socialLinks,
 }) => {
+  const [loading, setLoading] = useState(false);
 
   const contract = getContract({
 address: address,
@@ -108,6 +110,7 @@ value: basePrice.data,
           ))}
         </div>
         <Button variant="mint" lg onClick={(e) => { e.preventDefault(); mintnft();}}>
+          {loading ? <div className="spinner"></div> : 'Mint'}
           Mint
         </Button>
       </div>
