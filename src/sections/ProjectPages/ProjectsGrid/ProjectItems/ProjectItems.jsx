@@ -20,7 +20,7 @@ const ProjectItems = () => {
     const fetchData = async () => {
        loadNFTCollections((updatedData) => {
   console.log("Live update:", updatedData);
-          setData(updatedData.data[0]);
+          setData(updatedData.data);
          setLoading(false);
 });
       
