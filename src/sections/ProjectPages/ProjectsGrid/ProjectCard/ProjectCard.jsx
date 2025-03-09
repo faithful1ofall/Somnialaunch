@@ -70,7 +70,7 @@ value: basePrice.data,
               {title}
             </Link>
           </h4>
-          <div className="dsc">PRICE (S) = {price}</div>
+          <div className="dsc">PRICE S(Gwei) = {price}</div>
         </div>
       </div>
       <div className="project-content">
