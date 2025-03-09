@@ -53,44 +53,54 @@ method: "creationFee"
 const { mutate: sendTx, data: transactionResult } =
 useSendTransaction();
 
-const onSubmit = () => {
+
+  const onSubmit = () => {
   setLoading(true);
 
   const collectionName = document.getElementById("CollectionName")?.value.trim();
   const collectionDescription = document.getElementById("CollectionDescription")?.value.trim();
-if(!collectionName && !useAI){
-  return alert("No Collection details found")
-} else if (!collectionTheme && useAI){
-  return alert("No Collection details found")
+
+  if (!collectionName && !useAI) {
+    alert("No Collection details found");
+    return setLoading(false);
+  } else if (!collectionTheme && useAI) {
+    alert("No Collection details found");
+    return setLoading(false);
   }
-  if(!cusmetalink && useCustomLinks){
-      return alert("No URL found")
-  } else if (!metadataCID && !useCustomLinks){
-    return alert("No CID found")
+
+  if (!cusmetalink && useCustomLinks) {
+    alert("No URL found");
+    return setLoading(false);
+  } else if (!metadataCID && !useCustomLinks) {
+    alert("No CID found");
+    return setLoading(false);
   }
-  
-  if(useCustomLinks && !cusnftcount){
-    return alert("check the num of nfts specified")
-  } else if(nftCount > totalCombinations && !useAI && !useCustomLinks){
-    return alert("check the num of nfts specified doesn't match the no created for layers")
-  } else if (nftCount > previewNFTs.length && useAI && !useCustomLinks){
-    return alert("check the num of nfts specified doesn't match the no created")
+
+  if (useCustomLinks && !cusnftcount) {
+    alert("Check the number of NFTs specified");
+    return setLoading(false);
+  } else if (nftCount > totalCombinations && !useAI && !useCustomLinks) {
+    alert("The specified number of NFTs doesn't match the created number for layers");
+    return setLoading(false);
+  } else if (nftCount > previewNFTs.length && useAI && !useCustomLinks) {
+    alert("The specified number of NFTs doesn't match the number created");
+    return setLoading(false);
   }
 
   const link = useCustomLinks ? cusmetalink : metadataCID ? `ipfs://${metadataCID}/` : "";
   const name = useAI ? JSON.parse(collectionTheme).CollectionName : collectionName;
-
   const count = useCustomLinks ? cusnftcount : useAI ? previewNFTs.length : nftCount;
-  
 
-  if(!nftprice){
-    return alert("check nft price not set")
+  if (!nftprice) {
+    alert("Check NFT price, not set");
+    return setLoading(false);
   }
-    
-  
-  if(!data){
-    return alert("Error fetching Blockchain try connecting/refreshing");
+
+  if (!data) {
+    alert("Error fetching Blockchain, try connecting/refreshing");
+    return setLoading(false);
   }
+
   const transaction = prepareContractCall({
     contract,
     method: "createCollection",
@@ -98,15 +108,16 @@ if(!collectionName && !useAI){
     value: data,
   });
 
-    sendTx(transaction, {
-    onSuccess: () => alert("Transaction sent successfully!"),
-    onError: (error) => alert(`Transaction failed: ${error.message}`),
+  sendTx(transaction, {
+    onSuccess: () => {
+      alert("Transaction sent successfully!");
+      setLoading(false); // Stop loading on success
+    },
+    onError: (error) => {
+      alert(`Transaction failed: ${error.message}`);
+      setLoading(false); // Stop loading on error
+    },
   });
-  setLoading(false)
-  //  alert('trasaction sent for confirmation');
-  
-  
-  
 };
 
   const handleGenerateTheme = async () => {
