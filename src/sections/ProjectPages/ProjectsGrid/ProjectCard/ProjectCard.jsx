@@ -1,6 +1,11 @@
 import Link from "next/link";
 import CardHover from "@components/cardHover";
 import ProjectCardStyleWrapper from "./ProjectCard.style";
+import { getContract, sendTransaction, prepareContractCall } from "thirdweb";
+import { client } from "src/lib/client";
+import { sonicTestnet } from "src/lib/Customchains";
+import nftabi from "src/lib/nftabi.json";
+
 
 const ProjectCard = ({
   thumb,
@@ -12,6 +17,36 @@ const ProjectCard = ({
   address,
   socialLinks,
 }) => {
+ const mintnft = async () => {
+
+   const contract = getContract({
+address: address,
+chain: sonicTestnet,
+abi: nftabi,
+client,
+});
+const transaction = prepareContractCall({
+contract,
+method: "mint",
+params: [],
+});
+
+/* const { data, isLoading } = useReadContract({
+contract,
+method: "creationFee"
+});
+
+const { mutate: sendTx, data: transactionResult } =
+useSendTransaction();*/
+
+const { transactionHash } = await sendTransaction({
+account,
+transaction,
+});
+
+ }
+
+  
   return (
     <ProjectCardStyleWrapper className="project_item_wrapper">
       <div className="project-info d-flex">
