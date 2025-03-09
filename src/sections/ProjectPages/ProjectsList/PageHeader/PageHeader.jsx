@@ -38,10 +38,10 @@ const PageHeader = ({ currentPage, pageTitle }) => {
                   <FiSearch />
                 </button>
               </form>
-              <Button sm variant="dark" href="/project-calendar">
+              {/*<Button sm variant="dark" href="/project-calendar">
                 <BiCalendar />
                 Calender
-              </Button>
+              </Button>*/}
             </div>
           </div>
         </div>
