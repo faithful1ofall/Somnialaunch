@@ -46,7 +46,9 @@ const fetchCollection = async (collectionAddress) => {
   basePrice,
   totalSupplyLimit,
   totalSupply,
-  creator
+  creator,
+  address: collectionAddress
+        
 }; // Return as is if it's already a complete URL
 
   } catch (error) {
@@ -79,6 +81,7 @@ const fetchCollectionMetadata = async (collection) => {
       price: collection.basePrice ? `${collection.basePrice}` : "N/A",
       saleEnd: metadata.saleEnd || "N/A",
       coinIcon: soniciconsrc,
+      address: collection.address,
       projectDetails: [
         { title: "Min allocation", text: collection.totalSupply ? collection.totalSupply.toString() : "N/A", },
         { title: "Max allocation", text: collection.totalSupplyLimit ? collection.totalSupplyLimit.toString() : "N/A"},
