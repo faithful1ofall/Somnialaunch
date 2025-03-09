@@ -85,7 +85,7 @@ transaction,
             </Link>
           ))}
         </div>
-        <Button variant="blue" lg onClick={(e) => { e.preventDefault(); mintnft();}}>
+        <Button variant="mint" lg onClick={(e) => { e.preventDefault(); mintnft();}}>
           Submit Collection
         </Button>
       </div>
