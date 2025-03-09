@@ -23,18 +23,6 @@ const ProjectItems = () => {
           setData(updatedData.data);
          setLoading(false);
 });
-      
-    /*  try {
-       
-      //  const { data } = await loadNFTCollections();
-        console.log("newdata", data);
-     //   setData(data); // Store fetched data in state
-      } catch (error) {
-        console.error("Error loading NFT collections:", error);
-      } finally {
-         // Set loading to false after fetching
-         setLoading(false);
-      }*/
     };
 
     fetchData();
@@ -45,19 +33,11 @@ const ProjectItems = () => {
         <div className="single-project-row">
 
           {loading ? (
+      <div className="spinner"></div>
             <p>Loading...</p> // Display loading message while fetching
           ) : (
           <Tabs>
             <TabList>
-              {/*   <div className="tab_btn_wrapper">
-                {data?.map((child, i) => (
-                  <Tab key={i}>
-                    <button>
-                      {child.projectStatus}
-                    </button>
-                  </Tab>
-                ))}
-              </div>*/}
 
               <div className="item_sorting_list">
                 <button>
@@ -75,10 +55,7 @@ const ProjectItems = () => {
                   <img src={nextArrowIcon.src} alt="icon" />
                   <ul className="sub-menu">
                     <li><img src={'https://s2.coinmarketcap.com/static/img/coins/64x64/32684.png'} alt="icon" /> Sonic</li>
-                    {/* <li><img src={coinIcon2.src} alt="icon" /> Ethereum (ETH)</li>
-                    <li><img src={coinIcon3.src} alt="icon" /> Polygon</li>
-                    <li><img src={coinIcon4.src} alt="icon" /> All Block Chain</li>*/}
-                  </ul>
+                 </ul>
                 </button>
               </div>
             </TabList>
