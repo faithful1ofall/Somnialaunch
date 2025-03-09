@@ -97,7 +97,7 @@ const fetchCollectionMetadata = async (collection) => {
 };
 
 // Load NFT collections and format data
-const loadNFTCollections = async () => {
+const loadNFTCollections = async (onUpdate) => {
   try {
     console.log(sonicTestnet);
     const contract = getContract({
@@ -122,7 +122,21 @@ const loadNFTCollections = async () => {
 
       if (collect) {
         const collectionData = await fetchCollectionMetadata(collect);
-        if (collectionData) projects.push(collectionData);
+ if (collectionData) {
+          projects.push(collectionData);
+
+          // Call the callback function with updated data
+          if (onUpdate) {
+            onUpdate({
+              data: [
+                {
+                  projectStatus: "On Going",
+                  projects: [...projects], // Send a copy of the array
+                },
+              ],
+            });
+          }
+        }
       }
     }
 
