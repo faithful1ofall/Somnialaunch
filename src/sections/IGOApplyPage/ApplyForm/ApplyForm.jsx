@@ -93,7 +93,7 @@ if(!collectionName && !useAI){
   const transaction = prepareContractCall({
     contract,
     method: "createCollection",
-    params: [name, link, nftprice, count, 10],
+    params: [name, link, BigInt(nftprice), count, 10],
     value: data,
   });
   try{
@@ -802,16 +802,16 @@ const generateNFTs = async () => {
         
         <div className="form_widgets">
           <div className="form-group">
-            <label htmlFor="nftprice">NFT Price</label>
+            <label htmlFor="nftprice">NFT Price S(Gwei)</label>
             <div className="input_with_icon">
               <div className="input_social_icon">
                 <FaLink />
               </div>
               <input 
-                type="number" 
+                type="text" 
                 value={nftprice}
                 onChange={(e) => setNftprice(e.target.value)}
-                id="nftfile" placeholder="Enter nft price in S token" className="form-control" />
+                id="nftfile" placeholder="Enter nft price in S (Gwei) token" className="form-control" />
             </div>
           </div>
         </div>
