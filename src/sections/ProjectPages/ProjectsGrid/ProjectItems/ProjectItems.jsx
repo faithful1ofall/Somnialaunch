@@ -18,10 +18,16 @@ const ProjectItems = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      await loadNFTCollections((updatedData) => {
+  console.log("Live update:", updatedData);
+          setData(updatedData)
+});
+      
       try {
-        const { data } = await loadNFTCollections();
+       
+      //  const { data } = await loadNFTCollections();
         console.log("newdata", data);
-        setData(data); // Store fetched data in state
+     //   setData(data); // Store fetched data in state
       } catch (error) {
         console.error("Error loading NFT collections:", error);
       } finally {
