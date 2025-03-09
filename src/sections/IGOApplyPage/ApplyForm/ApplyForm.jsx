@@ -54,6 +54,7 @@ const { mutate: sendTx, data: transactionResult } =
 useSendTransaction();
 
 const onSubmit = () => {
+  setLoading(true);
 
   const collectionName = document.getElementById("CollectionName")?.value.trim();
   const collectionDescription = document.getElementById("CollectionDescription")?.value.trim();
@@ -96,19 +97,21 @@ if(!collectionName && !useAI){
     params: [name, link, BigInt(nftprice), count, 10],
     value: data,
   });
-  try{
-    const hash = sendTx(transaction);
-    alert('trasaction sent for confirmation');
-  } catch (error){
-    alert(error);
-  }
+
+    sendTx(transaction, {
+    onSuccess: () => alert("Transaction sent successfully!"),
+    onError: (error) => alert(`Transaction failed: ${error.message}`),
+  });
+  setLoading(false)
+  //  alert('trasaction sent for confirmation');
+  
   
   
 };
 
   const handleGenerateTheme = async () => {
     if (!idea.trim()) return alert("Enter an idea first!");
-    setIsGenerating(true);
+    setLoading(true);
 
     try {
       const theme = await generateCollectionTheme(idea);
@@ -117,12 +120,12 @@ if(!collectionName && !useAI){
     } catch (error) {
       console.error("Error generating theme:", error);
     } finally {
-      setIsGenerating(false);
+      setLoading(false);
     }
   };
 
   const handleGeneratePreview = async () => {
-    setIsGenerating(true);
+    setLoading(true);
     try {
       const previews = await generateNFTCollection(collectionTheme, nftCount, true); // True for preview mode
       
@@ -131,12 +134,12 @@ if(!collectionName && !useAI){
     } catch (error) {
       console.error("Error generating previews:", error);
     } finally {
-      setIsGenerating(false);
+      setLoading(false);
     }
   };
 
   const handleConfirmAndUpload = async () => {
-    setIsGenerating(true);
+    setLoading(true);
     try {
       let imageFiles = [];
         let metadataFiles = [];
@@ -183,7 +186,7 @@ if(!collectionName && !useAI){
     } catch (error) {
       console.error("Error uploading NFTs:", error);
     } finally {
-      setIsGenerating(false);
+      setLoading(false);
     }
   };
 
@@ -588,7 +591,7 @@ const generateNFTs = async () => {
             placeholder="Enter your idea..."
           />
           <Button variant="blue" style={{ marginTop: '10px' }} onClick={(e) => { e.preventDefault(); handleGenerateTheme();}} disabled={isGenerating}>
-            Generate Theme
+           {loading ? <div className="spinner"></div> : 'Generate Theme'}
           </Button>
         </div>
       )}
@@ -610,7 +613,7 @@ const generateNFTs = async () => {
             min="1"
           />
           <Button  variant="blue" style={{ marginTop: '10px' }} onClick={ (e) => { e.preventDefault(); handleGeneratePreview();}} disabled={isGenerating}>
-            Generate Preview
+            {loading ? <div className="spinner"></div> : 'Generate Preview'}
           </Button>
         </div>
       )}
@@ -624,7 +627,7 @@ const generateNFTs = async () => {
         ))}
           </div>
           <Button style={{ marginTop: '10px' }} variant="blue" onClick={(e) => { e.preventDefault(); handleConfirmAndUpload();}} disabled={isGenerating}>
-            Confirm & Upload
+           {loading ? <div className="spinner"></div> : 'Confirm & Upload'}
           </Button>
         </div>
       )}
@@ -665,7 +668,8 @@ const generateNFTs = async () => {
                 className="form-control"
               />
               <Button variant="blue" style={{ marginTop: '10px' }} onClick={(e) => { e.preventDefault(); handleLayerUpload(e, layerIndex, true); }}>
-  <FaMagic /> AI Generate
+  <FaMagic /> {loading ? <div className="spinner"></div> : 'AI Generate'}
+          
 </Button>
 
               {/* Display Images with Rarity Inputs */}
@@ -831,7 +835,7 @@ const generateNFTs = async () => {
         </div>*/}
 
         <Button variant="blue" lg onClick={(e) => { e.preventDefault(); onSubmit();}}>
-          Submit Collection
+          {loading ? <div className="spinner"></div> : 'Submit Collection'}
         </Button>
       </form>
     </ApplyFormStyleWrapper>
