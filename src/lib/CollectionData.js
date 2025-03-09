@@ -78,7 +78,7 @@ const fetchCollectionMetadata = async (collection) => {
     return {
       thumb: imagesrc,
       title: metadata.CollectionName,
-      price: collection.basePrice ? collection.basePrice : "N/A",
+      price: collection.basePrice ? `${collection.basePrice}` : "N/A",
       saleEnd: metadata.saleEnd || "N/A",
       coinIcon: soniciconsrc,
       address: collection.address,
