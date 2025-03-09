@@ -36,19 +36,20 @@ method: "totalSupply"
 useSendTransaction();
 
   
+  
  const mintnft = () => {
-   
+   const priceValue = parseInt(price) || 0;
 const transaction = prepareContractCall({
 contract,
 method: "mint",
 params: [data + 1],
-value: price.toNumber(),
+value: priceValue,
 });
    
-   sendTx(transaction);
-
-   alert('trasaction sent for confirmation');
-
+   sendTx(transaction, {
+    onSuccess: () => alert("Transaction sent successfully!"),
+    onError: (error) => alert(`Transaction failed: ${error.message}`),
+  });
  }
 
   
