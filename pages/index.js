@@ -24,10 +24,10 @@ export default function Home() {
         {metamaskModal && <MetamaskModal />}
         <Header />
         <Banner />
-          {/*  <About /> */}
+          {/*  <About /> 
         <NextProjects />
         <PreviousProjects />
-          {/*   <Statistics />
+        <Statistics />
         <Team />
         <Partner />*/}
         <Footer />
