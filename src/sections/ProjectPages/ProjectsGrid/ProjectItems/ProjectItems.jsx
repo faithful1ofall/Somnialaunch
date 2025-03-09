@@ -33,8 +33,10 @@ const ProjectItems = () => {
         <div className="single-project-row">
 
           {loading ? (
+      <>
       <div className="spinner"></div>
-            <p>Loading...</p> // Display loading message while fetching
+            <p>Loading...</p>
+        </>
           ) : (
           <Tabs>
             <TabList>
