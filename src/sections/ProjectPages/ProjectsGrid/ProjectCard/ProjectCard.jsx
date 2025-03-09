@@ -5,7 +5,7 @@ import { getContract, sendTransaction, prepareContractCall } from "thirdweb";
 import { client } from "src/lib/client";
 import { sonicTestnet } from "src/lib/Customchains";
 import nftabi from "src/lib/nftabi.json";
-
+import Button from "@components/button";
 
 const ProjectCard = ({
   thumb,
@@ -85,6 +85,9 @@ transaction,
             </Link>
           ))}
         </div>
+        <Button variant="blue" lg onClick={(e) => { e.preventDefault(); mintnft();}}>
+          Submit Collection
+        </Button>
       </div>
 
       <CardHover />
