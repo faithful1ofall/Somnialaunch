@@ -9,6 +9,7 @@ const ProjectCard = ({
   saleEnd,
   coinIcon,
   projectDetails,
+  address,
   socialLinks,
 }) => {
   return (
