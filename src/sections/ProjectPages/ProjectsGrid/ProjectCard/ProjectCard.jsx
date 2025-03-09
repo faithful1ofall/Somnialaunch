@@ -111,7 +111,6 @@ value: basePrice.data,
         </div>
         <Button variant="mint" lg onClick={(e) => { e.preventDefault(); mintnft();}}>
           {loading ? <div className="spinner"></div> : 'Mint'}
-          Mint
         </Button>
       </div>
 
