@@ -78,13 +78,13 @@ const fetchCollectionMetadata = async (collection) => {
     return {
       thumb: imagesrc,
       title: metadata.CollectionName,
-      price: collection.basePrice ? `${collection.basePrice}` : "N/A",
+      price: collection.basePrice ? collection.basePrice : "N/A",
       saleEnd: metadata.saleEnd || "N/A",
       coinIcon: soniciconsrc,
       address: collection.address,
       projectDetails: [
-        { title: "Min allocation", text: collection.totalSupply ? collection.totalSupply.toString() : "N/A", },
-        { title: "Max allocation", text: collection.totalSupplyLimit ? collection.totalSupplyLimit.toString() : "N/A"},
+        { title: "Current Mints", text: collection.totalSupply ? collection.totalSupply.toString() : "N/A", },
+        { title: "Max Mints", text: collection.totalSupplyLimit ? collection.totalSupplyLimit.toString() : "N/A"},
         { title: "Targeted raise", text: metadata.targetedRaise || "N/A" },
         { title: "Access type", text: metadata.accessType || "N/A" },
       ],
