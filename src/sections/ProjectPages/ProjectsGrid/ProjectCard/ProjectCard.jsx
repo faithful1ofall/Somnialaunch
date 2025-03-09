@@ -38,12 +38,11 @@ useSendTransaction();
   
   
  const mintnft = () => {
-   const priceValue = parseInt(price) || 0;
 const transaction = prepareContractCall({
 contract,
 method: "mint",
 params: [data + 1],
-value: priceValue,
+value: price,
 });
    
    sendTx(transaction, {
