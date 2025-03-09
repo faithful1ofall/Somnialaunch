@@ -32,6 +32,12 @@ contract,
 method: "totalSupply"
 });
 
+  const basePrice = useReadContract({
+contract,
+method: "basePrice"
+});
+
+
   const { mutate: sendTx, data: transactionResult } =
 useSendTransaction();
 
@@ -42,7 +48,7 @@ const transaction = prepareContractCall({
 contract,
 method: "mint",
 params: [data + 1],
-value: price,
+value: basePrice.data,
 });
    
    sendTx(transaction, {
