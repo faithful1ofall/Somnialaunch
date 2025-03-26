@@ -72,7 +72,7 @@ const fetchCollectionMetadata = async (collection) => {
     : metadatanft.image
 
     const imagesrc = { src: image }
-    const soniciconsrc = { src: 'https://s2.coinmarketcap.com/static/img/coins/64x64/32684.png' }
+    const soniciconsrc = { src: 'https://s2.coinmarketcap.com/static/img/coins/64x64/27657.png' }
     console.log('metadata base uri && nft1', metadata, metadatanft);
 
     return {
