@@ -99,7 +99,7 @@ const fetchCollectionMetadata = async (collection) => {
 // Load NFT collections and format data
 const loadNFTCollections = async (onUpdate) => {
   try {
-    console.log(sonicTestnet);
+    
     const contract = getContract({
   address: process.env.NEXT_PUBLIC_FACTORY,
   chain: lineaTestnet,
