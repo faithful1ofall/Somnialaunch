@@ -103,7 +103,7 @@ const mintnft = () => {
         <div className="collection-address">
           <strong>Collection:</strong>{" "}
           <Link
-            href={`https://testnet.sonicscan.org/address/${address}`}
+            href={`https://sepolia.lineascan.build/address/${address}`}
             target="_blank"
             rel="noopener noreferrer"
           >
