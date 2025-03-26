@@ -1,6 +1,6 @@
 import { getContract, readContract } from "thirdweb";
 import { client } from "./client";
-import { sonicTestnet } from "./Customchains";
+import { lineaTestnet } from "./Customchains";
 import factoryabi from "./factoryabi.json";
 import nftabi from "./nftabi.json";
 
@@ -10,7 +10,7 @@ const fetchCollection = async (collectionAddress) => {
   try {
     const contract = getContract({
       address: collectionAddress,
-      chain: sonicTestnet,
+      chain: lineaTestnet,
       abi: nftabi,
       client,
     });
@@ -102,7 +102,7 @@ const loadNFTCollections = async (onUpdate) => {
     console.log(sonicTestnet);
     const contract = getContract({
   address: process.env.NEXT_PUBLIC_FACTORY,
-  chain: sonicTestnet,
+  chain: lineaTestnet,
   abi: factoryabi,
   client,
 });
