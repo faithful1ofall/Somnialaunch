@@ -817,7 +817,7 @@ const generateNFTs = async () => {
         
         <div className="form_widgets">
           <div className="form-group">
-            <label htmlFor="nftprice">NFT Price S(Gwei)</label>
+            <label htmlFor="nftprice">NFT Price ETH(Gwei)</label>
             <div className="input_with_icon">
               <div className="input_social_icon">
                 <FaLink />
@@ -826,7 +826,7 @@ const generateNFTs = async () => {
                 type="text" 
                 value={nftprice}
                 onChange={(e) => setNftprice(e.target.value)}
-                id="nftfile" placeholder="Enter nft price in S (Gwei) token" className="form-control" />
+                id="nftfile" placeholder="Enter nft price in ETH (Gwei) token" className="form-control" />
             </div>
           </div>
         </div>
