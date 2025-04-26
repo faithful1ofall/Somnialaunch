@@ -1,34 +1,133 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+RootLaunch
 
-## Getting Started
+Live Site: rootlaunch.vercel.app
 
-First, run the development server:
+RootLaunch — AI-Powered NFT Launchpad on Rootstock
 
-```bash
+RootLaunch is a next-generation NFT launch platform that uses AI to generate full NFT collections and launch them on the Rootstock Blockchain testnet.
+
+We help creators go from idea to minted NFTs faster and smarter — combining AI generation, Rootstock smart contracts, and launchpad exposure in one seamless platform.
+
+Whether you’re building NFTs, games, metaverse experiences, or interactive NFT agents — RootLaunch gives you the tools to create, launch, and evolve with ease.
+
+
+
+Why RootLaunch?
+
+✅ AI-Generated NFT Collections — Instantly generate NFTs using AI models.
+✅ Rootstock Blockchain Integration — All launches are done on the Rootstock testnet, ensuring scalability and security with Bitcoin-powered smart contracts.
+✅ Projects Grid Showcase — Display your NFT project to investors, gamers, and collectors.
+✅ IGO (Initial Game Offering) Application — Seamless project onboarding for funding and community support.
+✅ Future-Ready AI Agents — Transform NFTs into intelligent, evolving digital assets.
+✅ Web3 & Developer Friendly — Built for rapid innovation and easy scaling in the blockchain ecosystem.
+
+
+
+Core Features
+
+AI-Powered NFT Generation
+
+Use AI to create your NFT collections without needing a full design team:
+
+Upload a concept or theme, and generate variations.
+
+Auto-distribute traits, rarities, and metadata.
+
+Ready-to-mint assets optimized for Rootstock smart contracts.
+
+
+Projects Grid
+
+A live showcase of NFT projects, collections, and GameFi platforms:
+
+Get early exposure for your AI-generated NFTs.
+
+Attract collectors, collaborators, and investors.
+
+
+IGO Apply
+
+Submit your project through a simple application form:
+
+Provide details about your NFT, GameFi, or AI-driven idea.
+
+Get fast-tracked for IGO support and RootLaunch platform promotion.
+
+
+Rootstock Blockchain Testnet Deployment
+
+RootLaunch is fully integrated with the Rootstock Blockchain testnet:
+
+Test and launch smart contract deployments securely.
+
+Build with Rootstock's Bitcoin sidechain advantages.
+
+Future-proof your project for mainnet migration.
+
+
+
+Technology Stack
+
+AI Frameworks: OpenAI, Stable Diffusion, Custom ML pipelines
+
+Frontend: Next.js (React Framework)
+
+Styling: Tailwind CSS
+
+Blockchain: Rootstock Blockchain (testnet integration)
+
+Hosting: Vercel
+
+
+
+
+Quick Start for Developers
+
+1. Clone the repository:
+
+git clone https://github.com/your-username/rootlaunch.git
+cd rootlaunch
+
+
+2. Install dependencies:
+
+npm install
+
+
+3. Start the development server:
+
 npm run dev
-# or
-yarn dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+4. Open http://localhost:3000 to view it locally.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Roadmap & Future Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+✅ Full Mainnet Rootstock deployment after hackathon
+✅ Dynamic NFTs with evolving metadata
+✅ AI Agents to manage and grow NFT projects autonomously
+✅ One-click NFT minting from AI-generated collections
+✅ Community-driven IGO voting system
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+Hackathon Vision
+
+RootLaunch is building the future of decentralized NFT creation:
+AI + Blockchain + Rootstock + Web3 fundraising, all in one.
+
+Instantly create full NFT collections with AI
+
+Deploy on the Rootstock Blockchain for Bitcoin-backed security
+
+Launch projects through IGOs, backed by the RootLaunch community
+
+Grow NFTs into interactive AI agents for metaverses, games, and DAOs
+
+
+RootLaunch empowers the next generation of NFT creators — making AI-driven NFT innovation accessible to everyone.
