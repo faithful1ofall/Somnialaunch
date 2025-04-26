@@ -2,11 +2,11 @@ import { defineChain } from "thirdweb/chains";
 
 
 export const lineaTestnet = defineChain({
-id: 59141,
-rpc: "https://rpc.sepolia.linea.build",
+id: 31,
+rpc: "https://rootstock-testnet.g.alchemy.com/v2/ZB6Wo-sBf0yX_LQfFlhsnqTFoM6TNnjU",
 nativeCurrency: {
-name: "linea-sepolia",
-symbol: "ETH",
+name: "RootStock-Testnet",
+symbol: "BTC",
 decimals: 18,
 },
 });
