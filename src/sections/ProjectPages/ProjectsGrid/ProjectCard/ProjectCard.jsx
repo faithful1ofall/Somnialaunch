@@ -80,7 +80,7 @@ const mintnft = () => {
               {title}
             </Link>
           </h4>
-          <div className="dsc">PRICE ETH(Gwei) = {price}</div>
+          <div className="dsc">PRICE RBTC(Gwei) = {price}</div>
         </div>
       </div>
       <div className="project-content">
@@ -103,7 +103,7 @@ const mintnft = () => {
         <div className="collection-address">
           <strong>Collection:</strong>{" "}
           <Link
-            href={`https://sepolia.lineascan.build/address/${address}`}
+            href={`https://explorer.testnet.rootstock.io/address/${address}`}
             target="_blank"
             rel="noopener noreferrer"
           >
