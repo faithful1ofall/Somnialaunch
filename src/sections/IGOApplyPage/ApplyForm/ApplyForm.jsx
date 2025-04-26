@@ -8,7 +8,7 @@ import imglyRemoveBackground from "@imgly/background-removal";
 import { useSendTransaction, useReadContract } from "thirdweb/react";
 import { getContract, prepareContractCall } from "thirdweb";
 import { client } from "src/lib/client";
-import { lineaTestnet } from "src/lib/Customchains";
+import { RootTestnet } from "src/lib/Customchains";
 import factoryabi from "src/lib/factoryabi.json";
 
 
@@ -40,7 +40,7 @@ const ApplyForm = () => {
 
   const contract = getContract({
   address: process.env.NEXT_PUBLIC_FACTORY,
-  chain: lineaTestnet,
+  chain: RootTestnet,
   abi: factoryabi,
   client,
 });
