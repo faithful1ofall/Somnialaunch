@@ -1,6 +1,6 @@
 import { getContract, readContract } from "thirdweb";
 import { client } from "./client";
-import { lineaTestnet } from "./Customchains";
+import { RootTestnet } from "./Customchains";
 import factoryabi from "./factoryabi.json";
 import nftabi from "./nftabi.json";
 
@@ -10,7 +10,7 @@ const fetchCollection = async (collectionAddress) => {
   try {
     const contract = getContract({
       address: collectionAddress,
-      chain: lineaTestnet,
+      chain: RootTestnet,
       abi: nftabi,
       client,
     });
@@ -72,7 +72,7 @@ const fetchCollectionMetadata = async (collection) => {
     : metadatanft.image
 
     const imagesrc = { src: image }
-    const soniciconsrc = { src: 'https://s2.coinmarketcap.com/static/img/coins/64x64/27657.png' }
+    const rooticonsrc = { src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAclBMVEUAAAAaDQCuZAC2aAAqFwDcgwD/lwD/lQDniQAPBwAsGgDsjQD/kAD0kQBIKgAJAwA8IgDMeACESwDCdAD/mgDUfgB0QgD/kgD/mwAwHQCLTwAeEQBvQABbMwDGcQCXWQBRLgBkOQCjXwCrYQAjEQB9RgBv97J/AAAAqUlEQVR4AdXQMRqCMBBE4QFJNpIFSGQNKAFVvf8VLexWOQB/+5r5BvtVlIcKW4wlV+CfI2rP3LTooPXBRJwGKzib0KoolMYJ8YKrTeRUdImHGVWNPHJqVIwNOVm8X8RRs0LpM27ETHfkFlqecfSJfY05Q1ktCc6JIgLR48+gFpcnJsusBwXisXwtUq0jk1GxXiSWNiV7eEvo8Wv63rdBhsF02NA9ngV26wPPsQmlLxuqvAAAAABJRU5ErkJggg==' }
     console.log('metadata base uri && nft1', metadata, metadatanft);
 
     return {
@@ -80,7 +80,7 @@ const fetchCollectionMetadata = async (collection) => {
       title: metadata.CollectionName,
       price: collection.basePrice ? `${collection.basePrice}` : "N/A",
       saleEnd: `${collection.totalSupplyLimit - collection.totalSupply}`  || "N/A",
-      coinIcon: soniciconsrc,
+      coinIcon: rooticonsrc,
       address: collection.address,
       projectDetails: [
         { title: "Current Mints", text: collection.totalSupply ? collection.totalSupply.toString() : "N/A", },
@@ -102,7 +102,7 @@ const loadNFTCollections = async (onUpdate) => {
     
     const contract = getContract({
   address: process.env.NEXT_PUBLIC_FACTORY,
-  chain: lineaTestnet,
+  chain: RootTestnet,
   abi: factoryabi,
   client,
 });
