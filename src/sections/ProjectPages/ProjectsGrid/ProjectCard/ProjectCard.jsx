@@ -4,7 +4,7 @@ import CardHover from "@components/cardHover";
 import ProjectCardStyleWrapper from "./ProjectCard.style";
 import { getContract, prepareContractCall } from "thirdweb";
 import { client } from "src/lib/client";
-import { lineaTestnet } from "src/lib/Customchains";
+import { RootTestnet } from "src/lib/Customchains";
 import nftabi from "src/lib/nftabi.json";
 import Button from "@components/button";
 
@@ -24,7 +24,7 @@ const ProjectCard = ({
 
   const contract = getContract({
 address: address,
-chain: lineaTestnet,
+chain: RootTestnet,
 abi: nftabi,
 client,
 });
