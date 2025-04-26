@@ -56,7 +56,7 @@ const ProjectItems = () => {
                   All Block Chain
                   <img src={nextArrowIcon.src} alt="icon" />
                   <ul className="sub-menu">
-                    <li><img src={'https://s2.coinmarketcap.com/static/img/coins/64x64/27657.png'} alt="icon" /> Linea Testnet</li>
+                    <li><img src={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAclBMVEUAAAAaDQCuZAC2aAAqFwDcgwD/lwD/lQDniQAPBwAsGgDsjQD/kAD0kQBIKgAJAwA8IgDMeACESwDCdAD/mgDUfgB0QgD/kgD/mwAwHQCLTwAeEQBvQABbMwDGcQCXWQBRLgBkOQCjXwCrYQAjEQB9RgBv97J/AAAAqUlEQVR4AdXQMRqCMBBE4QFJNpIFSGQNKAFVvf8VLexWOQB/+5r5BvtVlIcKW4wlV+CfI2rP3LTooPXBRJwGKzib0KoolMYJ8YKrTeRUdImHGVWNPHJqVIwNOVm8X8RRs0LpM27ETHfkFlqecfSJfY05Q1ktCc6JIgLR48+gFpcnJsusBwXisXwtUq0jk1GxXiSWNiV7eEvo8Wv63rdBhsF02NA9ngV26wPPsQmlLxuqvAAAAABJRU5ErkJggg=='} alt="icon" /> Linea Testnet</li>
                  </ul>
                 </button>
               </div>
