@@ -6,7 +6,7 @@ id: 31,
 rpc: "https://rootstock-testnet.g.alchemy.com/v2/ZB6Wo-sBf0yX_LQfFlhsnqTFoM6TNnjU",
 nativeCurrency: {
 name: "RootStock-Testnet",
-symbol: "BTC",
+symbol: "RBTC",
 decimals: 18,
 },
 });
