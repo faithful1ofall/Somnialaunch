@@ -5,25 +5,13 @@ import headerBg2 from "@assets/images/bg/header-shape2.png";
 const NavWrapper = styled.nav`
   z-index: 999;
   position: relative;
-  background: #090a1a;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
  
   &::before,
   &::after {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 300px;
-    height: 100%;
-    background: url(${headerBg1.src}) center no-repeat;
-    background-size: cover;
-    content: "";
-    opacity: 0.7;
-  }
-  &::after {
-    left: auto;
-    right: 0;
-    background: url(${headerBg2.src}) center no-repeat;
-    background-size: cover;
+    display: none;
   }
 
   &.gamfi_header {
@@ -38,11 +26,12 @@ const NavWrapper = styled.nav`
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(27, 34, 38, 0.8);
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.98) 0%, rgba(118, 75, 162, 0.98) 100%);
       backdrop-filter: blur(15px);
       z-index: 1000;
       margin-top: 0px;
       transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
   }
 
@@ -98,17 +87,18 @@ const NavWrapper = styled.nav`
           display: flex;
           align-items: center;
           column-gap: 4px;
+          transition: all 0.3s ease;
 
           svg {
             font-size: 18px;
           }
-        }
-
-        &:hover {
-          a {
+          
+          &:hover {
             color: #a3ff12;
+            text-shadow: 0 0 8px rgba(163, 255, 18, 0.5);
           }
         }
+
 
         /* submenu  */
         .sub_menu_list {

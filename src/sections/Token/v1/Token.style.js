@@ -3,12 +3,15 @@ import styled from "styled-components";
 const TokenStyleWrapper = styled.div`
   position: relative;
 
-  background: rgba(30, 31, 53, 0.8);
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
   backdrop-filter: blur(5px);
   min-height: 158px;
   margin-top: -155px;
   display: flex;
   align-items: center;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
 
   .section_title {
     margin-bottom: 0;

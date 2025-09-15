@@ -1,6 +1,6 @@
 import styled from "styled-components";
 const ExploreProjectsStyleWrapper = styled.div`
-  background: #090a1a;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   padding-top: 115px;
   padding-bottom: 105px;
   background-size: cover;

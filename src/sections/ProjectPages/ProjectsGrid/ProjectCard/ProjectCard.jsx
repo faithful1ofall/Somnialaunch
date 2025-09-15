@@ -4,7 +4,7 @@ import CardHover from "@components/cardHover";
 import ProjectCardStyleWrapper from "./ProjectCard.style";
 import { getContract, prepareContractCall } from "thirdweb";
 import { client } from "src/lib/client";
-import { RootTestnet } from "src/lib/Customchains";
+import { SomniaTestnet } from "src/lib/Customchains";
 import nftabi from "src/lib/nftabi.json";
 import Button from "@components/button";
 
@@ -24,7 +24,7 @@ const ProjectCard = ({
 
   const contract = getContract({
 address: address,
-chain: RootTestnet,
+chain: SomniaTestnet,
 abi: nftabi,
 client,
 });
@@ -81,6 +81,7 @@ const mintnft = () => {
             </Link>
           </h4>
           <div className="dsc">PRICE RBTC = {price}</div>
+          <div className="dsc">PRICE STT = {price}</div>
         </div>
       </div>
       <div className="project-content">
@@ -103,7 +104,7 @@ const mintnft = () => {
         <div className="collection-address">
           <strong>Collection:</strong>{" "}
           <Link
-            href={`https://explorer.testnet.rootstock.io/address/${address}`}
+            href={`https://shannon-explorer.somnia.network/address/${address}`}
             target="_blank"
             rel="noopener noreferrer"
           >

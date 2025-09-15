@@ -38,7 +38,7 @@ const Token = () => {
       <div className="container">
         <div className="row align-items-center">
           <div className="col-md-6">
-            <SectionTitle title="MULTI - BLOCK CHAINS" subtitle="SUPPORTED" />
+            <SectionTitle title="POWERED BY SOMNIA" subtitle="BLOCKCHAIN" />
           </div>
           <div className="col-md-6">
             <Slider {...sliderSettings}>

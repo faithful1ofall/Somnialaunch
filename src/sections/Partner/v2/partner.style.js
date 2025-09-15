@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const PartnerStyleWrapper = styled.div`
   position: relative;
-  background: #0a0b1a;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   padding: 136px 0 105px;
 
   .section_title {

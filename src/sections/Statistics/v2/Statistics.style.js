@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StatisticsStyleWrapper = styled.section`
-  background: #090a1a;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   padding-top: 0px;
   padding-bottom: 105px;
 
@@ -94,7 +94,9 @@ const StatisticsStyleWrapper = styled.section`
   }
 
   .tokenomics_content_right {
-    background: rgba(30, 31, 53, 0.8);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
     backdrop-filter: blur(5px);
     max-width: 570px;
     width: 100%;
@@ -103,6 +105,7 @@ const StatisticsStyleWrapper = styled.section`
     align-items: center;
     justify-content: center;
     padding: 50px;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
   }
 
   @media only screen and (max-width: 767px) {

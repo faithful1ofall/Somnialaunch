@@ -17,7 +17,7 @@ import walletIcon4 from "@assets/images/icons/gate.png"
 
 import { ConnectButton, darkTheme, lightTheme, ChainProvider, ChainIcon } from "thirdweb/react";
 import { client, wallets } from "src/lib/client";
-import { RootTestnet } from "src/lib/Customchains";
+import { SomniaTestnet } from "src/lib/Customchains";
 
 const Header = () => {
   const { walletModalHandle } = useModal();
@@ -110,7 +110,7 @@ const Header = () => {
         
               <ConnectButton
             client={client}
-                chain={RootTestnet}
+                chain={SomniaTestnet}
                 wallets={wallets}
           />
           

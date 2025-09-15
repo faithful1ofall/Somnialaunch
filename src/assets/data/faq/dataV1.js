@@ -1,27 +1,27 @@
 const data = [
   {
-    title: "What is Gamfi ?",
-    text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    title: "What is SomniaLaunch?",
+    text: "SomniaLaunch is an AI-powered NFT launchpad built on the Somnia blockchain. We help creators generate full NFT collections using AI and deploy them seamlessly with smart contracts.",
   },
   {
-    title: "How we can buy and invest token ?",
-    text: "It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur cites of the word in classical literature.",
+    title: "How can I create an NFT collection?",
+    text: "Simply connect your wallet, describe your NFT concept, and our AI will generate a complete collection for you. You can then customize traits, set pricing, and deploy directly to the Somnia blockchain.",
   },
   {
-    title: "Why we should choose Gamfi ?",
-    text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    title: "Why choose SomniaLaunch?",
+    text: "SomniaLaunch combines the power of AI generation with Somnia's high-performance blockchain, offering fast transactions, low fees, and seamless NFT creation tools all in one platform.",
   },
   {
-    title: "Where we can buy and sell Gamfi NFts ?",
-    text: "It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur cites of the word in classical literature.",
+    title: "Where can I buy and sell NFTs?",
+    text: "NFTs created on SomniaLaunch can be traded directly through our platform or on any Somnia-compatible marketplace. All transactions are secured by smart contracts on the Somnia blockchain.",
   },
   {
-    title: "How secure is this token ?",
-    text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    title: "How secure is the platform?",
+    text: "SomniaLaunch uses audited smart contracts deployed on the Somnia blockchain. All NFT metadata is stored on IPFS for decentralized access, and our AI generation process is completely transparent.",
   },
   {
-    title: "What is your contract address ?",
-    text: "It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur cites of the word in classical literature.",
+    title: "What are the contract addresses?",
+    text: "Contract addresses will be updated after deployment to the Somnia testnet. You can view all contract addresses and verify them on the Somnia Explorer at shannon-explorer.somnia.network.",
   },
 ];
 

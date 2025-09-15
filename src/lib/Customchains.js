@@ -1,12 +1,18 @@
 import { defineChain } from "thirdweb/chains";
 
 
-export const RootTestnet = defineChain({
-id: 31,
-rpc: "https://rootstock-testnet.g.alchemy.com/v2/ZB6Wo-sBf0yX_LQfFlhsnqTFoM6TNnjU",
+export const SomniaTestnet = defineChain({
+id: 50312,
+rpc: "https://dream-rpc.somnia.network/",
 nativeCurrency: {
-name: "RootStock-Testnet",
-symbol: "RBTC",
+name: "Somnia-Testnet",
+symbol: "STT",
 decimals: 18,
 },
+blockExplorers: [
+  {
+    name: "Somnia Explorer",
+    url: "https://shannon-explorer.somnia.network/",
+  },
+],
 });

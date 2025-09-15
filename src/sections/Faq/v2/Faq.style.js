@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const FAQStyleWrapper = styled.section`
-  background: #090a1a;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   padding-top: 0px;
   padding-bottom: 120px;
   position: relative;
@@ -43,10 +43,16 @@ const FAQStyleWrapper = styled.section`
     }
   }
   .accordion__item {
-    background: rgba(30, 31, 53, 0.5);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    margin-bottom: 8px;
     backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
     &:hover {
-      background: rgba(255, 255, 255, 0.05);
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
     }
   }
   .accordion__header {

@@ -24,12 +24,18 @@ body {
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
     font-weight: 500; 
-    background-color: #151625;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    min-height: 100vh;
 }
 
 img {
     max-width: 100%;
     height: auto;
+    transition: transform 0.3s ease;
+}
+
+img:hover {
+    transform: scale(1.02);
 }
 
 p {
@@ -48,6 +54,7 @@ h6 {
     line-height: 1.35;
     font-weight: 400;
     margin: 0 0 26px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 h1 {
@@ -86,6 +93,7 @@ a:hover {
     text-decoration: none;
     outline: 0 none;
     color: #a3ff12;
+    text-shadow: 0 0 8px rgba(163, 255, 18, 0.3);
 }
 
 ul {
@@ -105,6 +113,12 @@ button:focus {
 
 button {
     border: none;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* css grid */

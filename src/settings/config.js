@@ -1,6 +1,6 @@
 module.exports = {
-    siteTitle: "GamFi - Metaverse Web3 IGO/IDO Token Launchpad Next js Template",
-    description: "GamFi – Metaverse Web3.0 IGO/IDO Gaming launchpad next js Template is a gaming Crypto token launching platform, It’s Included Live IGO/IEO/IDO/INO Project, Staking, Firming Pools, IGO game Landing.", 
+    siteTitle: "SomniaLaunch - AI-Powered NFT Launchpad on Somnia",
+    description: "SomniaLaunch – AI-Powered NFT Launchpad on Somnia Blockchain. Create, launch, and manage NFT collections with AI generation, smart contracts, and community-driven IGOs.", 
     social: {
         twitter: "#"
     }

@@ -3,19 +3,24 @@ import styled from "styled-components";
 
 const ProjectCardStyleWrapper = styled.div`
   padding: 30px 30px 10px;
-  background: rgba(30, 31, 53, 0.8);
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
   transition: all 0.4s;
   position: relative;
   z-index: 2;
+  overflow: hidden;
 
   &::before {
     position: absolute;
-    background: rgba(255, 255, 255, 0.05);
+    background: linear-gradient(135deg, rgba(163, 255, 18, 0.1) 0%, rgba(102, 126, 234, 0.1) 100%);
     height: 50px;
     width: 100%;
     left: 0px;
     bottom: 0px;
     content: "";
+    border-radius: 0 0 16px 16px;
   }
 
 .spinner {
@@ -115,11 +120,10 @@ const ProjectCardStyleWrapper = styled.div`
   }
 
   &:hover {
-    background-image: radial-gradient(
-      circle,
-      rgba(137, 120, 211, 0.4) 0%,
-      #1e1f35 100%
-    );
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    border-color: rgba(163, 255, 18, 0.3);
 
     .card-hover-wrapper {
       opacity: 1;

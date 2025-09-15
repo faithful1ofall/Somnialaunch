@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const ProjectsListStyleWrapper = styled.section`
   height: auto;
-  background: #090a1a;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   position: relative;
 
   .previous_projects {

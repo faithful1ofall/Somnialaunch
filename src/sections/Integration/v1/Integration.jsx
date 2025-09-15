@@ -16,44 +16,44 @@ const Integration = () => {
           <div className="col-md-6">
             <div className="integration_content_right">
               <SectionTitle
-                title="MULTI-CHAIN SUPPORT"
+                title="SOMNIA BLOCKCHAIN"
                 subtitle="INTEGRATION "
               />
               <div className="integration_content">
                 <p>
-                  It must explain to you how all this mistaken idea of new gem
-                  denouncing pleasure and praising pain that they cannot foresee
-                  The gain and trouble that are bound to ensue.
+                  Built on Somnia's high-performance blockchain, offering lightning-fast 
+                  transactions, minimal fees, and seamless NFT deployment for creators 
+                  and collectors worldwide.
                 </p>
                 <div className="integration_features">
                   <span>
                     {" "}
-                    <FaCheck /> Binance Smart Chain
+                    <FaCheck /> High Performance
                   </span>
                   <span>
                     {" "}
                     <FaCheck />
-                    Avalanche
+                    Low Fees
                   </span>
                   <span>
                     {" "}
                     <FaCheck />
-                    Ethereum
+                    Fast Transactions
                   </span>
                   <span>
                     {" "}
                     <FaCheck />
-                    Fuse
+                    Secure Smart Contracts
                   </span>
                   <span>
                     {" "}
                     <FaCheck />
-                    Polygon (Matic)
+                    AI Integration
                   </span>
                   <span>
                     {" "}
                     <FaCheck />
-                    OKEX Chain
+                    IPFS Storage
                   </span>
                 </div>
               </div>

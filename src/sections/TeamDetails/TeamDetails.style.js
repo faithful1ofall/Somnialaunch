@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const TeamDetailsStyleWrapper = styled.div`
-  background: #090b1a;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   padding-top: 70px;
   padding-bottom: 140px;
 
@@ -11,7 +11,11 @@ const TeamDetailsStyleWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(30, 31, 53, 0.7);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
   }
 
   .right_content {

@@ -2,20 +2,20 @@ RootLaunch
 
 Live Site: rootlaunch.vercel.app
 
-RootLaunch — AI-Powered NFT Launchpad on Rootstock
+SomniaLaunch — AI-Powered NFT Launchpad on Somnia
 
-RootLaunch is a next-generation NFT launch platform that uses AI to generate full NFT collections and launch them on the Rootstock Blockchain testnet.
+SomniaLaunch is a next-generation NFT launch platform that uses AI to generate full NFT collections and launch them on the Somnia Blockchain testnet.
 
-We help creators go from idea to minted NFTs faster and smarter — combining AI generation, Rootstock smart contracts, and launchpad exposure in one seamless platform.
+We help creators go from idea to minted NFTs faster and smarter — combining AI generation, Somnia smart contracts, and launchpad exposure in one seamless platform.
 
-Whether you’re building NFTs, games, metaverse experiences, or interactive NFT agents — RootLaunch gives you the tools to create, launch, and evolve with ease.
+Whether you're building NFTs, games, metaverse experiences, or interactive NFT agents — SomniaLaunch gives you the tools to create, launch, and evolve with ease.
 
 
 
-Why RootLaunch?
+Why SomniaLaunch?
 
 ✅ AI-Generated NFT Collections — Instantly generate NFTs using AI models.
-✅ Rootstock Blockchain Integration — All launches are done on the Rootstock testnet, ensuring scalability and security with Bitcoin-powered smart contracts.
+✅ Somnia Blockchain Integration — All launches are done on the Somnia testnet, ensuring scalability and security with high-performance smart contracts.
 ✅ Projects Grid Showcase — Display your NFT project to investors, gamers, and collectors.
 ✅ IGO (Initial Game Offering) Application — Seamless project onboarding for funding and community support.
 ✅ Future-Ready AI Agents — Transform NFTs into intelligent, evolving digital assets.
@@ -33,7 +33,7 @@ Upload a concept or theme, and generate variations.
 
 Auto-distribute traits, rarities, and metadata.
 
-Ready-to-mint assets optimized for Rootstock smart contracts.
+Ready-to-mint assets optimized for Somnia smart contracts.
 
 
 Projects Grid
@@ -54,13 +54,13 @@ Provide details about your NFT, GameFi, or AI-driven idea.
 Get fast-tracked for IGO support and RootLaunch platform promotion.
 
 
-Rootstock Blockchain Testnet Deployment
+Somnia Blockchain Testnet Deployment
 
-RootLaunch is fully integrated with the Rootstock Blockchain testnet:
+SomniaLaunch is fully integrated with the Somnia Blockchain testnet:
 
 Test and launch smart contract deployments securely.
 
-Build with Rootstock's Bitcoin sidechain advantages.
+Build with Somnia's high-performance blockchain advantages.
 
 Future-proof your project for mainnet migration.
 
@@ -74,7 +74,7 @@ Frontend: Next.js (React Framework)
 
 Styling: Tailwind CSS
 
-Blockchain: Rootstock Blockchain (testnet integration)
+Blockchain: Somnia Blockchain (testnet integration)
 
 Hosting: Vercel
 
@@ -86,7 +86,7 @@ Quick Start for Developers
 1. Clone the repository:
 
 git clone https://github.com/your-username/rootlaunch.git
-cd rootlaunch
+cd somnialaunch
 
 
 2. Install dependencies:
@@ -107,7 +107,7 @@ npm run dev
 
 Roadmap & Future Features
 
-✅ Full Mainnet Rootstock deployment after hackathon
+✅ Full Mainnet Somnia deployment after hackathon
 ✅ Dynamic NFTs with evolving metadata
 ✅ AI Agents to manage and grow NFT projects autonomously
 ✅ One-click NFT minting from AI-generated collections
@@ -118,16 +118,16 @@ Roadmap & Future Features
 
 Hackathon Vision
 
-RootLaunch is building the future of decentralized NFT creation:
-AI + Blockchain + Rootstock + Web3 fundraising, all in one.
+SomniaLaunch is building the future of decentralized NFT creation:
+AI + Blockchain + Somnia + Web3 fundraising, all in one.
 
 Instantly create full NFT collections with AI
 
-Deploy on the Rootstock Blockchain for Bitcoin-backed security
+Deploy on the Somnia Blockchain for high-performance security
 
-Launch projects through IGOs, backed by the RootLaunch community
+Launch projects through IGOs, backed by the SomniaLaunch community
 
 Grow NFTs into interactive AI agents for metaverses, games, and DAOs
 
 
-RootLaunch empowers the next generation of NFT creators — making AI-driven NFT innovation accessible to everyone.
+SomniaLaunch empowers the next generation of NFT creators — making AI-driven NFT innovation accessible to everyone.

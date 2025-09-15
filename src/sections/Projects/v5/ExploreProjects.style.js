@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const ExploreProjectsStyleWrapper = styled.div`
-  background: #090b1a;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   padding: 136px 0 90px;
 
   .section_title {

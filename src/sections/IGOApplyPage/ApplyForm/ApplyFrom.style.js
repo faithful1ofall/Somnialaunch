@@ -7,9 +7,11 @@ const ApplyFormStyleWrapper = styled.div`
     height: 60px;
     width: 100%;
     padding: 8px 21px;
-    border: 2px solid rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
     box-sizing: border-box;
-    background: Transparent;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
     font-family: Inter;
     font-style: normal;
     font-weight: 500;
@@ -17,13 +19,14 @@ const ApplyFormStyleWrapper = styled.div`
     line-height: 45px;
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: 0;
-    border-radius: 0;
+    transition: all 0.3s ease;
 
     &:focus {
       outline: 0 !important;
-      background: transparent;
+      background: rgba(255, 255, 255, 0.1);
       box-shadow: none;
-      border-color: rgba(255, 255, 255, 0.15);
+      border-color: #a3ff12;
+      box-shadow: 0 0 0 3px rgba(163, 255, 18, 0.1);
     }
   }
 
@@ -132,7 +135,9 @@ const ApplyFormStyleWrapper = styled.div`
 
     .input_social_icon {
       width: 60px;
-      border: 2px solid rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px 0 0 8px;
+      background: rgba(255, 255, 255, 0.05);
       height: 60px;
       display: flex;
       align-items: center;
@@ -141,7 +146,12 @@ const ApplyFormStyleWrapper = styled.div`
 
       svg {
         font-size: 18px;
+        color: #a3ff12;
       }
+    }
+    
+    input {
+      border-radius: 0 8px 8px 0;
     }
   }
 

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const LeaderboardStyleWrapper = styled.div`
   padding: 120px 0 100px;
-  background: #090a1a;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
 
   .leaderboard_list {
     display: block;
@@ -13,8 +13,16 @@ const LeaderboardStyleWrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 25px 20px;
-    background: rgba(30, 31, 53, 0.8);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+    }
 
     li {
       position: relative;

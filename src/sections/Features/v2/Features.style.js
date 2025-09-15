@@ -1,8 +1,11 @@
 import styled from "styled-components";
 
 const FeaturesStyleWrapper = styled.section`
-  background: rgba(30, 31, 53, 0.7);
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
   backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  margin: 0 20px;
   position: relative;
   z-index: 2;
   padding-top: 115px;

@@ -8,13 +8,13 @@ const CTA = () => {
       <div className="container">
         <div className="cta-area text-center">
           <h2 className="title">
-            Create Collection <br />
+            Launch Your NFT Collection <br />
           </h2>
           <div className="dsc">
-            If you want to lanuch a Collection, It will be your perfect choice
+            Create and deploy AI-generated NFT collections on Somnia with ease
           </div>
           <Button variant="mint" md href="/igo-apply">
-            Create Collection
+            Launch Collection
           </Button>
           <CardHover />
         </div>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const FarmingStyleWrapper = styled.div`
   padding: 220px 0 130px;
-  background: #090b1a;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
 
   .form_item_wrapper {
     .farm_header {

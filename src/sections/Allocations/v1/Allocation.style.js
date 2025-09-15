@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const AllocationStyleWrapper = styled.div`
-  background: #090a1a;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   padding-top: 0px;
   padding-bottom: 105px;
   .menu-list {

@@ -3,7 +3,7 @@ import formShadow from "@assets/images/kycimg/BlurShadow.svg";
 import formBg from "@assets/images/kycimg/signUpBgimage.svg";
 
 const RegisterStyleWrapper = styled.div`
-  background: #090a1a;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   position: relative;
   padding: 96px 0px 0px 0px;
 
@@ -27,12 +27,16 @@ const RegisterStyleWrapper = styled.div`
   }
 
   .auth_form {
-    background: rgba(30, 31, 53, 0.8);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
     width: 100%;
     margin: auto;
     padding: 63px 60px 56px 60px;
     position: relative;
     z-index: 2;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
 
     h2 {
       font-size: 36px;

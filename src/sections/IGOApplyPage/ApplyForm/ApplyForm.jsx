@@ -8,7 +8,7 @@ import imglyRemoveBackground from "@imgly/background-removal";
 import { useSendTransaction, useReadContract } from "thirdweb/react";
 import { getContract, prepareContractCall } from "thirdweb";
 import { client } from "src/lib/client";
-import { RootTestnet } from "src/lib/Customchains";
+import { SomniaTestnet } from "src/lib/Customchains";
 import factoryabi from "src/lib/factoryabi.json";
 
 
@@ -39,8 +39,8 @@ const ApplyForm = () => {
   const [step, setStep] = useState(1);
 
   const contract = getContract({
-  address: process.env.NEXT_PUBLIC_FACTORY,
-  chain: RootTestnet,
+  address: process.env.NEXT_PUBLIC_FACTORY, // TODO: Update with deployed Somnia factory contract address
+  chain: SomniaTestnet,
   abi: factoryabi,
   client,
 });
@@ -817,7 +817,7 @@ const generateNFTs = async () => {
         
         <div className="form_widgets">
           <div className="form-group">
-            <label htmlFor="nftprice">NFT Price RBTC</label>
+            <label htmlFor="nftprice">NFT Price STT</label>
             <div className="input_with_icon">
               <div className="input_social_icon">
                 <FaLink />
@@ -826,7 +826,7 @@ const generateNFTs = async () => {
                 type="text" 
                 value={nftprice}
                 onChange={(e) => setNftprice(e.target.value)}
-                id="nftfile" placeholder="Enter nft price in RBTC token" className="form-control" />
+                id="nftfile" placeholder="Enter nft price in STT token" className="form-control" />
             </div>
           </div>
         </div>

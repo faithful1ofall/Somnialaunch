@@ -1,6 +1,6 @@
 import { getContract, readContract } from "thirdweb";
 import { client } from "./client";
-import { RootTestnet } from "./Customchains";
+import { SomniaTestnet } from "./Customchains";
 import factoryabi from "./factoryabi.json";
 import nftabi from "./nftabi.json";
 
@@ -10,7 +10,7 @@ const fetchCollection = async (collectionAddress) => {
   try {
     const contract = getContract({
       address: collectionAddress,
-      chain: RootTestnet,
+      chain: SomniaTestnet,
       abi: nftabi,
       client,
     });
@@ -101,8 +101,8 @@ const loadNFTCollections = async (onUpdate) => {
   try {
     
     const contract = getContract({
-  address: process.env.NEXT_PUBLIC_FACTORY,
-  chain: RootTestnet,
+  address: process.env.NEXT_PUBLIC_FACTORY, // TODO: Update with deployed Somnia contract address
+  chain: SomniaTestnet,
   abi: factoryabi,
   client,
 });

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const ProjectItemsStyleWrapper = styled.div`
-  background: #090a1a;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   padding-top: 170px;
   padding-bottom: 105px;
   background-size: cover;
@@ -51,7 +51,10 @@ const ProjectItemsStyleWrapper = styled.div`
     left: 0;
     width: 100%;
     height: auto;
-    background: #222231;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     margin-bottom: 42px;
   }
 
@@ -132,7 +135,10 @@ const ProjectItemsStyleWrapper = styled.div`
         top: 45px;
         left: 0;
         z-index: 1111;
-        background: #222231;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
         width: 100%;
         li {
           display: flex;
@@ -141,8 +147,10 @@ const ProjectItemsStyleWrapper = styled.div`
           column-gap: 5px;
           padding: 18px 28px;
           transition: all 0.4s;
+          border-radius: 6px;
           &:hover {
             color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
           }
 
           img {
@@ -151,7 +159,7 @@ const ProjectItemsStyleWrapper = styled.div`
           }
         }
         li + li {
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
       }
     }

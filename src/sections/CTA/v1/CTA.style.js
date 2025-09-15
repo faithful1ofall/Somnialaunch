@@ -5,7 +5,10 @@ const CTAStyleWrapper = styled.section`
   .cta-area {
     position: relative;
     padding: 70px 0 80px 0;
-    background: radial-gradient(circle, #4a4176 -24%, #1e1f35 40%);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+    border-radius: 20px;
+    margin: 0 20px;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
     z-index: 1;
     .card-hover-wrapper {
       opacity: 1;
@@ -23,18 +26,25 @@ const CTAStyleWrapper = styled.section`
       background-repeat: no-repeat;
       background-position: center;
       content: "";
-      opacity: 0.8;
+      opacity: 0.3;
       z-index: -1;
+      border-radius: 20px;
     }
   }
 
   .title {
     margin-bottom: 15px;
     text-transform: uppercase;
+    background: linear-gradient(45deg, #fff, #a3ff12);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .dsc {
     margin-bottom: 40px;
+    font-size: 18px;
+    opacity: 0.9;
   }
   .btn_wrapper {
     margin: 0 auto;

@@ -1,7 +1,7 @@
 import styled from "styled-components"; 
 
 const MentorStyleWrapper = styled.section`
-  background: #090A1A;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     padding-top: 0px;
     padding-bottom: 105px;
 

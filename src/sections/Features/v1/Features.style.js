@@ -37,7 +37,7 @@ const stoneFly3 = keyframes`
 `;
 
 const FeaturesStyleWrapper = styled.section`
-  background: #090a1a;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   padding: 90px 0 100px 0; 
   position: relative;
   z-index: 1;

@@ -5,34 +5,36 @@ const StatisticsCounterStyleWrapper = styled.div`
   display: flex;
   align-items: center;
   min-height: 158px;
-  background: rgba(30, 31, 53, 0.8);
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
   backdrop-filter: blur(5px);
   padding: 20px;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
   &::before,
   &::after {
     position: absolute;
     height: 5px;
     width: 50%;
     content: "";
+    border-radius: 4px;
   }
   &::before {
     left: 0;
     top: 0;
-    background: rgb(248, 37, 82);
     background: linear-gradient(
       90deg,
-      rgba(248, 37, 82, 0.5) 0%,
-      rgba(21, 22, 37, 0) 100%
+      rgba(163, 255, 18, 0.5) 0%,
+      rgba(102, 126, 234, 0) 100%
     );
   }
   &::after {
     right: 0;
     bottom: 0;
-    background: rgb(21, 22, 37);
     background: linear-gradient(
       90deg,
-      rgba(21, 22, 37, 0) 0%,
-      rgba(163, 255, 18, 0.5) 100%
+      rgba(102, 126, 234, 0) 0%,
+      rgba(118, 75, 162, 0.5) 100%
     );
   }
   .counter-number {

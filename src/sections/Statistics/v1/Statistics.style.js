@@ -3,6 +3,9 @@ import styled from "styled-components";
 const StatisticsStyleWrapper = styled.section`
   position: relative;
   padding: 115px 0 145px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  border-radius: 20px;
+  margin: 0 20px;
 
   .section_shape {
     position: absolute;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const ProjectCardStyleWrapper = styled.div`
-  background: #090b1a;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   padding-bottom: 120px;
   .menu-list {
     font-family: "Russo One", sans-serif;

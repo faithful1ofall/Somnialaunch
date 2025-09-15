@@ -14,9 +14,12 @@ const LinkStyle = styled.a`
   width: 120px;
   height: 40px;
   border: none;
-  background: #6d4afe;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   overflow: hidden;
   z-index: 1;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
 
   .hover_shape_wrapper {
     position: absolute;
@@ -58,6 +61,8 @@ const LinkStyle = styled.a`
       }
     }
     color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
   }
 
   ${({ isCenter }) =>
@@ -68,10 +73,12 @@ const LinkStyle = styled.a`
   ${({ variant }) =>
     variant === "mint" &&
     css`
-      background: #a3ff12;
+      background: linear-gradient(135deg, #a3ff12 0%, #7ed321 100%);
       color: #090a1a;
+      box-shadow: 0 4px 15px rgba(163, 255, 18, 0.3);
       &:hover {
         color: #090a1a;
+        box-shadow: 0 6px 20px rgba(163, 255, 18, 0.4);
       }
     `}
   ${({ variant }) =>
@@ -79,12 +86,18 @@ const LinkStyle = styled.a`
     css`
       color: #ffffff;
       background: transparent;
-      border: 2px solid rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
 
       .hover_shape_wrapper {
         .btn_hover_shape {
           background: rgba(255, 255, 255, 0.1);
         }
+      }
+      
+      &:hover {
+        border-color: #a3ff12;
+        box-shadow: 0 4px 15px rgba(163, 255, 18, 0.2);
       }
     `}
   ${({ variant }) =>

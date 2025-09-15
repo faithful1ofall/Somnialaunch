@@ -23,7 +23,7 @@ const data = [
   },
   {
     id: "2ZYYU",
-    title: "Collections",
+    title: "Explore",
     url: "/projects-grid",
  /*   subMenus: [
       {
@@ -87,7 +87,7 @@ const data = [
   },*/
   {
         id: "5Z4XW",
-        title: "Create Collection",
+        title: "Launch",
         url: "/igo-apply",
        /* subMenus: [
           {

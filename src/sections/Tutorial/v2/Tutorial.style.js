@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const TutorialStyleWrapper = styled.section`
-  background: #090a1a;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   position: relative;
   display: flex;
   align-items: center;
@@ -28,10 +28,18 @@ const TutorialStyleWrapper = styled.section`
     justify-content: flex-start;
     min-height: 186px;
     padding: 35px 50px;
-    background: rgba(30, 31, 53, 0.7);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
     backdrop-filter: blur(10px);
     margin-bottom: 20px;
     z-index: 1;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
     .number-image {
       margin-right: 12px;
       flex: 0 0 21%;

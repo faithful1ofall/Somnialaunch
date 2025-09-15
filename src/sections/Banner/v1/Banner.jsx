@@ -15,10 +15,10 @@ const Banner = () => {
               alt="banner icon"
             />
             <h1 className="banner-title">
-              Root Launch Metaverse Web 3.0 NFT Agent Launchpad &amp; AI
+              Somnia Launch — AI-Powered NFT Launchpad
             </h1>
             <div className="description">
-              The next generation A.I ecosystem for NFT AI Agents
+              The next generation AI ecosystem for NFT creation and deployment on Somnia
             </div>
 
             <Button href="/projects-grid" variant="mint" md isCenter className="banner-btn">

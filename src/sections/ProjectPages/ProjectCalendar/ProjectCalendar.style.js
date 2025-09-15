@@ -3,7 +3,7 @@ import styled from "styled-components";
 const ProjectCalendarStyleWrapper = styled.div`
   padding-top: 70px;
   padding-bottom: 130px;
-  background: #090b1a;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
 
   .week_list {
     height: 62px;
@@ -25,7 +25,9 @@ const ProjectCalendarStyleWrapper = styled.div`
       padding: 20px;
       height: 162px;
       vertical-align: super;
-      background: rgba(30, 31, 53, 0.8);
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
       z-index: 1;
       font-family: "Russo One";
       font-style: normal;
@@ -37,9 +39,16 @@ const ProjectCalendarStyleWrapper = styled.div`
       justify-content: space-between;
       flex-direction: column;
       color: rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
 
       &.active_date {
         color: #ffffff;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+      }
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
       }
 
       .project_thumb {

@@ -4,6 +4,7 @@ const AboutStyleWrapper = styled.section`
     position: relative;
     padding-top: 188px;
     padding-bottom: 80px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
 
     .live_project_wrapper {
         position: absolute;

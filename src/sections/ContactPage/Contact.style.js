@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const ContactStyleWrapper = styled.div`
   padding-top: 56px;
-  background: #090a1a;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   padding-bottom: 140px;
 
   .contact_info_title {
