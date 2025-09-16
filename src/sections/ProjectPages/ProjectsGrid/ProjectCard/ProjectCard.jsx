@@ -88,9 +88,9 @@ const mintnft = () => {
           <div className="heading-title">
             <h4>{saleEnd} Mints Left</h4>
           </div>
-          <div className="project-icon">
+          {/* <div className="project-icon">
             <img src={coinIcon.src} alt="coin icon" />
-          </div>
+          </div> */}
         </div>
         <ul className="project-listing">
           {projectDetails?.map((item, i) => (
