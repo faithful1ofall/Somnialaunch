@@ -80,7 +80,6 @@ const mintnft = () => {
               {title}
             </Link>
           </h4>
-          <div className="dsc">PRICE RBTC = {price}</div>
           <div className="dsc">PRICE STT = {price}</div>
         </div>
       </div>
