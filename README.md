@@ -1,6 +1,6 @@
-RootLaunch
+SomniaLaunch
 
-Live Site: rootlaunch.vercel.app
+Live Site: somnialaunch.vercel.app
 
 SomniaLaunch — AI-Powered NFT Launchpad on Somnia
 
